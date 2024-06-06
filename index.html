@@ -5,10 +5,10 @@
         <link rel="stylesheet" href="styles/main.css">
     </head>
     <body>
-        <form>
-            <p>Registro de Proveedor</p>
-            <p>Inicia sesion como proveedor</p>
-            <fieldset>
+        <form class="form">
+            <p class="titulo">Registro de Proveedor</p>
+            <p class="mensaje">Inicia sesion como proveedor</p>
+            <fieldset class="flex">
             <label>
                 <input class="texto" type="text">
                 <span>Nombre(s)</span>
@@ -27,9 +27,11 @@
                 <span>Contraseña</span>
             </label>
             <label>
-                <input class="input" type="password" placeholder="" required="">
+                <input class="texto" type="password" placeholder="" required="">
                 <span>Confirmar contraseña</span>
             </label>
+            <button class="submit">Confirmar</button>
+            <p class="inicio">Ya tienes una cuenta? <a href="#">Iniciar sesion</a></p>
         </form>
     </body>
 </html>
