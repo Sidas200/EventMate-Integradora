@@ -5,25 +5,26 @@
         <link rel="stylesheet" href="styles/arturo.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+
     </head>
     <body>
         <form class="form">
             <p class="titulo">Registro de Proveedor</p>
-            <p class="mensaje">Inicia sesion como proveedor</p>
-            <fieldset class="flex">
+            <p class="mensaje">Inicia sesión como proveedor</p>
+            <div class="flex">
             <label>
-                <input class="texto" type="text">
+                <input class="texto" type="text" placeholder=""  required="">
                 <span>Nombre(s)</span>
             </label> 
             <label>
-                <input class="texto" type="text">
+                <input class="texto" type="text" placeholder=""  required="">
                 <span>Apellido(s)</span>
             </label>  
-            </fieldset>
+            </div>
             <label>
-                <input class="texto" type="email">
-                <span>email</span>
+                <input class="texto" type="Email" placeholder="" required="" >
+                <span>Email</span>
             </label>
             <label>
                 <input class="texto" type="password" placeholder="" required="">
@@ -34,7 +35,7 @@
                 <span>Confirmar contraseña</span>
             </label>
             <button class="submit">Confirmar</button>
-            <p class="inicio">Ya tienes una cuenta? <a href="#">Iniciar sesion</a></p>
+            <p class="inicio">Ya tienes una cuenta? <a href="#">Iniciar sesión</a></p>
         </form>
     </body>
 </html>
