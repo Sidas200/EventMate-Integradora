@@ -139,9 +139,35 @@
   }
   body{
     background-image: url("assets/cuanto-cuesta-agencia-eventos.jpg");
+    margin: 20px;
+    background-size: cover;
+  }
+  .titulo5{
+    display: flex;
+    flex-direction: column;
+  }
+  .forms2{
     display: flex;
     justify-content: center;
     margin: 20px;
     background-size: cover;
   }
-  
+  h1{
+    font-family: "Lilita One", sans-serif;
+    color: white;
+    font-size: 50px;
+  }
+  .imagen{
+    display: flex;
+    border-radius: 10%;
+    width: 150px;
+    height: 150px;
+    
+    
+
+  }
+  .titulo_integradora{
+    display: flex;
+    justify-content: space-between;
+  }
+
