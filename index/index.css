@@ -232,7 +232,7 @@ body, html {
   
   .b-c {
     max-width: 80%;
-    color: white;
+    color: black;
   }
   
   .b h1 {
@@ -242,7 +242,7 @@ body, html {
   
   .b-b {
     text-decoration: none;
-    background-color: #000000;
+    background-color:black;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
