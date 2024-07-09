@@ -5,14 +5,16 @@ document.getElementById('login_cliente').addEventListener('submit', function(eve
     const correo_cliente = document.getElementById('correo').value;
     const apellido_cliente = document.getElementById('apellido').value;
     const contraseña = document.getElementById('contraseña').value;
-    const confirmar = document.getElementById('confirmar').value;
+    const confirmacion = document.getElementById('confirmacion').value;
+    const telefono = document.getElementById('telefono').value;
+    const fecha = document.getElementById('fecha').value;
 
     fetch('http://localhost:3000/clientes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ nombre_cliente, apellido_cliente, correo_cliente, contraseña, confirmar })
+        body: JSON.stringify({ nombre_cliente, apellido_cliente, correo_cliente, contraseña, confirmacion, telefono,fecha })
     })
     .then(response => response.text())
     .then(data => {
