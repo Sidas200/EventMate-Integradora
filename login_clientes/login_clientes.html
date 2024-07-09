@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Registro de proveedores</title>
+        <title>Registro de cliente</title>
         <link rel="stylesheet" href="arturo.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
         <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
+        <script src="login.js"></script>
     </head>
     <body>
-        <div class="titulo_integradora">
-            <h1 >EVENTMATE</h1>
-            <img class="imagen" src="../assets/images/Screenshot 2024-06-17 162118.png">
+        <nav>
+            <div class="logo">
+                <a href="index.html">EventMate</a>
             </div>
+            <ul class="nav-links">
+                <li><a href="../catering/catering.html">Catering</a></li>
+                <li><a href="../venues/venues.html">Venues</a></li>
+                <li><a href="../">Mobiliario</a></li>
+                <li><a href="../">Planeador</a></li>
+                <li><a href="../login_proveedores/login_proveedores.html">Login</a></li>
+                <li><a href="../">Sign Up</a></li>
+            </ul>
+        </nav>
             <br>
         <div class="forms2">
-        <form class="form">
-            <p class="titulo">Formulario para registro de proveedor</p>
-            <p class="mensaje">Registrate como proveedor</p>
+        <form class="form" id="login_cliente">
+            <p class="titulo">Formulario de registro</p>
+            <p class="mensaje">Registrate como cliente</p>
             <div class="flex">
             <label>
-                <input class="texto" type="text" placeholder=""  required="">
+                <input class="texto" type="text" id="nombre_cliente" placeholder=""  required="">
                 <span>Nombre(s)</span>
             </label> 
             <label>
-                <input class="texto" type="text" placeholder=""  required="">
+                <input class="texto" id="apellido" type="text" placeholder=""  required="">
                 <span>Apellido(s)</span>
             </label>  
             </div>
             <label>
-                <input class="texto" type="Email" placeholder="" required="" >
+                <input class="texto" id="correo" type="Email" placeholder="" required="" >
                 <span>Email</span>
             </label>
             <label>
-                <input class="texto" type="password" placeholder="" required="">
+                <input class="texto" id="" type="password" placeholder="" required="">
                 <span>Contraseña</span>
             </label>
             <label>
