@@ -25,41 +25,41 @@
         </nav>
             <br>
         <div class="forms2">
-        <form class="form" id="login_cliente">
+        <form class="form" id="login_cliente" action="http://localhost:3000/clientes" method="post">
             <p class="titulo">Formulario de registro</p>
             <p class="mensaje">Registrate como cliente</p>
             <div class="flex">
             <label>
-                <input class="texto" type="text" id="nombre_cliente" placeholder=""  required="">
+                <input class="texto" type="text" id="nombre" placeholder=""  required="" name="nombre_cliente">
                 <span>Nombre(s)</span>
             </label> 
             <label>
-                <input class="texto" id="apellido" type="text" placeholder=""  required="">
+                <input class="texto" id="apellido" type="text" placeholder=""  required="" name="apellido_cliente">
                 <span>Apellido(s)</span>
             </label>  
             </div>
             <label>
-                <input class="texto" id="correo" type="Email" placeholder="" required="" >
+                <input class="texto" id="email" type="Email" placeholder="" required="" name="correo_cliente" >
                 <span>Email</span>
             </label>
             <label>
-                <input class="texto" id="telefono" type="telefono" placeholder="" required="">
+                <input class="texto" id="telefono" type="telefono" placeholder="" required="" name="telefono_cliente">
                 <span>telefono</span>
             </label>
             <label>
-                <input class="texto" id="fecha" type="fecha" placeholder="" required="">
-                <span>Confirmar contraseña</span>
+                <input class="texto" id="fecha" type="fecha" placeholder="" required="" name="fecha_nac">
+                <span>Fecha nacimiento</span>
             </label>
             <label>
-                <input class="texto" id="contraseña" type="password" placeholder="" required="">
+                <input class="texto" id="contraseña" type="password" placeholder="" required="" name="contraseña">
                 <span>Contraseña</span>
             </label>
             <label>
-                <input class="texto" id="confirmar" type="password" placeholder="" required="">
+                <input class="texto" id="confirmacion" type="password" placeholder="" required="" name="confirmacion">
                 <span>Confirmar contraseña</span>
             </label>
 
-            <button class="submit">Confirmar</button>
+            <button class="submit" onclick="redi()">Confirmar</button>
             <p class="inicio">Ya tienes una cuenta? <a href="#">Iniciar sesión</a></p>
         </form>
         </div>
