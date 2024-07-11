@@ -1,0 +1,11 @@
+{
+  "name": "eventmate-integradora",
+  "version": "1.0.0",
+  "description": "Este es un repositorio donde se encontrara todo lo relacionado con el proyecto de integradora",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
