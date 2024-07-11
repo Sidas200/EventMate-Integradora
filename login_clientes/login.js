@@ -1,4 +1,4 @@
-document.getElementById('login_cliente').addEventListener('submit', function(event) {
+document.getElementById('login_cliente').addEventListener('confirmacion', function(event) {
     event.preventDefault();
 
     const nombre_cliente = document.getElementById('nombre').value;
