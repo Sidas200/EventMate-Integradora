@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+<<<<<<< HEAD
     <nav>
         <div class="logo">
             <a href="../index.html">EventMate</a>
@@ -21,23 +22,43 @@
             <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
         </ul>
     </nav>
+=======
+    <div class="mobiliario-container">
+        <h1>Sillas para Eventos</h1>
+        <div class="image-viewer">
+            <button id="prevBtn">&#10094;</button>
+            <img id="mainImage" src="../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg" alt="Silla para Eventos">
+            <button id="nextBtn">&#10095;</button>
+        </div>
+        <div class="details">
+            <h2>Especificaciones</h2>
+            <p>Estas sillas están diseñadas para proporcionar comodidad y estilo a cualquier evento...</p>
+            <ul>
+                <li>Altura: 90 cm</li>
+                <li>Ancho: 45 cm</li>
+                <li>Profundidad: 50 cm</li>
+                <li>Material: Metal y plástico</li>
+            </ul>
+        </div>
 
-    <div class="content">
-        <div class="product">
-            <h1>Sillas para Eventos</h1>
-            <div class="product-gallery">
-                <img src="../assets/images/silla_evento.png" alt="Silla 1">
-                <img src="../assets/images/silla2.jpg" alt="Silla 2">
-                <img src="../assets/images/silla3.jpg" alt="Silla 3">
+        <div class="other-chairs">
+            <h2>Otros tipos de sillas</h2>
+            <div class="chair-list">
+                <img src="../assets/images/silla_evento.png" alt="Silla 4">
+                <img src="../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg" alt="Silla 5">
+                <img src="../assets/images/silla_evento.png" alt="Silla 6">
             </div>
-            <div class="product-details">
-                <h2>Detalles del Producto</h2>
-                <p>Material: Plástico resistente</p>
-                <p>Color: Blanco</p>
-                <p>Precio: $50 por unidad</p>
-                <p>Disponibilidad: 200 unidades</p>
+        </div>
+
+        <div class="comments">
+            <h2>Comentarios</h2>
+            <div id="commentList">
+                <!-- Los comentarios se agregarán aquí dinámicamente -->
             </div>
-            <button class="btn-contact">Reservar</button>
+            <form id="commentForm">
+                <textarea id="commentText" placeholder="Agrega tu comentario..." required></textarea>
+                <button type="submit">Agregar Comentario</button>
+            </form>
         </div>
     </div>
 

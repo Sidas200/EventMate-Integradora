@@ -1,35 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
     const images = [
-        '../assets/images/bck.webp', 
-        '../assets/images/v2.webp',
-        '../assets/images/cat1.jpg'
+        '../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg',
+        '../assets/images/silla_evento.png',
+        '../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg'
     ];
     let currentImageIndex = 0;
-    const banner = document.querySelector('.banner');
+    const mainImage = document.getElementById('mainImage');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const commentForm = document.getElementById('commentForm');
+    const commentList = document.getElementById('commentList');
 
-    function changeImage() {
-        const currentImage = banner.querySelector('img.active');
-        currentImage.classList.remove('active');
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        const nextImage = banner.querySelector(`img[data-index="${currentImageIndex}"]`);
-        nextImage.classList.add('active');
+    function updateImage() {
+        mainImage.src = images[currentImageIndex];
     }
 
-    images.forEach((src, index) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.setAttribute('data-index', index);
-        if (index === 0) img.classList.add('active');
-        banner.appendChild(img);
+    prevBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        updateImage();
     });
 
-    setInterval(changeImage, 3000);
+    nextBtn.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        updateImage();
+    });
 
-    const cards = document.querySelectorAll(".card");
+    updateImage();
 
-    cards.forEach(card => {
-        card.addEventListener("click", function() {
-            this.classList.toggle("flipped");
-        });
+    commentForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const commentText = document.getElementById('commentText').value;
+        if (commentText.trim() === '') return; // No agregar comentarios vacíos
+
+        const commentItem = document.createElement('div');
+        commentItem.classList.add('comment');
+        commentItem.innerHTML = `<p>${commentText}</p>`;
+        commentList.appendChild(commentItem);
+
+        // Limpiar el campo de texto después de agregar el comentario
+        document.getElementById('commentText').value = '';
     });
 });
