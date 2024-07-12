@@ -8,7 +8,13 @@ const path = require('path');
 server.use(bodyParser.urlencoded({extended: false}));
 server.use(bodyParser.json());
 server.use(cors());
-server.use(express.static(path.join(__dirname, 'eventmate-integradora/index'))); 
+server.use(express.static(path.join(__dirname, 'index'))); 
+
+
+server.get('/index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index', 'index.html'));
+});
+
 
 const conn = db.createConnection({
     host:"localhost",
@@ -19,7 +25,7 @@ const conn = db.createConnection({
 });
 conn.connect((error)=>{
     if (error) {
-        console.log("Error conncecting to database", err);
+        console.log("Error conncecting to database", error);
     }else{
         console.log("Connected to database");
     }
@@ -30,7 +36,7 @@ conn.connect((error)=>{
     // res.json("Hola tontito");
 // });
 server.get("/clientes", (req,res)=>{
-    const id = req.params.id;
+
 
     conn.query("select * from clientes ", (error,results)=>{
         if(error){
@@ -75,7 +81,7 @@ server.post("/clientes", (req, res) => {
             res.status(400).send('Error al guardar el cliente');
         } else {
             console.log("Cliente guardado correctamente");
-            res.status(201).redirect('../index/index.html');
+            res.status(201).send('cliente guardado correctamente');
         }
     });
 });
