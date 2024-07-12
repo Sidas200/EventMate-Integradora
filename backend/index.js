@@ -86,6 +86,31 @@ server.post("/clientes", (req, res) => {
     });
 });
 
+server.post("/login_clientes", (req, res) => {
+    const { correo_electronico, contraseña } = req.body;
+    conn.query(
+        "SELECT * FROM clientes WHERE correo_cliente = ? AND contraseña = ?",
+        [correo_electronico, contraseña],
+        (error, results) => {
+            if (error) {
+                console.log("Error al consultar la base de datos", error);
+                res.status(500).send("Error al consultar la base de datos");
+            } else {
+                if (results.length > 0) {
+                 
+                    res.status(200).json({ message: "Inicio de sesión exitoso" });
+                } else {
+                    
+                    res.status(401).json({ message: "Datos incorrectas" });
+                }
+            }
+        }
+    );
+});
+
+
+
+
 server.listen(3000,()=>{
  console.log("Server is running on http://localhost:3000");
 });

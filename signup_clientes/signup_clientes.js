@@ -1,4 +1,4 @@
-    document.getElementById("signup_cliente").addEventListener("submit", async(event) => {
+document.getElementById("signup_cliente").addEventListener("submit", async(event) => {
         event.preventDefault();
     
         const nombre = document.getElementById("nombre").value;
