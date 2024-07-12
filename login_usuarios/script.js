@@ -17,11 +17,11 @@ document.getElementById("login_usuario").addEventListener("submit", async (event
             throw new Error("Correo o contraseña incorrectos, intentelo de nuevo");
         }
 
-        window.location.href = "http://localhost:5500/index/index.html";
+        window.location.href = "../index/index.html";
     } catch (error) {
         console.error("Se produjo un error al iniciar sesión:", error);
         const errorMessageElement = document.getElementById("error-message");
-        errorMessageElement.textContent = error.message;
+        errorMessageElement.textContent = error;
         errorMessageElement.style.display = "block";
 
         setTimeout(() => {
