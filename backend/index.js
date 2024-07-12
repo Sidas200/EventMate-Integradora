@@ -86,7 +86,7 @@ server.post("/clientes", (req, res) => {
     });
 });
 
-server.post("/login_clientes", (req, res) => {
+server.post("/login_cliente", (req, res) => {
     const { correo_electronico, contraseña } = req.body;
     conn.query(
         "SELECT * FROM clientes WHERE correo_cliente = ? AND contraseña = ?",
