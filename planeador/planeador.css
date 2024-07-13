@@ -1,0 +1,84 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
+      }
+      
+      nav .logo a {
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        font-size: 24px;
+        font-weight: bold;
+      }
+      
+      nav .nav-links {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+      
+      nav .nav-links li {
+        margin-left: 20px;
+      }
+      
+      nav .nav-links li a {
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      
+      nav .nav-links li a:hover {
+        background-color: lightgrey;
+        color: rgb(0, 0, 0);
+      }
+}
+
+.evento {
+  margin: 3% 15%;
+  select {
+    margin: 1%;
+    padding: 5px 20px;
+    font-size: medium;
+    border-radius: 10px;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-width: 3px;  
+  }
+  textarea {
+    width: 95%;
+    height: 150px;
+    text-align: left;
+    resize: none;
+    margin: 1%;
+    padding: 10px;
+    font-size: medium;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+  }
+  input {
+    margin: 1%;
+    padding: 10px;
+    font-size: medium;
+    border-radius: 10px;
+    border-width: 1px;
+    font-family: 'Inter', sans-serif;
+  }
+  button {
+    background-color: #008080;
+    margin: 1%;
+    padding: 0px 20px;
+    border-radius: 10px;
+  }
+}
