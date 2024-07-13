@@ -1,7 +1,7 @@
 # EventMate-Integradora
 Este es un repositorio donde se encontrara todo lo relacionado con el proyecto de integradora.
 
-Funcionamiento Actual del programa:
+Funcionamiento Actual de la pagina web:
 Actualmente se tiene un avanze grande en cuanto al funcionamiento actual del programa
 las interfaces con las que se cuenta actualmente es la interfaz de venues principal,
 la de venue individual, la del registro para los clientes, la de el inicio de sesion 
