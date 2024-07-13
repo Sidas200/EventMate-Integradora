@@ -31,38 +31,7 @@ conn.connect((error)=>{
     }
 })
 
-// server.get("/", (req,res)=>{
-   // console.log("GET/");
-    // res.json("Hola tontito");
-// });
-server.get("/clientes", (req,res)=>{
 
-
-    conn.query("select * from clientes ", (error,results)=>{
-        if(error){
-            console.log("Error fetching data",error);
-            res.send("Error fetching data",500);
-
-        }else{
-            console.log("Data fetched succesfully");
-            res.send(results);
-        }
-    })
-});
-/*
-server.get("/clientes", (req,res)=>{
-    conn.query("select * from clientes", (error,results)=>{
-        if (error) {
-            console.log("Error fetching data", error);
-            res.send("Error fetching data");
-        }else{
-            console.log("Data fetched succesfullly");
-            res.send(results);
-        }
-    })
-    // res.send("Miguelito");
-});
-*/
 server.post("/clientes", (req, res) => {
     const { nombre_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion, apellido_cliente } = req.body;
     const nuevoCliente = {

@@ -5,14 +5,6 @@
         form.addEventListener("submit", async(event) => {
         event.preventDefault();
     
-        /*const nombre = document.getElementById("nombre").value;
-        const apellido = document.getElementById("apellido").value;
-        const correo = document.getElementById("email").value;
-        const telefono = document.getElementById("telefono").value;
-        const fecha = document.getElementById("fecha").value;
-        const contraseña = document.getElementById("contraseña").value;
-        const confirmacion = document.getElementById("confirmacion").value;*/
-
         const dataForm = new FormData(form);
         const data = Object.fromEntries(dataForm);
 

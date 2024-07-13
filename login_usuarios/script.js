@@ -1,16 +1,16 @@
-document.getElementById("login_usuario").addEventListener("submit", async (event) => {
+const form =document.getElementById("login_usuario");
+form.addEventListener("submit", async (event) => {
     event.preventDefault();
     
-    const correo = document.getElementById("correo").value;
-    const contraseña_cliente = document.getElementById("contraseña").value;
-
+    const dataForm = new FormData(form);
+    const data = Object.fromEntries(dataForm)
     try {
         const response = await fetch("http://localhost:3000/login_cliente", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ correo_electronico: correo, contraseña: contraseña_cliente }),
+            body: JSON.stringify(data),
         });
 
         if (!response.ok) {
