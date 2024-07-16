@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <title>EventMate Planeador</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+        <link rel="stylesheet" href="planeador.css">
+        <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
+    </head>
+    <body>
+        <nav>
+            <div class="logo">
+                <a href="../index/index.html">EventMate</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../catering/catering.html">Catering</a></li>
+                <li><a href="../venues-main/venues-main.html">Venues</a></li>
+                <li><a href="../inmobiliario/inmobiliario.html">Mobiliario</a></li>
+                <li><a href="../planeador/planeador.html">Planeador</a></li>
+                <li><a href="../login_usuarios/login_usuario.html">Login</a></li>
+                <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
+            </ul>
+        </nav>
+        <center><h1>Planeador</h1></center>
+        <form>
+            <div class="evento">
+                <label for="dropdown">¿Qué tipo de evento tendrás?</label><br>
+                <select name="dropdown" id="dropdown">
+                    <option value="opcion1">Evento familiar</option>
+                    <option value="opcion2">Evento escolar</option>
+                    <option value="opcion3">Evento laboral</option>
+                    <option value="opcion4">Otro</option>
+                </select><br>
+                <label for="comentario">Danos detalles sobre cómo quieres tu evento</label><br>
+                <textarea type="text" id="comentario" class="comentario" name="comentario"
+                placeholder="Temática, comida, música, espacio exterior o interior, etc..."></textarea><br>
+                <label for="presupuesto">¿Cuál es tu presupuesto?</label><br>
+                <input type="number" id="presupuesto" name="presupuesto" placeholder="$$$"><br>
+                <label for="date">Fecha del evento</label><br>
+                <input type="datetime-local" id="date" name="date"><br>
+                <label for="invitados">¿Cuántos invitados son?</label><br>
+                <input type="number" placeholder="Número de invitados"><br>
+                <center><button><h3>ENVIAR</h3></button></center>
+            </div>
+        </form>
+        </body>
+</html>
