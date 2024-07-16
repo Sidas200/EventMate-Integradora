@@ -1,15 +1,12 @@
 .form{
     display: flex;
     flex-direction: column;
-    justify-content:left;
+    align-content: center;
     gap: 10px;
     max-width:350px;
     padding: 150px;
     border-radius: 30px;
     position: relative;
-    background-color: #333333;
-    color: #fff;
-    border: 1px solid #333333;
 }
 .titulo{
     font-size: 50px;
@@ -19,7 +16,7 @@
     display: flex;
     align-items: center;
     padding-left: 40px;
-    color: #008080;
+    color: black;
     font-family: "Lilita One", sans-serif;
 }
 
@@ -42,13 +39,13 @@
   width: 16px;
   border-radius: 50%;
   left: 0px;
-  background-color: #008080;
+  background-color: black;
 }
 
 .mensaje, 
 .inicio {
   font-size: 20px;
-  color: #F0F0F0;
+  color:black;
   font-family: "Lilita One", sans-serif;
 
 }
@@ -58,11 +55,11 @@
   }
   
   .inicio a:hover {
-    text-decoration: underline #1B263B;
+    text-decoration: underline  #00bfff96;
   }
 
   .inicio a {
-    color: #008080;
+    color: black;
   }
 
   .flex {
@@ -75,17 +72,17 @@
   }
   
   .form label .texto {
-    background-color: #333333;
-    color: #F0F0F0;
+    background-color: white;
+    color: black;
     width: 100%;
     padding: 20px 05px 05px 10px;
     outline: 0;
-    border: 2px solid #F0F0F0;
+    border: 2px solid lightgray;
     border-radius: 10px;
   }
   
   .form label .texto + span {
-    color: rgba(255, 255, 255, 0.5);
+    color: lightgray;
     position: absolute;
     left: 10px;
     top: 0px;
@@ -101,7 +98,7 @@
   
   .form label .texto:focus + span,
   .form label .texto:valid + span {
-    color: #008080;
+    color: black;
     top: 0px;
     font-size: 0.7em;
     font-weight: 600;
@@ -116,10 +113,11 @@
     outline: none;
     padding: 10px;
     border-radius: 10px;
-    color: #F0F0F0;
+    color:white;
     font-size: 16px;
     transform: .3s ease;
-    background-color: #008080;
+    background-color: black;
+    margin-left: 20px;
   }
   
   .submit:hover {
@@ -143,8 +141,7 @@
   }
   .forms2{
     display: flex;
-    justify-content: left;
-    margin: 20px;
+    justify-content:center;
     background-size: cover;
   }
   h1{
@@ -171,6 +168,7 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    background-color: #f7f7f7;
   }
   
   h1{
