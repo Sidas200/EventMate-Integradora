@@ -14,9 +14,10 @@ form.addEventListener("submit", async (event) => {
         });
 
         if (!response.ok) {
+            alert("Correo o contraseña incorrectos, intentelo de nuevo");
             throw new Error("Correo o contraseña incorrectos, intentelo de nuevo");
         }
-
+        alert("Inicio de sesion exitoso");
         window.location.href = "../index/index.html";
     } catch (error) {
         console.error("Se produjo un error al iniciar sesión:", error);
