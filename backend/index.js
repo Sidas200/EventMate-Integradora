@@ -6,8 +6,11 @@ const cors = require("cors");
 const path = require('path');
 const {engine} = require('express-handlebars')
 const session = require('express-session');
-const bcrypt = require('bcrypt'); // Importa bcrypt
+const bcrypt = require('bcrypt'); 
+const cookie = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 
+server.use(cookieParser())
 server.use(bodyParser.urlencoded({extended: false}));
 server.use(bodyParser.json());
 server.use(cors());
