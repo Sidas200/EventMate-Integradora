@@ -1,25 +1,32 @@
 const express = require('express');
 const db = require('mysql2');
 const server = express();
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
-const {engine} = require('express-handlebars')
-const session = require('express-session');
-const bcrypt = require('bcrypt'); 
-const cookie = require('cookie-parser');
+const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
+const secret_jwt = "esta-es-la-llave-secreta";
 
-server.use(cookieParser())
-server.use(bodyParser.urlencoded({extended: false}));
+// Middleware
+server.use(cookieParser());
+server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
-server.use(cors());
-server.use(express.static(path.join(__dirname, 'index'))); 
+server.use(cors({
+    origin: 'http://127.0.0.1:5500', // Ajusta esto al origen del cliente
+    credentials: true // Habilita el uso de cookies en CORS
+}));
 
+// Directorio estático
+server.use(express.static(path.join(__dirname, 'public'))); // Asegúrate de que 'public' sea el directorio correcto
+
+// Rutas
 server.get('/index', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ajusta el directorio si es necesario
 });
 
+// Conexión a la base de datos
 const conn = db.createConnection({
     host: "localhost",
     user: "root",
@@ -36,7 +43,27 @@ conn.connect((error) => {
     }
 });
 
+// Middleware para verificar el token
+const verifyToken = (req, res, next) => {
+    const token = req.cookies.access_token;
+    if (!token) {
+        return res.status(403).send('Acceso no autorizado');
+    }
+    try {
+        const data = jwt.verify(token, secret_jwt);
+        req.user = data;
+        next();
+    } catch (error) {
+        return res.status(401).send('Acceso no autorizado');
+    }
+};
 
+// Ruta protegida
+server.get("/", verifyToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ajusta el directorio si es necesario
+});
+
+// Registrar cliente
 server.post("/clientes", async (req, res) => {
     const { nombre_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion, apellido_cliente } = req.body;
 
@@ -80,6 +107,7 @@ server.post("/clientes", async (req, res) => {
     });
 });
 
+// Iniciar sesión del cliente
 server.post("/login_cliente", (req, res) => {
     const { correo_electronico, contraseña } = req.body;
 
@@ -107,23 +135,36 @@ server.post("/login_cliente", (req, res) => {
                     try {
                         const isMatch = await bcrypt.compare(contraseña, storedHash);
                         if (isMatch) {
-                            res.status(200).json({ message: "Inicio de sesión exitoso" });
+                            const token = jwt.sign({ id: results[0].id_cliente }, secret_jwt, { expiresIn: '15m' });
+                            res.cookie('access_token', token, {
+                                httpOnly: true,
+                                sameSite: 'lax',
+                                secure: false, // Cambiado a false para desarrollo local
+                                path: '/',
+                                expires: new Date(Date.now() + 900000)
+                            });
+                            return res.status(200).json({ message: "Inicio de sesión exitoso", token });
                         } else {
-                            res.status(401).json({ message: "Datos incorrectos" });
+                            return res.status(401).json({ message: "Datos incorrectos" });
                         }
                     } catch (compareError) {
                         console.log("Error al comparar las contraseñas", compareError);
-                        res.status(500).send("Error al procesar la solicitud");
+                        return res.status(500).send("Error al procesar la solicitud");
                     }
                 } else {
-                    res.status(401).json({ message: "Datos incorrectos" });
+                    return res.status(401).json({ message: "Datos incorrectos" });
                 }
             }
         }
     );
 });
 
+// Ruta protegida
+server.get('/protected', verifyToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'protected.html')); // Asegúrate de que la ruta del archivo sea correcta
+});
+
+// Iniciar servidor
 server.listen(3000, () => {
     console.log("Server is running on http://localhost:3000");
 });
-
