@@ -100,7 +100,6 @@ server.post("/login_cliente", (req, res) => {
                 if (results.length > 0) {
                     const storedHash = results[0].contraseña;
 
-                    // Asegúrate de que el hash almacenado no sea undefined o null
                     if (!storedHash) {
                         console.log("No se encontró un hash de contraseña en la base de datos");
                         return res.status(500).send("Error interno del servidor");
