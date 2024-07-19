@@ -7,7 +7,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const secret_jwt = "esta-es-la-llave-secreta";
+const secret_jwt = "12345678";
 
 // Middleware
 server.use(cookieParser());
@@ -64,7 +64,7 @@ server.get("/", verifyToken, (req, res) => {
 });
 
 // Registrar cliente
-server.post("/clientes", async (req, res) => {
+server.post("/registrar", async (req, res) => {
     const { nombre_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion, apellido_cliente } = req.body;
 
     if (contraseña !== confirmacion) {
@@ -135,7 +135,7 @@ server.post("/login_cliente", (req, res) => {
                     try {
                         const isMatch = await bcrypt.compare(contraseña, storedHash);
                         if (isMatch) {
-                            const token = jwt.sign({ id: results[0].id_cliente }, secret_jwt, { expiresIn: '15m' });
+                            const token = jwt.sign({ id: results[0].id_cliente},secret_jwt,{ expiresIn: '15m' });
                             res.cookie('access_token', token, {
                                 httpOnly: true,
                                 sameSite: 'lax',
