@@ -83,7 +83,6 @@ server.post("/clientes", async (req, res) => {
 server.post("/login_cliente", (req, res) => {
     const { correo_electronico, contraseña } = req.body;
 
-    // Asegúrate de que correo_electronico y contraseña no sean undefined o null
     if (!correo_electronico || !contraseña) {
         console.log("Correo electrónico y contraseña son requeridos");
         return res.status(400).send("Correo electrónico y contraseña son requeridos");
