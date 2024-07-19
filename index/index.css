@@ -7,7 +7,13 @@ body, html {
   h1{
     font-size: 148px;
   }
-  
+  .nav-container {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
   nav {
     display: flex;
     justify-content: space-between;
@@ -24,18 +30,18 @@ body, html {
     font-weight: bold;
   }
   
-  nav .nav-links {
+  .nav-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
   }
   
-  nav .nav-links li {
+  .nav-links li {
     margin-left: 20px;
   }
   
-  nav .nav-links li a {
+  .nav-links li a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 16px;
@@ -44,7 +50,7 @@ body, html {
     transition: background-color 0.3s, color 0.3s;
   }
   
-  nav .nav-links li a:hover {
+  .nav-links li a:hover {
     background-color: lightgrey;
     color: rgb(0, 0, 0);
   }
