@@ -30,7 +30,7 @@ server.get('/', (req, res) => {
 const conn = db.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "Sidas-200",
     port: 3306,
     database: "eventmate_integradora"
 });
