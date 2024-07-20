@@ -7,7 +7,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const secret_jwt = "12345678";
+const secret_jwt = "esta-es-la-llave-secreta";
 
 // Middleware
 server.use(cookieParser());
@@ -19,11 +19,11 @@ server.use(cors({
 }));
 
 // Directorio estático
-server.use(express.static(path.join(__dirname, 'public'))); // Asegúrate de que 'public' sea el directorio correcto
+server.use(express.static(path.join(__dirname, 'index'))); // Asegúrate de que 'public' sea el directorio correcto
 
 // Rutas
-server.get('/index', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ajusta el directorio si es necesario
+server.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index', 'index.html')); // Ajusta el directorio si es necesario
 });
 
 // Conexión a la base de datos
@@ -60,7 +60,7 @@ const verifyToken = (req, res, next) => {
 
 // Ruta protegida
 server.get("/", verifyToken, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html')); // Ajusta el directorio si es necesario
+    res.sendFile(path.join(__dirname, 'index', 'index.html')); // Ajusta el directorio si es necesario
 });
 
 // Registrar cliente
@@ -135,12 +135,12 @@ server.post("/login_cliente", (req, res) => {
                     try {
                         const isMatch = await bcrypt.compare(contraseña, storedHash);
                         if (isMatch) {
-                            const token = jwt.sign({ id: results[0].id_cliente},secret_jwt,{ expiresIn: '15m' });
+                            const token = jwt.sign({ id: results[0].id_cliente},secret_jwt, { expiresIn: '15m' });
                             res.cookie('access_token', token, {
                                 httpOnly: true,
                                 sameSite: 'lax',
                                 secure: false, // Cambiado a false para desarrollo local
-                                path: '/',
+                                path: '/', // Asegúrate de que la ruta es correcta
                                 expires: new Date(Date.now() + 900000)
                             });
                             return res.status(200).json({ message: "Inicio de sesión exitoso", token });
@@ -161,7 +161,7 @@ server.post("/login_cliente", (req, res) => {
 
 // Ruta protegida
 server.get('/protected', verifyToken, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'protected.html')); // Asegúrate de que la ruta del archivo sea correcta
+    res.sendFile(path.join(__dirname, 'index', 'index.html')); // Asegúrate de que la ruta del archivo sea correcta
 });
 
 // Iniciar servidor
