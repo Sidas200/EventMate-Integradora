@@ -59,7 +59,7 @@ const verifyToken = (req, res, next) => {
 };
 
 // Ruta protegida
-server.get("/", verifyToken, (req, res) => {
+server.get("/index", verifyToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'index', 'index.html')); // Ajusta el directorio si es necesario
 });
 
