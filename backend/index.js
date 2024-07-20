@@ -16,6 +16,12 @@ server.use(bodyParser.json());
 server.use(cors());
 server.use(express.static(path.join(__dirname, 'index'))); 
 
+// sid.signature
+server.use(express.json());
+server.use(session({
+    secret: "esteeselmayorsecreto"
+}));
+
 server.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, 'index', 'index.html'));
 });
