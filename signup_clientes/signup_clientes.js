@@ -1,6 +1,4 @@
-        
-        
-        const form = document.getElementById("signup_cliente");
+    const form = document.getElementById("signup_cliente");
 
         form.addEventListener("submit", async(event) => {
         event.preventDefault();
@@ -10,12 +8,13 @@
 
     
         try {
-            const response = await fetch("http://localhost:3000/clientes", {
+            const response = await fetch("http://localhost:3000/registrar", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body:JSON.stringify(data),
+                credentials: 'include'
             });
     
             if (!response.ok) {

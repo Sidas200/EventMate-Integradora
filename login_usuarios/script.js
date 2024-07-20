@@ -11,6 +11,7 @@ form.addEventListener("submit", async (event) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
+            credentials: 'include', // Asegúrate de que las cookies se envíen con las solicitudes
         });
 
         if (!response.ok) {
