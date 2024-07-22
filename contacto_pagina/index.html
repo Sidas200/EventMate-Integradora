@@ -6,7 +6,7 @@
     <title>Contacto | EventMate</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
     <link rel="stylesheet" href="main.css">
-    <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
+    <link rel="icon" href="/assets/images/contacto.jpg" type="image/png">
 </head>
 <body>
     <nav>
@@ -14,11 +14,10 @@
             <a href="../index/index.html">EventMate</a>
         </div>
         <ul class="nav-links">
-            <li><a href="/index/index.html">Home</a></li>
             <li><a href="../catering/catering.html">Catering</a></li>
             <li><a href="../venues/venues.html">Venues</a></li>
             <li><a href="../inmobiliario/inmobiliario.html">Mobiliario</a></li>
-            <li><a href="#">Planeador</a></li>
+            <li><a href="../planeador/planeador.html">Planeador</a></li>
             <li><a href="../login_usuarios/login_usuario.html">Login</a></li>
             <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
         </ul>
@@ -27,13 +26,12 @@
     <div class="contact-container">
         <div class="info-container">
             <h1>Contactanos</h1>
-            <p>Contacta a nuestros proveedores</p>
-            <ul class="contact-info">
-                <li><strong>Nombre:</strong> Susana Gallegos</li>
-                <li><strong>Correo:</strong> mandalagc@gmail.com</li>
-                <li><strong>Teléfono:</strong> (123) 456-7890</li>
-                <li><strong>Dirección:</strong> Calle de Ejemplo, 123, Ciudad, País</li>
-            </ul>
+            <p>Selecciona una categoría para más información</p>
+            <div class="button-container">
+                <button id="venueButton">Venue</button>
+                <button id="cateringButton">Catering</button>
+                <button id="mobiliarioButton">Mobiliario</button>
+            </div>
         </div>
         <div class="image-container">
             <img src="/assets/images/contacto.jpg" alt="Contact Image">
@@ -65,5 +63,7 @@
             </div>
         </div>
     </footer>
+
+    <script src="/contacto_pagina/script.js"></script>
 </body>
 </html>
