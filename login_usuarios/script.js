@@ -19,7 +19,7 @@ form.addEventListener("submit", async (event) => {
             throw new Error("Correo o contraseña incorrectos, intentelo de nuevo");
         }
         alert("Inicio de sesion exitoso");
-        window.location.href = "../index/index.html";
+        window.location.href = "../perfil/perfil.html";
     } catch (error) {
         console.error("Se produjo un error al iniciar sesión:", error);
         const errorMessageElement = document.getElementById("error-message");

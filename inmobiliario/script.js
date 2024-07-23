@@ -10,9 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('nextBtn');
     const commentForm = document.getElementById('commentForm');
     const commentList = document.getElementById('commentList');
+    const quantityInput = document.getElementById('quantity');
+    const totalPriceElement = document.getElementById('totalPrice');
+    const pricePerChair = 50.00; // Precio unitario de la silla
 
     function updateImage() {
         mainImage.src = images[currentImageIndex];
+    }
+
+    function updatePrice() {
+        const quantity = parseInt(quantityInput.value);
+        const totalPrice = pricePerChair * quantity;
+        totalPriceElement.textContent = totalPrice.toFixed(2);
     }
 
     prevBtn.addEventListener('click', () => {
@@ -25,7 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateImage();
     });
 
+    quantityInput.addEventListener('input', updatePrice);
+
     updateImage();
+    updatePrice();
 
     commentForm.addEventListener('submit', function(event) {
         event.preventDefault();
