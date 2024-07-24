@@ -179,6 +179,16 @@ server.get('/autorizacion', (req, res) => {
         return res.status(401).json({ authenticated: false });
     }
 });
+
+server.get('/logout', (req, res) => {
+    res.clearCookie('access_token', {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        path: '/'
+    });
+    return res.status(200).json({ message: 'Sesión cerrada correctamente' });
+});
 /*server.get("/check-session", (req, res) => {
     console.log("req.session/");
     console.log(req.cookies.access_token);
