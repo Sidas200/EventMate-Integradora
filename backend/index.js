@@ -99,7 +99,6 @@ server.post("/registrar", async (req, res) => {
 
 server.post("/login_cliente", (req, res) => {
     const { correo_electronico, contraseña } = req.body;
-    const user = req.body;
 
     if (!correo_electronico || !contraseña) {
         console.log("Correo electrónico y contraseña son requeridos");
@@ -177,6 +176,28 @@ server.get('/autorizacion', (req, res) => {
         });
     } else {
         return res.status(401).json({ authenticated: false });
+    }
+});
+
+server.get('/info-token', (req, res) => {
+    const token = req.cookies.access_token;
+
+    if (!token) {
+        return res.status(403).json({ message: 'No token provided' });
+    }
+
+    try {
+        // Decodificar el token sin verificar su validez
+        const decoded = jwt.decode(token, { complete: true });
+
+        if (decoded) {
+            // Información del token
+            return res.status(200).json({ message: 'Token decoded successfully', data: decoded });
+        } else {
+            return res.status(401).json({ message: 'Invalid token' });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: 'Error decoding token', error: error.message });
     }
 });
 

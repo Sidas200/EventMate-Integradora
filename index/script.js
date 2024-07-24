@@ -63,6 +63,52 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Se produjo un error al verificar el estado de autenticación:", error);
     }
 
+    // Obtener y mostrar información del token
+    try {
+        const response = await fetch('http://localhost:3000/info-token', {
+            method: 'GET',
+            credentials: 'include' // Asegúrate de incluir las cookies en la solicitud
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const payload = data.data && data.data.payload;
+            console.log(data);
+
+            if (payload) {
+                // Muestra todo el contenido del payload para depuración
+                console.log('Payload completo:', payload);
+
+                // Verifica si el campo 'id' está presente en el payload
+                if ('id' in payload) {
+                    const userId = payload.id;
+                    console.log('ID del usuario:', userId);
+
+                    // Opcional: Mostrar el ID en el DOM
+                    const userIdElement = document.querySelector('#user-id');
+                    if (userIdElement) {
+                        userIdElement.textContent = `ID del usuario: ${userId}`;
+                    }
+                } else {
+                    console.error('El campo "id" no se encontró en el payload');
+                }
+
+                // Puedes manejar otros campos del payload si es necesario
+                if ('otherField' in payload) {
+                    const otherField = payload.otherField;
+                    console.log('Otro campo:', otherField);
+                }
+
+            } else {
+                console.error('No se encontró el payload en la respuesta');
+            }
+        } else {
+            console.error("Error al obtener la información del token");
+        }
+    } catch (error) {
+        console.error('Se produjo un error al obtener la información del token:', error);
+    }
+
     // Cerrar sesión
     const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
     logoutLinks.forEach(link => {
