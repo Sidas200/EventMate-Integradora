@@ -8,28 +8,16 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const secret_jwt = "esta-es-la-clave-secreta"
 
-// Genera una cadena aleatoria de 32 bytes y la codifica en base64
-const secret = crypto.randomBytes(32).toString('hex');
-const secret_jwt = Buffer.from(secret).toString('base64');
-console.log('Cadena secreta codificada en base64:', secret_jwt);
 
-// Middleware
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(cors({
-    origin: 'http://localhost:5501', // Ajusta esto al origen del cliente
-    credentials: true // Habilita el uso de cookies en CORS
+    origin: 'http://localhost:5501', 
+    credentials: true 
 }));
-
-// Directorio estático
-server.use(express.static(path.join(__dirname, 'index'))); // Asegúrate de que 'index' sea el directorio correcto
-
-// Rutas
-server.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index', 'index.html')); // Ajusta el directorio si es necesario
-});
 
 // Conexión a la base de datos
 const conn = db.createConnection({
@@ -63,12 +51,8 @@ const verifyToken = (req, res, next) => {
     }
 };
 
-// Ruta protegida
-server.get("/index", verifyToken, (req, res) => {
-    res.sendFile(path.join(__dirname, 'index', 'index.html')); // Ajusta el directorio si es necesario
-});
 
-// Registrar cliente
+
 server.post("/registrar", async (req, res) => {
     const { nombre_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion, apellido_cliente } = req.body;
 
@@ -112,7 +96,7 @@ server.post("/registrar", async (req, res) => {
     });
 });
 
-// Iniciar sesión del cliente
+
 server.post("/login_cliente", (req, res) => {
     const { correo_electronico, contraseña } = req.body;
     const user = req.body;
@@ -124,7 +108,7 @@ server.post("/login_cliente", (req, res) => {
 
     conn.query(
         "SELECT * FROM clientes WHERE correo_cliente = ?",
-        [correo_electronico],
+        [correo_electronico, contraseña],
         async (error, results) => {
             if (error) {
                 console.log("Error al consultar la base de datos", error);
@@ -142,9 +126,10 @@ server.post("/login_cliente", (req, res) => {
                         const isMatch = await bcrypt.compare(contraseña, storedHash);
                         if (isMatch) {
                             const token = jwt.sign({ id: results[0].id_cliente }, secret_jwt, { expiresIn: '15m' });
+                            const encriptada = await bcrypt.hash(contraseña, 10);
                             const sesion = {
                                 correo_electronico,
-                                contraseña
+                                contraseña: encriptada
 
                             }
                             res.cookie('access_token', token, {
@@ -154,10 +139,15 @@ server.post("/login_cliente", (req, res) => {
                                 maxAge: 1000*60*60*24,
                                 path:'/'
                             });
-                            //res.send('Cookie is set');
                             console.log('Cookie set',res.get('Set-Cookie'));
                             const guardar = "INSERT INTO login_cliente(correo_electronico, contraseña) VALUES (?,?) ";
-                            conn.query(guardar,[sesion.correo_electronico, sesion.contraseña]);
+                            conn.query(guardar,[sesion.correo_electronico, sesion.contraseña], (err,res)=>{
+                                if (err) {
+                                    console.log("Error inserting data", error);
+                                } else {
+                                    console.log("Sesion guardada");
+                                }
+                            });
                             return res.status(200).json({ message: "Inicio de sesión exitoso", token });
                         } else {
                             return res.status(401).json({ message: "Datos incorrectos" });
@@ -174,7 +164,22 @@ server.post("/login_cliente", (req, res) => {
     );
 });
 
-server.get("/check-session", (req, res) => {  //modificacion 19/07/2024
+server.get('/autorizacion', (req, res) => {
+    const token = req.cookies.access_token;
+
+    if (token) {
+        jwt.verify(token, secret_jwt, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ authenticated: false });
+            }
+            // Aquí puedes realizar comprobaciones adicionales si es necesario
+            return res.status(200).json({ authenticated: true });
+        });
+    } else {
+        return res.status(401).json({ authenticated: false });
+    }
+});
+/*server.get("/check-session", (req, res) => {
     console.log("req.session/");
     console.log(req.cookies.access_token);
     if (req.session) {
@@ -183,13 +188,8 @@ server.get("/check-session", (req, res) => {  //modificacion 19/07/2024
       res.send({ loggedIn: false });
     }
   });
+*/
 
-// Ruta protegida
-server.get('/protected', verifyToken, (req, res) => {
-    res.sendFile(path.join(__dirname, 'index', 'index.html')); // Asegúrate de que la ruta del archivo sea correcta
-});
-
-// Iniciar servidor
 server.listen(3000, () => {
     console.log("Server is running on http://localhost:3000");
 });
