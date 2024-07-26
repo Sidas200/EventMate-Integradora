@@ -20,10 +20,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         } else {
             console.error("Error al verificar el estado de autenticación");
+            window.location.href = "../login_usuarios/login_usuario.html";
         }
     } catch (error) {
         console.error("Se produjo un error al verificar el estado de autenticación:", error);
+        window.location.href = "../login_usuarios/login_usuario.html";
     }
+
+    // Configurar el cierre de sesión
     const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
     logoutLinks.forEach(link => {
         link.addEventListener("click", async (event) => {

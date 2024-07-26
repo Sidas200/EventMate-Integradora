@@ -44,30 +44,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             credentials: 'include',
         });
 
-        if (response.ok) {
-            const result = await response.json();
-            const navLoggedInItems = document.querySelectorAll(".nav-logged-in");
-            const navLoggedOutItems = document.querySelectorAll(".nav-logged-out");
-
-            if (result.authenticated) {
-                navLoggedInItems.forEach(item => item.style.display = "block");
-                navLoggedOutItems.forEach(item => item.style.display = "none");
-            } else {
-                navLoggedInItems.forEach(item => item.style.display = "none");
-                navLoggedOutItems.forEach(item => item.style.display = "block");
-            }
+        if (!response.ok) {
+            window.location.href = "../login_usuarios/login_usuario.html";
         } else {
-            console.error("Error al verificar el estado de autenticación");
+            const result = await response.json();
+            if (!result.authenticated) {
+                window.location.href = "../login_usuarios/login_usuario.html";
+            }
         }
     } catch (error) {
-        console.error("Se produjo un error al verificar el estado de autenticación:", error);
+        console.error("Error al verificar la autenticación", error);
+        window.location.href = "../login_usuarios/login_usuario.html";
     }
 
     // Obtener y mostrar información del token
     try {
         const response = await fetch('http://localhost:3000/info-token', {
             method: 'GET',
-            credentials: 'include' // Asegúrate de incluir las cookies en la solicitud
+            credentials: 'include'
         });
 
         if (response.ok) {
@@ -76,15 +70,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log(data);
 
             if (payload) {
-                // Muestra todo el contenido del payload para depuración
                 console.log('Payload completo:', payload);
-
-                // Verifica si el campo 'id' está presente en el payload
                 if ('id' in payload) {
                     const userId = payload.id;
                     console.log('ID del usuario:', userId);
 
-                    // Opcional: Mostrar el ID en el DOM
                     const userIdElement = document.querySelector('#user-id');
                     if (userIdElement) {
                         userIdElement.textContent = `ID del usuario: ${userId}`;
@@ -93,12 +83,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                     console.error('El campo "id" no se encontró en el payload');
                 }
 
-                // Puedes manejar otros campos del payload si es necesario
                 if ('otherField' in payload) {
                     const otherField = payload.otherField;
                     console.log('Otro campo:', otherField);
                 }
-
             } else {
                 console.error('No se encontró el payload en la respuesta');
             }
@@ -108,26 +96,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error('Se produjo un error al obtener la información del token:', error);
     }
+});
 
-    // Cerrar sesión
-    const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
-    logoutLinks.forEach(link => {
-        link.addEventListener("click", async (event) => {
-            event.preventDefault();
-            try {
-                const response = await fetch("http://localhost:3000/logout", {
-                    method: "GET",
-                    credentials: 'include',
-                });
-                if (response.ok) {
-                    // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
-                    window.location.href = "../login_usuarios/login_usuario.html";
-                } else {
-                    console.error("Error al cerrar la sesión");
-                }
-            } catch (error) {
-                console.error("Se produjo un error al cerrar la sesión:", error);
+// Cerrar sesión
+const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
+logoutLinks.forEach(link => {
+    link.addEventListener("click", async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch("http://localhost:3000/logout", {
+                method: "GET",
+                credentials: 'include',
+            });
+            if (response.ok) {
+                window.location.href = "../login_usuarios/login_usuario.html";
+            } else {
+                console.error("Error al cerrar la sesión");
             }
-        });
+        } catch (error) {
+            console.error("Se produjo un error al cerrar la sesión:", error);
+        }
     });
 });

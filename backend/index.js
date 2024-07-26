@@ -210,6 +210,45 @@ server.get('/logout', (req, res) => {
     });
     return res.status(200).json({ message: 'Sesión cerrada correctamente' });
 });
+
+server.get('/user-info', verifyToken, (req, res) => {
+    const userId = req.user.id; // Obtener el ID del usuario desde el token decodificado
+
+    const sql = "SELECT nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, fecha_nac  FROM clientes WHERE id_cliente = ?";
+    conn.query(sql, [userId], (error, results) => {
+        if (error) {
+            console.error("Error al obtener la información del usuario", error);
+            return res.status(500).json({ message: 'Error interno del servidor' });
+        }
+
+        if (results.length > 0) {
+            const user = results[0];
+            res.status(200).json({ nombre_cliente: user.nombre_cliente, apellido_cliente: user.apellido_cliente, correo_cliente: user.correo_cliente, telefono_cliente: user.telefono_cliente, fecha_nac: user.fecha_nac });
+        } else {
+            res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+    });
+});
+
+server.post('/comentario', verifyToken, (req, res) => {
+    const id = req.user.id; 
+    const { comentario } = req.body;
+
+    const nuevo_com = {
+        id,
+        comentario
+    };
+    const com = "INSERT INTO comentarios(fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(com, [nuevo_com.id, nuevo_com.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario");
+            res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
 /*server.get("/check-session", (req, res) => {
     console.log("req.session/");
     console.log(req.cookies.access_token);
@@ -223,4 +262,21 @@ server.get('/logout', (req, res) => {
 
 server.listen(3000, () => {
     console.log("Server is running on http://localhost:3000");
+});
+
+server.get('/comentarios', (req, res) => {
+    const sql = `
+        SELECT c.comentario, cl.nombre_cliente 
+        FROM comentarios c 
+        JOIN clientes cl ON c.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
 });
