@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function updatePrice() {
-        const quantity = parseInt(quantityInput.value);
+        const quantity = parseInt(quantityInput.value) || 0;
         const totalPrice = pricePerChair * quantity;
         totalPriceElement.textContent = totalPrice.toFixed(2);
     }
@@ -105,38 +105,45 @@ document.addEventListener('DOMContentLoaded', async () => {
             credentials: 'include',
         });
 
-        if (!response.ok) {
-            // Redirigir al login si no está autenticado
-            window.location.href = "../login_usuarios/login_usuario.html";
-        } else {
+        if (response.ok) {
             const result = await response.json();
-            if (!result.authenticated) {
-                window.location.href = "../login_usuarios/login_usuario.html";
+            const navLoggedInItems = document.querySelectorAll(".nav-logged-in");
+            const navLoggedOutItems = document.querySelectorAll(".nav-logged-out");
+
+            if (result.authenticated) {
+                navLoggedInItems.forEach(item => item.style.display = "block");
+                navLoggedOutItems.forEach(item => item.style.display = "none");
+            } else {
+                navLoggedInItems.forEach(item => item.style.display = "none");
+                navLoggedOutItems.forEach(item => item.style.display = "block");
             }
+        } else {
+            console.error("Error al verificar el estado de autenticación");
+            window.location.href = "../login_usuarios/login_usuario.html";
         }
     } catch (error) {
-        console.error("Error al verificar la autenticación", error);
+        console.error("Se produjo un error al verificar el estado de autenticación:", error);
         window.location.href = "../login_usuarios/login_usuario.html";
     }
-});
 
-const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
-logoutLinks.forEach(link => {
-    link.addEventListener("click", async (event) => {
-        event.preventDefault();
-        try {
-            const response = await fetch("http://localhost:3000/logout", {
-                method: "GET",
-                credentials: 'include',
-            });
-            if (response.ok) {
-                // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
-                window.location.href = "../login_usuarios/login_usuario.html";
-            } else {
-                console.error("Error al cerrar la sesión");
+    const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
+    logoutLinks.forEach(link => {
+        link.addEventListener("click", async (event) => {
+            event.preventDefault();
+            try {
+                const response = await fetch("http://localhost:3000/logout", {
+                    method: "GET",
+                    credentials: 'include',
+                });
+                if (response.ok) {
+                    // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
+                    window.location.href = "../login_usuarios/login_usuario.html";
+                } else {
+                    console.error("Error al cerrar la sesión");
+                }
+            } catch (error) {
+                console.error("Se produjo un error al cerrar la sesión:", error);
             }
-        } catch (error) {
-            console.error("Se produjo un error al cerrar la sesión:", error);
-        }
+        });
     });
 });
