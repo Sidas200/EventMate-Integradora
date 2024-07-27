@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async() => {
+document.addEventListener('DOMContentLoaded', async () => {
     const images = [
         '../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg',
         '../assets/images/silla_evento.png',
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async() => {
     }
 
     function updatePrice() {
-        const quantity = parseInt(quantityInput.value);
+        const quantity = parseInt(quantityInput.value) || 0;
         const totalPrice = pricePerChair * quantity;
         totalPriceElement.textContent = totalPrice.toFixed(2);
     }
@@ -39,19 +39,66 @@ document.addEventListener('DOMContentLoaded', async() => {
     updateImage();
     updatePrice();
 
-    commentForm.addEventListener('submit', function(event) {
+    async function loadComments() {
+        try {
+            const response = await fetch("http://localhost:3000/comentarios", {
+                method: "GET",
+                credentials: 'include',
+            });
+
+            if (response.ok) {
+                const comments = await response.json();
+                commentList.innerHTML = ''; // Limpiar la lista de comentarios
+
+                comments.forEach(comment => {
+                    const commentItem = document.createElement('div');
+                    commentItem.classList.add('comment');
+                    commentItem.innerHTML = `<strong>${comment.nombre_cliente}</strong>: <p>${comment.comentario}</p>`;
+                    commentList.appendChild(commentItem);
+                });
+            } else {
+                console.error("Error al obtener los comentarios");
+            }
+        } catch (error) {
+            console.error("Se produjo un error al obtener los comentarios:", error);
+        }
+    }
+
+    // Cargar los comentarios al cargar la página
+    loadComments();
+
+    commentForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         const commentText = document.getElementById('commentText').value;
         if (commentText.trim() === '') return; // No agregar comentarios vacíos
 
-        const commentItem = document.createElement('div');
-        commentItem.classList.add('comment');
-        commentItem.innerHTML = `<p>${commentText}</p>`;
-        commentList.appendChild(commentItem);
+        try {
+            const response = await fetch("http://localhost:3000/comentario", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({ comentario: commentText })
+            });
 
-        // Limpiar el campo de texto después de agregar el comentario
-        document.getElementById('commentText').value = '';
+            if (response.ok) {
+                // Agregar comentario a la lista de comentarios en la interfaz de usuario
+                const commentItem = document.createElement('div');
+                commentItem.classList.add('comment');
+                commentItem.innerHTML = `<p>${commentText}</p>`;
+                commentList.appendChild(commentItem);
+
+                // Limpiar el campo de texto después de agregar el comentario
+                document.getElementById('commentText').value = '';
+            } else {
+                console.error("Error al guardar el comentario en el servidor");
+            }
+        } catch (error) {
+            console.error("Se produjo un error al guardar el comentario:", error);
+        }
     });
+
     try {
         const response = await fetch("http://localhost:3000/autorizacion", {
             method: "GET",
@@ -72,10 +119,13 @@ document.addEventListener('DOMContentLoaded', async() => {
             }
         } else {
             console.error("Error al verificar el estado de autenticación");
+            window.location.href = "../login_usuarios/login_usuario.html";
         }
     } catch (error) {
         console.error("Se produjo un error al verificar el estado de autenticación:", error);
+        window.location.href = "../login_usuarios/login_usuario.html";
     }
+
     const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
     logoutLinks.forEach(link => {
         link.addEventListener("click", async (event) => {
