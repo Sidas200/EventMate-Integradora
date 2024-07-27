@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else {
                 navLoggedInItems.forEach(item => item.style.display = "none");
                 navLoggedOutItems.forEach(item => item.style.display = "block");
+                window.location.href = "../login_usuarios/login_usuario.html";
             }
         } else {
             console.error("Error al verificar el estado de autenticación");
@@ -63,8 +64,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (error) {
         console.error("Se produjo un error al verificar el estado de autenticación:", error);
+        alert("Debes iniciar sesión para acceder a esta vista.");
         window.location.href = "../login_usuarios/login_usuario.html";
     }
+
 
     // Logout
     const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
