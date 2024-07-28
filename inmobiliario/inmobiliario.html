@@ -10,7 +10,7 @@
 <body>
     <nav>
         <div class="logo">
-            <a href="../index.html">EventMate</a>
+            <a href="../index/index.html">EventMate</a>
         </div>
         <ul class="nav-links">
             <li><a href="../catering/catering.html">Catering</a></li>
@@ -19,6 +19,42 @@
             <li><a href="#">Planeador</a></li>
             <li><a href="../login_usuarios/login_usuario.html">Login</a></li>
             <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../catering/catering.html">Catering</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../venues/venues.html">Venues</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../planeador/planeador.html">Planeador</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../perfil/perfil.html">Perfil</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../logout/logout.html">Logout</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../catering/catering.html">Catering</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../venues/venues.html">Venues</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../planeador/planeador.html">Planeador</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../login_usuarios/login_usuario.html">Login</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
+            </li>
         </ul>
     </nav>
     <div class="mobiliario-container">
@@ -37,6 +73,12 @@
                 <li>Profundidad: 50 cm</li>
                 <li>Material: Metal y plástico</li>
             </ul>
+            
+            <div class="price-quantity">
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" value="1" min="1">
+                <p>Precio: $<span id="totalPrice">50.00</span></p>
+            </div>
         </div>
 
         <div class="other-chairs">

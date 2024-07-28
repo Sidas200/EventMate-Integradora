@@ -21,12 +21,48 @@
                 <li><a href="#">Planeador</a></li>
                 <li><a href="../login_usuarios/login_usuario.html">Login</a></li>
                 <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../catering/catering.html">Catering</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../venues/venues.html">Venues</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../planeador/planeador.html">Planeador</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../perfil/perfil.html">Perfil</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../logout/logout.html">Logout</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../catering/catering.html">Catering</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../venues/venues.html">Venues</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../planeador/planeador.html">Planeador</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../login_usuarios/login_usuario.html">Login</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
+                </li>
             </ul>
         </nav>
             <br>
         <div class="forms2">
         <form id="signup_cliente" class="form">
-            <p class="titulo">Formulario de registro</p>
+            <p class="titulo">Registro</p>
             <p class="mensaje">Registrate como cliente</p>
             <div class="flex">
             <label for="nombre">
@@ -47,7 +83,7 @@
                 <span>telefono</span>
             </label>
             <label for="fecha">
-                <input class="texto" id="fecha" type="fecha" placeholder="" required="" name="fecha_nac">
+                <input class="texto" id="fecha" type="date" placeholder="" required="" name="fecha_nac">
                 <span>Fecha nacimiento</span>
             </label>
             <label for="contraseña">
@@ -59,7 +95,7 @@
                 <span>Confirmar contraseña</span>
             </label>
             <button type="submit" class="submit" >Confirmar</button>
-            <p class="inicio">Ya tienes una cuenta? <a href="#">Iniciar sesión</a></p>
+            <p class="inicio">Ya tienes una cuenta? <a href="../login_usuarios/login_usuario.html">Iniciar sesión</a></p>
         </form>
         </div>
     </body>
