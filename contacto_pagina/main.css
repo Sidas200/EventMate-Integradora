@@ -45,7 +45,6 @@ nav .nav-links li a:hover {
     color: rgb(0, 0, 0);
 }
 
-
 .contact-container {
     display: flex;
     justify-content: space-between;
@@ -67,18 +66,26 @@ nav .nav-links li a:hover {
     margin-bottom: 20px;
 }
 
-.contact-info {
-    list-style: none;
-    padding: 0;
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.button-container button {
+    padding: 20px 10px;
     font-size: 16px;
-}
-
-.contact-info li {
-    margin-bottom: 10px;
-}
-
-.contact-info strong {
     font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #333;
 }
 
 .image-container {
