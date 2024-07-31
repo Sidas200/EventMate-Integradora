@@ -21,11 +21,11 @@ server.use(cors({
 
 // Conexión a la base de datos
 const conn = db.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Sidas-200",
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "Sidas-200",
     port: 3306,
-    database: "eventmate_integradora"
+    database: process.env.DB_NAME || "eventmate_integradora"
 });
 
 conn.connect((error) => {
