@@ -31,7 +31,7 @@ form.addEventListener("submit", async (event) => {
 
         // Esperar 2 segundos antes de redirigir
         setTimeout(() => {
-            window.location.href = "../index/index.html";
+            window.location.href = "../index.html";
         }, 1000);
 
     } catch (error) {
@@ -48,4 +48,5 @@ form.addEventListener("submit", async (event) => {
             }, 2000); 
         }, 2000); 
     }
+    
 });
