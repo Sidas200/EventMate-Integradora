@@ -11,6 +11,7 @@ form.addEventListener("submit", async (event) => {
     // Mostrar mensaje de "Iniciando sesión..."
     infoMessageElement.style.display = "block";
     errorMessageElement.style.display = "none";
+    
     try {
         const response = await fetch("http://localhost:3000/login_cliente", {
             method: "POST",

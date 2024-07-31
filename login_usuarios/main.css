@@ -2,9 +2,10 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    height: 100%;
-    background: url('/assets/images/image-b192146d-7a62-463d-b437-8ff813ab8244.jpg.webp') no-repeat center center fixed; 
-    background-size: cover; 
+}
+
+h1 {
+    font-size: 148px;
 }
 
 nav {
@@ -14,8 +15,6 @@ nav {
     padding: 20px;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    position: relative;
-    z-index: 10;
 }
 
 nav .logo a {
@@ -52,57 +51,41 @@ nav .nav-links li a:hover {
 
 .login-container {
     display: flex;
-    height: calc(100vh - 60px); /* Ajuste para cubrir el espacio restante debajo del nav */
-    justify-content: center; /* Asegura que haya espacio entre los formularios */
+    flex-direction: column;
     align-items: center;
-    padding: 20px; /* Añadido para dar espacio superior e inferior */
+    justify-content: center;
+    height: 80vh;
+    padding: 20px;
+    background-color: #f7f7f7;
 }
 
-.login-form {
+.login-container h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.login-container form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente para los formularios */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    max-width: 400px; /* Ajuste de ancho máximo */
-    height: auto; /* Ajuste de altura automática */
-    flex-grow: 1; /* Permite que el formulario crezca proporcionalmente */
-    margin: 0 20px; /* Espaciado horizontal igualado */
+    width: 300px;
 }
 
-/* Puedes modificar el tamaño de los títulos aquí */
-.login-form h2 {
-    margin-top: 0;
-    font-size: 24px; /* Tamaño del título */
-    margin-bottom: 20px;
-}
-
-/* Puedes modificar el tamaño de los labels aquí */
-.login-form label {
-    display: block;
+.login-container label {
     margin-bottom: 5px;
-    font-size: 14px; /* Tamaño del texto de los labels */
+    font-size: 14px;
 }
 
-/* Puedes modificar el tamaño de los inputs aquí */
-.login-form input {
-    width: 100%;
-    padding: 10px; /* Padding interno del input */
+.login-container input {
     margin-bottom: 15px;
-    font-size: 16px; /* Tamaño del texto del input */
+    padding: 10px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-/* Puedes modificar el tamaño del botón aquí */
-.login-form button {
-    width: 100%;
-    padding: 10px; /* Padding interno del botón */
-    font-size: 16px; /* Tamaño del texto del botón */
+.login-container button {
+    padding: 10px;
+    font-size: 16px;
     background-color: #000000;
     color: white;
     border: none;
@@ -111,7 +94,7 @@ nav .nav-links li a:hover {
     transition: background-color 0.3s;
 }
 
-.login-form button:hover {
+.login-container button:hover {
     background-color: #000000ca;
 }
 .error-message, .info-message {
