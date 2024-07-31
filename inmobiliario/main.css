@@ -311,8 +311,6 @@ nav .logo a {
   background-color: #0056b3;
 }
 
-
-/* Footer */
 /* Footer */
 .footer {
   display: flex;
@@ -330,7 +328,7 @@ nav .logo a {
 }
 
 .footer .icons img {
-  width: 40px; /* Ajusta el tamaño según sea necesario */
+  width: 40px; 
   height: auto;
 }
 
@@ -352,4 +350,8 @@ nav .logo a {
   font-size: 14px;
   color: #666;
   margin: 0 0 5px 0;
+}
+.nav-icon {
+  width: 50px;
+  height: auto;
 }
