@@ -8,18 +8,49 @@
         <link rel="stylesheet" href="planeador.css">
         <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
     </head>
+    <script src="//code.tidio.co/i3dvbjco7v5affcnmhrrwbo61wenaflf.js" async></script>
     <body>
         <nav>
             <div class="logo">
-                <a href="../index/index.html">EventMate</a>
+                <a href="../index.html">EventMate</a>
             </div>
             <ul class="nav-links">
-                <li><a href="../catering/catering.html">Catering</a></li>
-                <li><a href="../venues-main/venues-main.html">Venues</a></li>
-                <li><a href="../inmobiliario/inmobiliario.html">Mobiliario</a></li>
-                <li><a href="../planeador/planeador.html">Planeador</a></li>
-                <li><a href="../login_usuarios/login_usuario.html">Login</a></li>
-                <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../catering/catering.html">Catering</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../venues/venues.html">Venues</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../planeador/planeador.html">Planeador</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../perfil/perfil.html">Perfil</a>
+                </li>
+                <li class="nav-item nav-logged-in" style="display: none;">
+                    <a href="../logout/logout.html">Logout</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../catering/catering.html">Catering</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../venues/venues.html">Venues</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../planeador/planeador.html">Planeador</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../login_usuarios/login_usuario.html">Login</a>
+                </li>
+                <li class="nav-item nav-logged-out">
+                    <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
+                </li>
             </ul>
         </nav>
         <center><h1>Planeador</h1></center>
@@ -44,5 +75,6 @@
                 <center><button><h3>ENVIAR</h3></button></center>
             </div>
         </form>
+        <script src="planeador.js"></script>
         </body>
 </html>

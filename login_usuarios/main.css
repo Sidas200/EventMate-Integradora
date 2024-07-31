@@ -114,3 +114,14 @@ nav .nav-links li a:hover {
 .login-form button:hover {
     background-color: #000000ca;
 }
+.error-message, .info-message {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.error-message {
+    color: red;
+}
+.info-message {
+    color: blue;
+}
