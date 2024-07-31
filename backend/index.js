@@ -10,12 +10,11 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const secret_jwt = "esta-es-la-clave-secreta"
 
-
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(cors({
-    origin: 'http://localhost:5501', 
+    origin: ['http://localhost:5501', 'https://eventmate-integradora.onrender.com'], // Agregar URL de Render
     credentials: true 
 }));
 
@@ -27,6 +26,7 @@ const conn = db.createConnection({
     port: 3306,
     database: process.env.DB_NAME || "eventmate_integradora"
 });
+
 
 conn.connect((error) => {
     if (error) {
