@@ -1,59 +1,39 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('registro_usuario');
-    const contrasenaInput = document.getElementById('contrasena');
-    const confirmarContrasenaInput = document.getElementById('confirmar_contrasena');
-    const errorContrasena = document.getElementById('error_contrasena');
+const form = document.getElementById("registro_usuario");
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+form.addEventListener("submit", async(event) => {
+event.preventDefault();
 
-        const nombre = document.getElementById('nombre').value.trim();
-        const apellidoPaterno = document.getElementById('apellido_paterno').value.trim();
-        const correo = document.getElementById('correo').value.trim();
-        const contrasena = contrasenaInput.value;
-        const confirmarContrasena = confirmarContrasenaInput.value;
-        const telefono = document.getElementById('telefono').value.trim();
-        const fechaNacimiento = document.getElementById('fecha_nacimiento').value;
+const dataForm = new FormData(form);
+const data = Object.fromEntries(dataForm);
 
-        let errores = [];
 
-        if (nombre === '') {
-            errores.push('El nombre es obligatorio.');
-        }
-        if (apellidoPaterno === '') {
-            errores.push('El apellido paterno es obligatorio.');
-        }
-        if (correo === '' || !validarCorreo(correo)) {
-            errores.push('El correo electrónico es inválido.');
-        }
-        if (contrasena === '' || contrasena.length < 8) {
-            errores.push('La contraseña debe tener al menos 8 caracteres.');
-        }
-        if (contrasena !== confirmarContrasena) {
-            errores.push('Las contraseñas no coinciden.');
-        }
-        if (telefono === '' || !validarTelefono(telefono)) {
-            errores.push('El número de teléfono es inválido.');
-        }
-        if (fechaNacimiento === '') {
-            errores.push('La fecha de nacimiento es obligatoria.');
-        }
-
-        if (errores.length > 0) {
-            errorContrasena.innerHTML = errores.join('<br>');
-        } else {
-            errorContrasena.innerHTML = '';
-            form.submit();
-        }
+try {
+    const response = await fetch("http://localhost:3000/registrar", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body:JSON.stringify(data),
+        credentials: 'include'
     });
 
-    function validarCorreo(correo) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(correo);
+    if (!response.ok) {
+        throw new Error("Datos no validos");
     }
 
-    function validarTelefono(telefono) {
-        const regex = /^\d{10}$/; // Ejemplo para un número de teléfono de 10 dígitos
-        return regex.test(telefono);
-    }
+    window.location.href = "../login_usuarios/login_usuario.html";
+} catch (error) {
+    console.error("Error al registrar al cliente", error);
+    const errorMessageElement = document.getElementById("error-message");
+    errorMessageElement.textContent = error;
+    errorMessageElement.style.display = "block"; 
+
+    setTimeout(() => {
+        errorMessageElement.style.opacity = "0";
+        setTimeout(() => {
+            errorMessageElement.style.display = "none";
+            errorMessageElement.style.opacity = "1"; 
+        }, 1000);
+    }, 1000); 
+}
 });
