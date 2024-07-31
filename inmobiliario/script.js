@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function loadComments() {
         try {
-            const response = await fetch("http://localhost:3000/comentarios", {
+            const response = await fetch("/comentarios", {
                 method: "GET",
                 credentials: 'include',
             });
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (commentText.trim() === '') return; // No agregar comentarios vacíos
 
         try {
-            const response = await fetch("http://localhost:3000/comentario", {
+            const response = await fetch("/comentario", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     try {
-        const response = await fetch("http://localhost:3000/autorizacion", {
+        const response = await fetch("/autorizacion", {
             method: "GET",
             credentials: 'include',
         });
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         link.addEventListener("click", async (event) => {
             event.preventDefault();
             try {
-                const response = await fetch("http://localhost:3000/logout", {
+                const response = await fetch("/logout", {
                     method: "GET",
                     credentials: 'include',
                 });

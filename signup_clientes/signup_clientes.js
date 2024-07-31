@@ -8,7 +8,7 @@
 
     
         try {
-            const response = await fetch("http://localhost:3000/registrar", {
+            const response = await fetch("/registrar", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",

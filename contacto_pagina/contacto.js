@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
     try {
-        const response = await fetch("http://localhost:3000/autorizacion", {
+        const response = await fetch("/autorizacion", {
             method: "GET",
             credentials: 'include',
         });
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         link.addEventListener("click", async (event) => {
             event.preventDefault();
             try {
-                const response = await fetch("http://localhost:3000/logout", {
+                const response = await fetch("/logout", {
                     method: "GET",
                     credentials: 'include',
                 });
