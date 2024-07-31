@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMate - Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="stylesheet" href="/login/login.css">
+</head>
+<script src="//code.tidio.co/i3dvbjco7v5affcnmhrrwbo61wenaflf.js" async></script>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="/index/index.html">EventMate</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/catering/catering.html">Catering</a></li>
+            <li><a href="/venues/venues.html">Venues</a></li>
+            <li><a href="/inmobiliario/inmobiliario.html">Mobiliario</a></li>
+            <li><a href="/planeador/planeador.html">Planeador</a></li>
+            <li><a href="/signup/singup_index.html">Sign Up</a></li>
+        </ul>
+    </nav>
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Iniciar Sesión Usuario</h2>
+            <form id="login_usuario">
+                <label for="correo_electronico">Correo electronico</label>
+                <input type="text" id="correo" name="correo_electronico" required>
+                
+                <label for="contraseña">Contraseña</label>
+                <input type="password" id="contraseña" name="contraseña" required>
+                
+                <button type="submit">Ingresar</button>
+            </form>
+        </div>
+        <div class="login-form">
+            <h2>Iniciar Sesión Proveedor</h2>
+            <form id="login_proveedor">
+                <label for="correo_electronico_proveedor">Correo electronico</label>
+                <input type="text" id="correo_proveedor" name="correo_electronico_proveedor" required>
+                
+                <label for="contraseña_proveedor">Contraseña</label>
+                <input type="password" id="contraseña_proveedor" name="contraseña_proveedor" required>
+                
+                <button type="submit">Ingresar</button>
+            </form>
+        </div>
+
+    <script src="/login/login.js"></script>
+</body>
+</html>
