@@ -50,7 +50,7 @@ nav .nav-links li a:hover {
     color: rgb(0, 0, 0);
 }
 
-.login-container {
+.registro-container {
     display: flex;
     height: calc(100vh - 60px); /* Ajuste para cubrir el espacio restante debajo del nav */
     justify-content: center; /* Asegura que haya espacio entre los formularios */
@@ -58,7 +58,7 @@ nav .nav-links li a:hover {
     padding: 20px; /* Añadido para dar espacio superior e inferior */
 }
 
-.login-form {
+.registro-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,28 +68,23 @@ nav .nav-links li a:hover {
     background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente para los formularios */
     border: 1px solid #ccc;
     border-radius: 8px;
-    max-width: 400px; /* Ajuste de ancho máximo */
-    height: auto; /* Ajuste de altura automática */
-    flex-grow: 1; /* Permite que el formulario crezca proporcionalmente */
-    margin: 0 20px; /* Espaciado horizontal igualado */
+    max-width: 500px; /* Ajuste de ancho máximo */
+    width: 100%; /* Asegura que el formulario se ajuste al contenedor */
 }
 
-/* Puedes modificar el tamaño de los títulos aquí */
-.login-form h2 {
+.registro-form h2 {
     margin-top: 0;
     font-size: 24px; /* Tamaño del título */
     margin-bottom: 20px;
 }
 
-/* Puedes modificar el tamaño de los labels aquí */
-.login-form label {
+.registro-form label {
     display: block;
     margin-bottom: 5px;
     font-size: 14px; /* Tamaño del texto de los labels */
 }
 
-/* Puedes modificar el tamaño de los inputs aquí */
-.login-form input {
+.registro-form input {
     width: 100%;
     padding: 10px; /* Padding interno del input */
     margin-bottom: 15px;
@@ -98,8 +93,14 @@ nav .nav-links li a:hover {
     border-radius: 5px;
 }
 
-/* Puedes modificar el tamaño del botón aquí */
-.login-form button {
+.registro-form .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px; /* Ajuste para que aparezca justo debajo del campo de confirmación de contraseña */
+    margin-bottom: 15px; /* Espacio para que no esté pegado al botón */
+}
+
+.registro-form button {
     width: 100%;
     padding: 10px; /* Padding interno del botón */
     font-size: 16px; /* Tamaño del texto del botón */
@@ -111,6 +112,6 @@ nav .nav-links li a:hover {
     transition: background-color 0.3s;
 }
 
-.login-form button:hover {
+.registro-form button:hover {
     background-color: #000000ca;
 }
