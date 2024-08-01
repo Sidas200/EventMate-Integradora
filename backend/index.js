@@ -230,7 +230,7 @@ server.get('/user-info', verifyToken, (req, res) => {
     });
 });
 
-server.post('/comentario', verifyToken, (req, res) => {
+server.post("/comentario", verifyToken, (req, res) => {
     const id = req.user.id; 
     const { comentario } = req.body;
 
@@ -241,7 +241,7 @@ server.post('/comentario', verifyToken, (req, res) => {
     const com = "INSERT INTO comentarios(fk_cliente, comentario) VALUES (?, ?)";
     conn.query(com, [nuevo_com.id, nuevo_com.comentario], (err, result) => {
         if (err) {
-            console.log("Error al guardar el comentario");
+            console.log("Error al guardar el comentario", err);
             res.status(400).send("Error al guardar el comentario");
         } else {
             console.log("Comentario guardado exitosamente");
@@ -259,11 +259,6 @@ server.post('/comentario', verifyToken, (req, res) => {
     }
   });
 */
-
-server.listen(3000, () => {
-    console.log("Server is running on http://localhost:3000");
-});
-
 server.get('/comentarios', (req, res) => {
     const sql = `
         SELECT c.comentario, cl.nombre_cliente 
@@ -279,4 +274,8 @@ server.get('/comentarios', (req, res) => {
 
         res.status(200).json(results);
     });
+});
+
+server.listen(3000, () => {
+    console.log("Server is running on http://localhost:3000");
 });
