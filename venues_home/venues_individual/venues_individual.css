@@ -56,7 +56,7 @@ nav .logo a {
 /* Header Section */
 .header-section {
     position: relative;
-    background: url('../assets/images/venue_background.jpg') no-repeat center center;
+    background: url('../../assets/images/fondo_venue_indvi.avif') no-repeat center center;
     background-size: cover;
     height: 450px;
     display: flex;
