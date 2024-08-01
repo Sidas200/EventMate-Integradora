@@ -10,23 +10,23 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const secret_jwt = "esta-es-la-clave-secreta"
 
+
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(cors({
-    origin: 'https://eventmate.site', // Permitir solicitudes desde tu dominio
-    credentials: true // Permitir el envío de cookies
+    origin: 'http://localhost:5501', 
+    credentials: true 
 }));
 
 // Conexión a la base de datos
 const conn = db.createConnection({
-    host: process.env.DB_HOST || "localhost",
-    user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "Sidas-200",
+    host: "localhost",
+    user: "root",
+    password: "Sidas-200",
     port: 3306,
-    database: process.env.DB_NAME || "eventmate_integradora"
+    database: "eventmate_integradora"
 });
-
 
 conn.connect((error) => {
     if (error) {
@@ -50,6 +50,24 @@ const verifyToken = (req, res, next) => {
         return res.status(401).send('Acceso no autorizado');
     }
 };
+
+server.get('/caterings', (req, res) => {
+    const sql = `
+        SELECT c.descripcion, c.precio_catering, c.plan_catering, c.personas, 
+               p.nombre_proveedor, p.apellido_proveedor, p.telefono_proveedor, p.email_proveedor
+        FROM caterings c
+        JOIN proveedores p ON c.fk_proveedor = p.id_proveedor
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los caterings", error);
+            return res.status(500).json({ message: 'Error al obtener los caterings' });
+        }
+
+        res.status(200).json(results);
+    });
+});
 
 
 
@@ -230,7 +248,7 @@ server.get('/user-info', verifyToken, (req, res) => {
     });
 });
 
-server.post('/comentario', verifyToken, (req, res) => {
+server.post("/comentario", verifyToken, (req, res) => {
     const id = req.user.id; 
     const { comentario } = req.body;
 
@@ -241,7 +259,7 @@ server.post('/comentario', verifyToken, (req, res) => {
     const com = "INSERT INTO comentarios(fk_cliente, comentario) VALUES (?, ?)";
     conn.query(com, [nuevo_com.id, nuevo_com.comentario], (err, result) => {
         if (err) {
-            console.log("Error al guardar el comentario");
+            console.log("Error al guardar el comentario", err);
             res.status(400).send("Error al guardar el comentario");
         } else {
             console.log("Comentario guardado exitosamente");
@@ -259,11 +277,6 @@ server.post('/comentario', verifyToken, (req, res) => {
     }
   });
 */
-
-server.listen(3000, () => {
-    console.log("Server is running on http://localhost:3000");
-});
-
 server.get('/comentarios', (req, res) => {
     const sql = `
         SELECT c.comentario, cl.nombre_cliente 
@@ -279,4 +292,8 @@ server.get('/comentarios', (req, res) => {
 
         res.status(200).json(results);
     });
+});
+
+server.listen(3000, () => {
+    console.log("Server is running on http://localhost:3000");
 });

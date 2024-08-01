@@ -46,4 +46,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     });
+
+    // Funcionalidad de giro al hacer clic en el botón Select
+    const selectButtons = document.querySelectorAll('.select-btn');
+    selectButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const planCard = this.closest('.plan');
+            planCard.classList.toggle('flipped');
+            const contactInfo = planCard.querySelector('.contact-info');
+            if (contactInfo.style.display === "none") {
+                contactInfo.style.display = "block";
+            } else {
+                contactInfo.style.display = "none";
+            }
+        });
+    });
 });
