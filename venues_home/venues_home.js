@@ -21,6 +21,30 @@ document.addEventListener('DOMContentLoaded', async function() {
             price: 25000,
             link: "../venues_home/venues_individual/venue_individual2.html"
         },
+        {
+            title: "Ballys",
+            imageUrl: "/assets/images/ballys.jpg",
+            price: 25000,
+            link: "../venues_home/venues_individual/venue_individual2.html"
+        },
+        {
+            title: "Ballys",
+            imageUrl: "/assets/images/ballys.jpg",
+            price: 25000,
+            link: "../venues_home/venues_individual/venue_individual2.html"
+        },
+        {
+            title: "Ballys",
+            imageUrl: "/assets/images/ballys.jpg",
+            price: 25000,
+            link: "../venues_home/venues_individual/venue_individual2.html"
+        },
+        {
+            title: "Ballys",
+            imageUrl: "/assets/images/ballys.jpg",
+            price: 25000,
+            link: "../venues_home/venues_individual/venue_individual2.html"
+        },
     ];
 
     function loadVenues(venues) {
@@ -53,6 +77,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     priceSort.addEventListener('change', function() {
         sortVenues(this.value);
     });
+
     try {
         const response = await fetch("http://localhost:3000/autorizacion", {
             method: "GET",
@@ -73,12 +98,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         } else {
             console.error("Error al verificar el estado de autenticación");
-            window.location.href = "../login_usuarios/login_usuario.html";
         }
     } catch (error) {
         console.error("Se produjo un error al verificar el estado de autenticación:", error);
-        window.location.href = "../login_usuarios/login_usuario.html";
     }
+
     const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
     logoutLinks.forEach(link => {
         link.addEventListener("click", async (event) => {
@@ -89,8 +113,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     credentials: 'include',
                 });
                 if (response.ok) {
-                    // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
-                    window.location.href = "../login_usuarios/login_usuario.html";
+                    console.log("Sesión cerrada exitosamente");
                 } else {
                     console.error("Error al cerrar la sesión");
                 }
@@ -100,4 +123,3 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
 });
-
