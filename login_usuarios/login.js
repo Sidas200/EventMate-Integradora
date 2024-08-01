@@ -13,7 +13,7 @@ form.addEventListener("submit", async (event) => {
     errorMessageElement.style.display = "none";
     
     try {
-        const response = await fetch("/login_cliente", {
+        const response = await fetch("http://localhost:3000/login_cliente", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
