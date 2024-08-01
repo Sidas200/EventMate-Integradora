@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function loadComments() {
         try {
-            const response = await fetch("http://localhost:3000/comentarios", {
+            const response = await fetch("/comentarios", {
                 method: "GET",
                 credentials: 'include',
             });
@@ -38,15 +38,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
+    // Cargar los comentarios al cargar la página
     loadComments();
 
     commentForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         const commentText = document.getElementById('commentText').value;
-        if (commentText.trim() === '') return;
+        if (commentText.trim() === '') return; // No agregar comentarios vacíos
 
         try {
-            const response = await fetch("http://localhost:3000/comentario", {
+            const response = await fetch("/comentario", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,10 +57,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             if (response.ok) {
+                // Agregar comentario a la lista de comentarios en la interfaz de usuario
                 const commentItem = document.createElement('div');
                 commentItem.classList.add('comment');
                 commentItem.innerHTML = `<p>${commentText}</p>`;
                 commentList.appendChild(commentItem);
+
+                // Limpiar el campo de texto después de agregar el comentario
                 document.getElementById('commentText').value = '';
             } else {
                 console.error("Error al guardar el comentario en el servidor");
