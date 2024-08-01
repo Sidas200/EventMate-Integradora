@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
     <link rel="stylesheet" href="index.css">
     <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 </head>
 <body>
     <nav>
         <div class="logo">
-            <a href="index.html">EventMate</a>
-        </div>
+            <img src="../assets/images/EventMateLogo.png" alt="Instagram Icon" class="nav-icon">
+          </div>
         <ul class="nav-links">
           <li class="nav-item nav-logged-in" style="display: none;">
             <a href="index.html">Spanish</a>
@@ -36,9 +38,6 @@
                 <a href="logout/logout.html">Logout</a>
             </li>
             <li class="nav-item nav-logged-out">
-              <a href="index.html">Spanish</a>
-          </li>
-            <li class="nav-item nav-logged-out">
                 <a href="catering/catering.html">Catering</a>
             </li>
             <li class="nav-item nav-logged-out">
@@ -55,6 +54,11 @@
             </li>
             <li class="nav-item nav-logged-out">
                 <a href="signup_clientes/signUpClientes.html">Sign Up</a>
+                    <li class="nav-item nav-logged-out">
+                      <a class="material-symbols-outlined" href="index.html" id="ingbutton">
+                        translate
+                      </a>
+                  </li>
             </li>
         </ul>
     </nav>
@@ -69,25 +73,25 @@
     </div>
     <div class="content">
         <div class="section left">
-            <div class="text">
-                <h2>Catering</h2>
+            <div class="text" id="Catering_text">
+                <h1>Catering</h1>
                 <p>Find a selection of suppliers tailored to your preferences.</p>
                 <p>We offer a variety of catering options, including vegetarian, vegan, and gluten-free choices to meet the diverse needs of your guests.</p>
                 <br>
                 <br>
                 <a href="catering/catering.html" class="btn-contact">Discover more</a>
             </div>
-            <div class="image">
+            <div class="image" id="img1">
                 <img src="assets\images\024023-1080w.webp" alt="Image 1"> 
             </div>
         </div>
         <div class="section right">
-            <div class="image">
+            <div class="image" id="img2">
                 <img src="assets/images/casa-infinito-1928.jpeg" alt="Image 2"> 
             </div>
-            <div class="text">
-                <h2>Furniture</h2>
-                <h3>The best furniture for your event</h3>
+            <div class="text" id="Mobiliario_text">
+                <h1>Furniture</h1>
+                <h4>The best furniture for your event</h4>
                 <p>Our furniture collection includes elegant chairs, tables, and linens that will make your event stylish and comfortable.</p>
                 <br>
                 <br>
@@ -95,7 +99,8 @@
             </div>
         </div>
     </div>
-    <div id="token-info"></div>
+
+    <hr class="section-divider">
     <div class="b">
         <div class="b-c">
             <h1>Venues</h1>
@@ -187,11 +192,8 @@
     </div>
     
 <br />
+<br>
 <div class="footer">
-    <div class="icons">
-        <img src="assets/images/Facebook_logo_(square).png" alt="Facebook Icon">
-        <img src="assets/images/Instagram_logo_2022.svg.png" alt="Instagram Icon">
-    </div>
     <div class="content">
         <h4>Venues</h4>
         <p>Interiors</p>

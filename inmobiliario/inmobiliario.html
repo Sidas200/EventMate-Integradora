@@ -9,82 +9,69 @@
 </head>
 <script src="//code.tidio.co/i3dvbjco7v5affcnmhrrwbo61wenaflf.js" async></script>
 <body>
-    <nav>
+    <nav class="nav-container">
         <div class="logo">
-            <a href="..index.html">EventMate</a>
-        </div>
+            <a href="../index.html" > <img src="../assets/images/EventMateLogo.png" class="nav-icon" ></a>
+          </div>
         <ul class="nav-links">
-            <li class="nav-item nav-logged-in" style="display: none;">
-                <a href="../catering/catering.html">Catering</a>
-            </li>
-            <li class="nav-item nav-logged-in" style="display: none;">
-                <a href="../venues/venues.html">Venues</a>
-            </li>
-            <li class="nav-item nav-logged-in" style="display: none;">
-                <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
-            </li>
-            <li class="nav-item nav-logged-in" style="display: none;">
-                <a href="../planeador/planeador.html">Planeador</a>
-            </li>
-            <li class="nav-item nav-logged-in" style="display: none;">
-                <a href="../perfil/perfil.html">Perfil</a>
-            </li>
-            <li class="nav-item nav-logged-in" style="display: none;">
-                <a href="../logout/logout.html">Logout</a>
-            </li>
-            <li class="nav-item nav-logged-out">
-                <a href="../catering/catering.html">Catering</a>
-            </li>
-            <li class="nav-item nav-logged-out">
-                <a href="../venues/venues.html">Venues</a>
-            </li>
-            <li class="nav-item nav-logged-out">
-                <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
-            </li>
-            <li class="nav-item nav-logged-out">
-                <a href="../planeador/planeador.html">Planeador</a>
-            </li>
-            <li class="nav-item nav-logged-out">
-                <a href="../login_usuarios/login_usuario.html">Login</a>
-            </li>
-            <li class="nav-item nav-logged-out">
-                <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
-            </li>
+            <li><a href="../catering/catering.html">Catering</a></li>
+            <li><a href="../venues/venues.html">Venues</a></li>
+            <li><a href="../inmobiliario/inmobiliario.html">Mobiliario</a></li>
+            <li><a href="../planeador/planeador.html">Planeador</a></li>
+            <li><a href="../login_usuarios/login_usuario.html">Login</a></li>
+            <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
         </ul>
     </nav>
-    <div class="mobiliario-container">
-        <h1>Sillas para Eventos</h1>
-        <div class="image-viewer">
-            <button id="prevBtn">&#10094;</button>
-            <img id="mainImage" src="../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg" alt="Silla para Eventos">
-            <button id="nextBtn">&#10095;</button>
+    <header class="header-section">
+        <div class="header-content">
+            <h1>Mobiliario para Eventos</h1>
+            <p>Encuentra el mobiliario perfecto para tu evento</p>
         </div>
-        <div class="details">
-            <h2>Especificaciones</h2>
-            <p>Estas sillas están diseñadas para proporcionar comodidad y estilo a cualquier evento...</p>
-            <ul>
-                <li>Altura: 90 cm</li>
-                <li>Ancho: 45 cm</li>
-                <li>Profundidad: 50 cm</li>
-                <li>Material: Metal y plástico</li>
-            </ul>
-            
-            <div class="price-quantity">
-                <label for="quantity">Cantidad:</label>
-                <input type="number" id="quantity" value="1" min="1">
-                <p>Precio: $<span id="totalPrice">50.00</span></p>
+    </header>
+    <div class="mobiliario-container">
+        <div class="product-overview">
+            <div class="image-viewer">
+                <img class="fade-in" src="../assets/images/wedding-chair-hire.jpg" alt="Silla para Eventos">
+                <img class="fade" src="../assets/images/white-chairs-decorated-with-peonies-greenerty-stand-outside.jpg.webp" alt="Silla para Eventos">
+                <img class="fade" src="../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg" alt="Silla para Eventos">
+                <img class="fade" src="../assets/images/silla_evento.png" alt="Silla para Eventos">
+            </div>
+            <div class="details">
+                <h2>Silla Basica de Madera</h2>
+                <h3>Silla de madera con colchon </h3>
+                <ul>
+                    <li>Altura: 90 cm</li>
+                    <li>Ancho: 45 cm</li>
+                    <li>Profundidad: 50 cm</li>
+                    <li>Material: Metal y plástico</li>
+                </ul>
+                <div class="price-quantity">
+                    <label for="quantity">Cantidad:</label>
+                    <input type="number" id="quantity" value="1" min="1">
+                </div>
+                <div><p>Precio: $<span id="totalPrice">50.00</span></p>
+                    <button class="cta">Añadir al carrito</button></div>
             </div>
         </div>
-
+        <hr class="section-divider">
         <div class="other-chairs">
             <h2>Otros tipos de sillas</h2>
+            <br>
             <div class="chair-list">
-                <img src="../assets/images/silla_evento.png" alt="Silla 4">
-                <img src="../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg" alt="Silla 5">
-                <img src="../assets/images/silla_evento.png" alt="Silla 6">
+                <div class="card">
+                    <img src="../assets/images/white-chairs-decorated-with-peonies-greenerty-stand-outside.jpg.webp" alt="Silla 4">
+                    <p>Silla para Bodas</p>
+                </div>
+                <div class="card">
+                    <img src="../assets/images/nick-fewings-yzqR-1tZVKI-unsplash-2.jpg" alt="Silla 5">
+                    <p>Silla Formal con Velo</p>
+                </div>
+                <div class="card">
+                    <img src="../assets/images/dcc-gold-rim-chairs-1.jpg" alt="Silla 6">
+                    <p>Silla Formal con Respaldo Acolchonado</p>
+                </div>
             </div>
         </div>
-
         <div class="comments">
             <h2>Comentarios</h2>
             <div id="commentList">
@@ -96,7 +83,25 @@
             </form>
         </div>
     </div>
-
-    <script src="script.js"></script>
+    <div class="footer">
+        <div class="content">
+            <h4>Venues</h4>
+            <p>Interiores</p>
+            <p>Exteriores</p>
+            <p>Jardines</p>
+        </div>
+        <div class="content">
+            <h4>Catering</h4>
+            <p>Bebidas</p>
+            <p>Comidas</p>
+            <p>Planes</p>
+        </div>
+        <div class="content">
+            <h4>Mobiliario</h4>
+            <p>Mesas</p>
+            <p>Sillas</p>
+            <p>Manteles</p>
+        </div>
+    </div>
 </body>
 </html>
