@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function loadComments() {
         try {
-            const response = await fetch("/comentarios", {
+            const response = await fetch("http://localhost:3000/comentarios", {
                 method: "GET",
                 credentials: 'include',
             });
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (commentText.trim() === '') return; // No agregar comentarios vacíos
 
         try {
-            const response = await fetch("/comentario", {
+            const response = await fetch("http://localhost:3000/comentario", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
