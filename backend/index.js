@@ -14,8 +14,8 @@ server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(cors({
-    origin: ['http://localhost:5501' || 'https://eventmate-integradora.onrender.com'], // Agregar URL de Render
-    credentials: true 
+    origin: 'https://eventmate.site', // Permitir solicitudes desde tu dominio
+    credentials: true // Permitir el envío de cookies
 }));
 
 // Conexión a la base de datos
