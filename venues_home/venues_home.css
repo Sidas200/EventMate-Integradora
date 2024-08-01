@@ -2,48 +2,91 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    height: 100%;
-    background-color: #f0f0f0;
+    background-color: #FAF9F6;
+}
+
+.nav-container {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #ffffff;
-    color: #000000;
 }
 
 nav .logo a {
     text-decoration: none;
-    color: #000000;
+    color: rgb(0, 0, 0);
     font-size: 24px;
     font-weight: bold;
 }
 
-nav .nav-links {
+.nav-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
 }
 
-nav .nav-links li {
+.nav-links li {
     margin-left: 20px;
 }
 
-nav .nav-links li a {
+.nav-links li a {
     text-decoration: none;
-    color: #000000;
+    color: rgb(0, 0, 0);
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
 
-nav .nav-links li a:hover {
+.nav-links li a:hover {
     background-color: lightgrey;
+    color: rgb(0, 0, 0);
+}
+
+/* Header Section */
+.header-section {
+    position: relative;
+    background: url('/assets/images/fondo_venue_home.avif') no-repeat center center;
+    background-size: cover;
+    height: 450px; /* Ajusta la altura según sea necesario */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #FAF9F6 100%);
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-content h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+.header-content p {
+    font-size: 24px;
+    margin: 10px 0 0;
 }
 
 .filter-container {
@@ -51,13 +94,71 @@ nav .nav-links li a:hover {
     text-align: center;
 }
 
-.filter-container select {
+.filter-container label {
     font-size: 16px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #333;
 }
 
+.price-sort {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    color: #333;
+    appearance: none; /* Elimina el estilo por defecto del navegador */
+    -webkit-appearance: none; /* Para Safari */
+    -moz-appearance: none; /* Para Firefox */
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.price-sort:hover {
+    border-color: #1dd86b; /* Cambia el color del borde al pasar el mouse */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.price-sort:focus {
+    outline: none;
+    border-color: #1dd86b;
+    box-shadow: 0 0 5px rgba(29, 216, 107, 0.5);
+}
+
+.price-sort::-ms-expand {
+    display: none; /* Elimina la flecha en Internet Explorer */
+}
+
+/* Estilo para la flecha del select */
+.filter-container::after {
+    content: '▼'; /* Caracter para la flecha */
+    font-size: 12px;
+    color: #333;
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* La flecha no debe interferir con la selección */
+}
+
+.filter-container {
+    display: inline-block;
+    position: relative;
+}
+
+.price-sort {
+    width: 200px; /* Ancho del select */
+    padding-right: 40px; /* Espacio para la flecha */
+    text-align: left;
+}
+
+
+
+
+/* Venues Container */
 .venues-container {
     display: flex;
     flex-wrap: wrap;
@@ -97,4 +198,45 @@ nav .nav-links li a:hover {
 
 .venue-item:hover {
     transform: scale(1.02);
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+}
+
+.footer .content {
+    text-align: left;
+    margin: 0 20px;
+}
+
+.footer .content h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    margin: 0 0 10px 0;
+}
+
+.footer .content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 5px 0;
+}
+
+.nav-icon {
+    width: 50px;
+    height: auto;
+}
+
+.section-divider {
+    border: none;
+    border-top: 2px solid #ccc; /* Adjust the color and thickness as needed */
+    margin: 40px 0; /* Adjust the spacing around the line as needed */
 }

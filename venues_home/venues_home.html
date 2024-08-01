@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="venues_home.css">
 </head>
 <body>
-    <nav>
+    <nav class="nav-container">
         <div class="logo">
-            <a href="/index/index.html">EventMate</a>
+            <a href="../index.html"><img src="../assets/images/EventMateLogo.png" class="nav-icon"></a>
         </div>
         <ul class="nav-links">
             <li class="nav-item nav-logged-in" style="display: none;">
@@ -40,16 +40,44 @@
         </ul>
     </nav>
 
+    <header class="header-section">
+        <div class="header-content">
+            <h1>Venues para Eventos</h1>
+            <p>Encuentra el lugar perfecto para tu evento</p>
+        </div>
+    </header>
+
     <div class="filter-container">
-        <label for="priceSort">Ordenar por precio:</label>
-        <select id="priceSort">
-            <option value="asc">Menor a mayor</option>
-            <option value="desc">Mayor a menor</option>
+        <label for="priceSort">Ordenar por:</label>
+        <select id="priceSort" class="price-sort">
+            <option value="asc">Menor precio</option>
+            <option value="desc">Mayor precio</option>
         </select>
     </div>
+    
 
-    <div class="venues-container" id="venuesContainer">
-    </div>
+    <div class="venues-container" id="venuesContainer"></div>
+
+    <footer class="footer">
+        <div class="content">
+            <h4>Venues</h4>
+            <p>Interiores</p>
+            <p>Exteriores</p>
+            <p>Jardines</p>
+        </div>
+        <div class="content">
+            <h4>Catering</h4>
+            <p>Bebidas</p>
+            <p>Comidas</p>
+            <p>Planes</p>
+        </div>
+        <div class="content">
+            <h4>Mobiliario</h4>
+            <p>Mesas</p>
+            <p>Sillas</p>
+            <p>Manteles</p>
+        </div>
+    </footer>
 
     <script src="venues_home.js"></script>
 </body>

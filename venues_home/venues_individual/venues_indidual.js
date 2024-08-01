@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Obtén los datos del venue desde los atributos de datos del HTML
     const venueDataElement = document.getElementById('venueData');
 
     const venue = {
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentImageIndex = 0;
 
     function displayVenueDetails(venue) {
-        venueImage.src = venue.images[currentImageIndex];
+        venueImage.src = venue.images[currentImageIndex].trim();
         venueImage.alt = venue.name;
 
         venueInfo.textContent = venue.description;
@@ -31,22 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayComments(comments) {
-        commentsContainer.innerHTML = ''; // Limpiar comentarios anteriores
+        commentsContainer.innerHTML = '';
         comments.forEach(comment => {
-            const commentElement = document.createElement('p');
-            commentElement.textContent = comment;
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `<p>${comment}</p>`;
             commentsContainer.appendChild(commentElement);
         });
     }
 
     function showNextImage() {
         currentImageIndex = (currentImageIndex + 1) % venue.images.length;
-        venueImage.src = venue.images[currentImageIndex];
+        venueImage.src = venue.images[currentImageIndex].trim();
     }
 
     function showPreviousImage() {
         currentImageIndex = (currentImageIndex - 1 + venue.images.length) % venue.images.length;
-        venueImage.src = venue.images[currentImageIndex];
+        venueImage.src = venue.images[currentImageIndex].trim();
     }
 
     function addComment(event) {
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (newComment) {
             venue.comments.push(newComment);
             displayComments(venue.comments);
-            commentText.value = ''; // Limpiar el campo de texto
+            commentText.value = '';
         }
     }
 

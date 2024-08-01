@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventMate - Detalles del Venue</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-    <link rel="stylesheet" href="venues_individual.css">
+    <link rel="stylesheet" href="/venues_home/venues_individual/venues_individual.css">
 </head>
+
 <body>
-    <nav>
+    <nav class="nav-container">
         <div class="logo">
-            <a href="/index/index.html">EventMate</a>
+            <a href="/index/index.html"><img src="/assets/images/EventMateLogo.png" class="nav-icon" alt="EventMate Logo"></a>
         </div>
         <ul class="nav-links">
             <li><a href="/catering/catering.html">Catering</a></li>
@@ -22,47 +24,103 @@
         </ul>
     </nav>
 
-    <div class="venue-details-container" id="venueDetailsContainer">
-        <div class="left-section">
-            <h2>Fotos</h2>
-            <div class="image-gallery">
-                <button id="prevImage">&lt;</button>
-                <img id="venueImage" src="" alt="Venue Image">
-                <button id="nextImage">&gt;</button>
-            </div>
+    <header class="header-section">
+        <div class="header-content">
+            <h1>Quinta Victoria</h1>
+            <p>Descubre el lugar perfecto para tu evento</p>
         </div>
-        <div class="right-section">
-            <h2>Información</h2>
-            <p id="venueInfo" data-description="Un hermoso lugar para eventos, con jardines amplios y vistas impresionantes. Perfecto para bodas, conferencias y eventos sociales."></p>
-            <h2>Contacto</h2>
-            <p id="venueContact" data-contact="Teléfono: 123-456-7890, Email: contacto@venuea.com"></p>
-            <h2>Precios</h2>
-            <p id="venuePrice" data-price="500"></p>
+    </header>
+
+    <div class="venue-details-container mobiliario-container">
+        <div class="product-overview">
+            <div class="image-viewer">
+                <img class="fade-in" id="venueImage" src="/assets/images/quinta_victoria.jpg" alt="Venue Image">
+                <!-- Botones para cambiar de imagen -->
+                <button id="prevImage" class="image-nav-btn">&lt;</button>
+                <button id="nextImage" class="image-nav-btn">&gt;</button>
+            </div>
+            <div class="details">
+                <h2>Información del Venue</h2>
+                <p id="venueInfo"></p>
+                <h3>Contacto</h3>
+                <p id="venueContact"></p>
+                <h3>Precios</h3>
+                <p id="venuePrice"></p>
+            </div>
         </div>
     </div>
 
-    <div class="comments-section">
+    <div class="comments">
         <h2>Comentarios</h2>
         <div id="commentsContainer">
+            <!-- Los comentarios se agregarán aquí dinámicamente -->
         </div>
-        <div class="add-comment">
-            <h3>Agregar Comentario</h3>
-            <form id="commentForm">
-                <textarea id="commentText" placeholder="Escribe tu comentario aquí..." required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
+        <form id="commentForm" class="add-comment">
+            <textarea id="commentText" placeholder="Escribe tu comentario aquí..." required></textarea>
+            <button type="submit">Agregar Comentario</button>
+        </form>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="recommended-venues">
+        <h2>Recomendaciones de otros Venues</h2>
+        <div class="venue-list">
+            <a href="../venues_home/venues_individual/venue_individual1.html" class="card">
+                <img src="/assets/images/salon_anita.jpg" alt="Salon Las Fuentes">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Salon Las Fuentes</p>
+                </div>
+            </a>
+            <a href="../venues_home/venues_individual/venue_individual2.html" class="card">
+                <img src="/assets/images/image-60e38b8a-e47b-4554-b16f-540ad046e70e.jpg.webp" alt="Ballys Eventos">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Ballys Eventos</p>
+                </div>
+            </a>
+            <a href="../venues_home/venues_individual/venue_individual3.html" class="card">
+                <img src="/assets/images/salon_las_fuentes.jpg" alt="Palacio de Cristal">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Palacio de Cristal</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="content">
+            <h4>Venues</h4>
+            <p>Interiores</p>
+            <p>Exteriores</p>
+            <p>Jardines</p>
+        </div>
+        <div class="content">
+            <h4>Catering</h4>
+            <p>Bebidas</p>
+            <p>Comidas</p>
+            <p>Planes</p>
+        </div>
+        <div class="content">
+            <h4>Mobiliario</h4>
+            <p>Mesas</p>
+            <p>Sillas</p>
+            <p>Manteles</p>
         </div>
     </div>
 
     <div id="venueData" style="display: none;"
-        data-name="Venue A"
-        data-images="/assets/images/quinta_victoria2.jpg,/assets/images/venue_b.jpg,/assets/images/venue_c.jpg"
-        data-description="Un hermoso lugar para eventos, con jardines amplios y vistas impresionantes. Perfecto para bodas, conferencias y eventos sociales."
-        data-contact="Teléfono: 123-456-7890, Email: contacto@venuea.com"
-        data-price="500"
-        data-comments="Excelente lugar, muy recomendable!|El personal fue muy amable y todo salió perfecto.|Hermoso venue, aunque un poco caro."
-    ></div>
+        data-name="Quinta Victoria"
+        data-images="/assets/images/quinta_victoria.jpg,/assets/images/quinta_victoria2.jpg,/assets/images/quinta_victoria3.jpg,/assets/images/quinta_victoria5.jpg"
+        data-description="Quinta Victoria ofrece un entorno idílico con jardines exuberantes, instalaciones de lujo, y una atmósfera tranquila. Perfecto para bodas, conferencias, y eventos corporativos. Equipado con tecnología de punta y servicios personalizados para cada evento."
+        data-contact="Teléfono: +34 123-456-7890, Email: contacto@quintavictoria.com"
+        data-price="2500"
+        data-comments="Un lugar maravilloso, el mejor día de mi vida se hizo realidad aquí!|El personal fue muy atento y profesional, lo recomiendo!|El ambiente es espectacular, aunque un poco costoso, vale la pena.">
+    </div>
 
-    <script src="venues_indidual.js"></script>
+    <script src="/venues_home/venues_individual/venues_indidual.js"></script>
 </body>
+
 </html>
