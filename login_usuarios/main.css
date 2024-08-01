@@ -15,39 +15,39 @@ nav {
     padding: 20px;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-}
-
-nav .logo a {
+  }
+  
+  nav .logo a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 24px;
     font-weight: bold;
-}
-
-nav .nav-links {
+  }
+  
+  nav .nav-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-}
-
-nav .nav-links li {
+  }
+  
+  nav .nav-links li {
     margin-left: 20px;
-}
-
-nav .nav-links li a {
+  }
+  
+  nav .nav-links li a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
-}
-
-nav .nav-links li a:hover {
+  }
+  
+  nav .nav-links li a:hover {
     background-color: lightgrey;
     color: rgb(0, 0, 0);
-}
+  }
 
 .login-container {
     display: flex;
