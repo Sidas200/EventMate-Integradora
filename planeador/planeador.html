@@ -1,85 +1,107 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-        <title>EventMate Planeador</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-        <link rel="stylesheet" href="../planeador/planeador.css">
-        <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
-    </head>
-    <script src="//code.tidio.co/i3dvbjco7v5affcnmhrrwbo61wenaflf.js" async></script>
-    <body>
-        <nav>
-            <div class="logo">
-                <a href="../index.html" > <img src="../assets/images/EventMateLogo.png" class="nav-icon" ></a>
-              </div>
-            <ul class="nav-links">
-                <li class="nav-item nav-logged-in" style="display: none;">
-                    <a href="../catering/catering.html">Catering</a>
-                </li>
-                <li class="nav-item nav-logged-in" style="display: none;">
-                    <a href="../venues/venues.html">Venues</a>
-                </li>
-                <li class="nav-item nav-logged-in" style="display: none;">
-                    <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
-                </li>
-                <li class="nav-item nav-logged-in" style="display: none;">
-                    <a href="../planeador/planeador.html">Planeador</a>
-                </li>
-                <li class="nav-item nav-logged-in" style="display: none;">
-                    <a href="../perfil/perfil.html">Perfil</a>
-                </li>
-                <li class="nav-item nav-logged-in" style="display: none;">
-                    <a href="../logout/logout.html">Logout</a>
-                </li>
-                <li class="nav-item nav-logged-out">
-                    <a href="../catering/catering.html">Catering</a>
-                </li>
-                <li class="nav-item nav-logged-out">
-                    <a href="../venues/venues.html">Venues</a>
-                </li>
-                <li class="nav-item nav-logged-out">
-                    <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
-                </li>
-                <li class="nav-item nav-logged-out">
-                    <a href="../planeador/planeador.html">Planeador</a>
-                </li>
-                <li class="nav-item nav-logged-out">
-                    <a href="../login_usuarios/login_usuario.html">Login</a>
-                </li>
-                <li class="nav-item nav-logged-out">
-                    <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
-                </li>
-            </ul>
-        </nav>
-        <header class="header-section">
-            <div class="header-content">
-                <h1>Planeador</h1>
-                <p>Planea tu evento ideal con nosotros</p>
-            </div>
-        </header>
-        <form>
-            <div class="evento">
-                <label for="dropdown">¿Qué tipo de evento tendrás?</label><br>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMate Planner</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="stylesheet" href="../planeador/planeador.css">
+    <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
+</head>
+<script src="//code.tidio.co/i3dvbjco7v5affcnmhrrwbo61wenaflf.js" async></script>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="../index.html"> <img src="../assets/images/EventMateLogo.png" class="nav-icon"></a>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../catering/catering.html">Catering</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../venues/venues.html">Venues</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../inmobiliario/inmobiliario.html">Furniture</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../planeador/planeador.html">Planner</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../perfil/perfil.html">Profile</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../logout/logout.html">Logout</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../catering/catering.html">Catering</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../venues/venues.html">Venues</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../inmobiliario/inmobiliario.html">Furniture</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../planeador/planeador.html">Planner</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../login_usuarios/login_usuario.html">Login</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
+            </li>
+        </ul>
+    </nav>
+    <header class="header-section">
+        <div class="header-content">
+            <h1>Planner</h1>
+            <p>Plan your ideal event with us</p>
+        </div>
+    </header>
+    <div class="planeador-container">
+        <form class="evento">
+            <div class="event-card">
+                <label for="dropdown">What type of event will you have?</label>
                 <select name="dropdown" id="dropdown">
-                    <option value="opcion1">Evento familiar</option>
-                    <option value="opcion2">Evento escolar</option>
-                    <option value="opcion3">Evento laboral</option>
-                    <option value="opcion4">Otro</option>
-                </select><br>
-                <label for="comentario">Danos detalles sobre cómo quieres tu evento</label><br>
-                <textarea type="text" id="comentario" class="comentario" name="comentario"
-                placeholder="Temática, comida, música, espacio exterior o interior, etc..."></textarea><br>
-                <label for="presupuesto">¿Cuál es tu presupuesto?</label><br>
-                <input type="number" id="presupuesto" name="presupuesto" placeholder="$$$"><br>
-                <label for="date">Fecha del evento</label><br>
-                <input type="datetime-local" id="date" name="date"><br>
-                <label for="invitados">¿Cuántos invitados son?</label><br>
-                <input type="number" placeholder="Número de invitados"><br>
-                <center><button><h3>ENVIAR</h3></button></center>
+                    <option value="opcion1">Wedding</option>
+                    <option value="opcion2">Work Event</option>
+                    <option value="opcion3">Social Event</option>
+                    <option value="opcion4">Other</option>
+                </select>
+                <label for="comentario">Give us details on how you want your event</label>
+                <textarea type="text" id="comentario" class="comentario" name="comentario" placeholder="Theme, food, music, outdoor or indoor space, etc..."></textarea>
+                <label for="presupuesto">What is your budget?</label>
+                <input type="number" id="presupuesto" name="presupuesto" placeholder="$$$">
+                <label for="date">Event Date</label>
+                <input type="datetime-local" id="date" name="date">
+                <label for="invitados">How many guests?</label>
+                <input type="number" id="invitados" name="invitados" placeholder="Number of guests">
+                <center><button type="submit"><h3>SUBMIT</h3></button></center>
             </div>
         </form>
-        <script src="planeador.js"></script>
-        </body>
+    </div>
+
+    <div class="footer">
+        <div class="content">
+            <h4>Venues</h4>
+            <p>Indoors</p>
+            <p>Outdoors</p>
+            <p>Gardens</p>
+        </div>
+        <div class="content">
+            <h4>Catering</h4>
+            <p>Beverages</p>
+            <p>Foods</p>
+            <p>Plans</p>
+        </div>
+        <div class="content">
+            <h4>Furniture</h4>
+            <p>Tables</p>
+            <p>Chairs</p>
+            <p>Tablecloths</p>
+        </div>
+    </div>
+    <script src="planeador.js"></script>
+</body>
 </html>

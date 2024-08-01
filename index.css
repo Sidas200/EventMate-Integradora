@@ -72,8 +72,9 @@ nav .nav-links li a:hover {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
   overflow: hidden;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .banner img {
@@ -83,6 +84,7 @@ nav .nav-links li a:hover {
   object-fit: cover;
   opacity: 0;
   transition: opacity 1s;
+  
 }
 
 .banner img.active {
@@ -122,7 +124,7 @@ nav .nav-links li a:hover {
 
 .content {
   padding: 40px 20px;
-  box-shadow: #000000d8;
+  box-shadow: #000000e4;
 }
 
 .section {
@@ -270,25 +272,33 @@ nav .nav-links li a:hover {
   background-color: #000000ca;
 }
 
+
 .footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-start;
   padding: 40px 20px;
   background-color: #f8f8f8;
   border-top: 1px solid #ddd;
-  position: relative;
+}
+
+.footer .icons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer .icons img {
+  width: 40px; 
+  height: auto;
 }
 
 .footer .content {
   text-align: left;
-  margin-left: 20px;
+  margin: 0 20px;
 }
 
-.footer h1,
-.footer h2,
-.footer h3,
-.footer h4 {
+.footer .content h4 {
   font-family: 'Inter', sans-serif;
   font-weight: bold;
   font-size: 18px;
@@ -296,24 +306,11 @@ nav .nav-links li a:hover {
   margin: 0 0 10px 0;
 }
 
-.footer p {
+.footer .content p {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   color: #666;
   margin: 0 0 5px 0;
-}
-
-.icons {
-  position: absolute;
-  bottom: 80px;
-  left: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.icons img {
-  width: 50px;
-  height: auto;
 }
 
 ::-webkit-scrollbar {
