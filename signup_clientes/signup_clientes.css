@@ -1,427 +1,182 @@
-.form{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    gap: 10px;
-    max-width:350px;
-    padding: 150px;
-    border-radius: 30px;
-    position: relative;
-}
-.titulo{
-    font-size: 50px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding-left: 40px;
-    color: black;
-    font-family: "Lilita One", sans-serif;
-}
-
-.titulo::before{
-    width: 18px;
-    height: 18px;
-}
-
-.titulo::after{
-    width: 18px;
-    height: 18px;
-    animation: pulse 1s linear infinite;
-}
-
-.titulo::before,
-.titulo::after {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  left: 0px;
-  background-color: black;
-}
-
-.mensaje, 
-.inicio {
-  font-size: 20px;
-  color:black;
-  font-family: "Lilita One", sans-serif;
-
-}
-
-.inicio {
-    text-align: center;
-  }
-  
-  .inicio a:hover {
-    text-decoration: underline  #00bfff96;
-  }
-
-  .inicio a {
-    color: black;
-  }
-
-  .flex {
-    display: flex;
-    width: 100%;
-    gap:30px;
-  }
-  .form label {
-    position: relative;
-  }
-  
-  .form label .texto {
-    background-color: white;
-    color: black;
-    width: 100%;
-    padding: 20px 05px 05px 10px;
-    outline: 0;
-    border: 2px solid lightgray;
-    border-radius: 10px;
-  }
-  
-  .form label .texto + span {
-    color: lightgray;
-    position: absolute;
-    left: 10px;
-    top: 0px;
-    font-size: 0.9em;
-    cursor: text;
-    transition: 0.3s ease;
-  }
-  
-  .form label .texto:placeholder-shown + span {
-    top: 12.5px;
-    font-size: 0.9em;
-  }
-  
-  .form label .texto:focus + span,
-  .form label .texto:valid + span {
-    color: black;
-    top: 0px;
-    font-size: 0.7em;
-    font-weight: 600;
-  }
-  
-  .texto {
-    font-size: medium;
-  }
-  
-  .submit {
-    border: none;
-    outline: none;
-    padding: 10px;
-    border-radius: 10px;
-    color:white;
-    font-size: 16px;
-    transform: .3s ease;
-    background-color: black;
-    margin-left: 20px;
-  }
-  
-  .submit:hover {
-    background-color: #00bfff96;
-  }
-  
-  @keyframes pulse {
-    from {
-      transform: scale(0.9);
-      opacity: 1;
-    }
-  
-    to {
-      transform: scale(1.8);
-      opacity: 0;
-    }
-  }
-  .titulo5{
-    display: flex;
-    flex-direction: column;
-  }
-  .forms2{
-    display: flex;
-    justify-content:center;
-    background-size: cover;
-  }
-  h1{
-    font-family: "Lilita One", sans-serif;
-    color: white;
-    font-size: 50px;
-  }
-  .imagen{
-    display: flex;
-    border-radius: 10%;
-    width: 150px;
-    height: 150px;
-    
-    
-
-  }
-  .titulo_integradora{
-    display: flex;
-    justify-content: space-between;
-  }
-
-
 body, html {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
     background-color: #f7f7f7;
-  }
-  
-  h1{
-    font-size: 148px;
-  }
-  
-  nav {
+}
+
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #FAF9F6;
     color: rgb(0, 0, 0);
-  }
-  
-  nav .logo a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  nav .nav-links {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-icon {
+    width: 50px;
+    height: auto;
+}
+
+nav .nav-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-  }
-  
-  nav .nav-links li {
+}
+
+nav .nav-links li {
     margin-left: 20px;
-  }
-  
-  nav .nav-links li a {
+}
+
+nav .nav-links li a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
-  }
-  
-  nav .nav-links li a:hover {
+}
+
+nav .nav-links li a:hover {
     background-color: lightgrey;
     color: rgb(0, 0, 0);
-  }
-  
-  .banner {
-    position: relative;
-    height: 70vh;
+}
+
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    color: white;
-    overflow: hidden;
-  }
-  
-  .banner img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s;
-  }
-  
-  .banner img.active {
-    opacity: 1;
-  }
-  
-  .banner-content {
-    position: relative;
-    z-index: 2;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .banner-content h1 {
-    font-size: 48px;
-    margin: 0;
-  }
-  
-  .banner-content p {
-    font-size: 24px;
-    margin: 10px 0;
-  }
-  
-  .btn-contact {
-    text-decoration: none;
-    background-color: #000000;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.222);
-  }
-  
-  .btn-contact:hover {
-    background-color: #000000ca;
-  }
-  
-  .content {
-    padding: 40px 20px;
-    box-shadow: #000000d8;
-  }
-  
-  .section {
-    display: flex;
-    align-items: center;
-    padding: 20px 0;
-  }
-  
-  .section.left .text {
-    order: 1;
-    padding-right: 20px;
-  }
-  
-  .section.left .image {
-    order: 2;
-  }
-  
-  .section.right .text {
-    order: 2;
-    padding-left: 20px;
-  }
-  
-  .section.right .image {
-    order: 1;
-  }
-  
-  .section .text {
-    flex: 1;
-  }
-  
-  .section .image {
-    flex: 1;
-    box-shadow: #000000d8;
-  }
-  
-  .section .image img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.222); 
-    transition: transform 0.4s;
-  }
-  
-  .cards {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    width: 100%;
-    padding: 15px;
-    justify-content: center;
-  }
-  
-  .card {
-    width: 350px;
-    height: 250px;
-    perspective: 1000px;
-    flex: 0 0 auto;
-  }
-  
-  .card-inner {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.4s;
-  }
-  
-  .card.flipped .card-inner {
-    transform: rotateY(180deg);
-  }
-  
-  .card-front,
-  .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-  }
-  
-  .card-front img {
-    width: 100%; 
-    height: 100%; /* Ensure the image fills the card */
-    object-fit: cover; 
-    display: block; 
-    border-radius: 5px;
-  }
-  
-  .card-back {
-    transform: rotateY(180deg);
-    background-color: #ecf4ef;
-    color: #000000;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 24px;
-    border-color:  #ecf4ef;
-    border-radius: 5px;
-  }
-  
-  .card {
-    cursor: pointer;
-    transition: transform 0.4s, filter 0.4s;
-  }
-  
-  .cards:hover > .card:not(:hover) {
-    filter: blur(10px);
-    transform: scale(0.9);
-  }
-  
-  .b {
-    position: relative;
-    height: 300px;
-    background-image: url('../assets/images/hhhh.webp');
+    height: 100vh;
+    padding-top: 80px; /* To prevent overlap with fixed nav */
     background-size: cover;
     background-position: center;
+}
+
+.form-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: left;
-    text-align: left;
-    padding-left: 100px;
-    backdrop-filter: blur(10px);
-    opacity: 0.8;
-  }
-  
-  .b-c {
-    max-width: 80%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.titulo {
+    font-size: 24px;
+    font-weight: 700;
     color: black;
-  }
-  
-  .b h1 {
-    font-size: 3.5rem;
+    font-family: "Inter", sans-serif;
     margin-bottom: 10px;
-  }
-  
-  .b-b {
-    text-decoration: none;
-    background-color:black;
-    color: white;
-    padding: 10px 20px;
+    text-align: center;
+}
+
+.mensaje {
+    font-size: 16px;
+    color: black;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.flex {
+    display: flex;
+    gap: 20px;
+}
+
+.form label {
+    position: relative;
+    width: 100%;
+}
+
+.form label .texto {
+    background-color: white;
+    color: black;
+    width: 100%;
+    padding: 15px;
+    outline: 0;
+    border: 2px solid lightgray;
     border-radius: 5px;
     font-size: 16px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.222);
-  }
-  
-  .b-b:hover {
-    background-color: #000000ca;
-  }
-  
-  .footer {
+}
+
+.form label .texto + span {
+    color: lightgray;
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+}
+
+.form label .texto:placeholder-shown + span {
+    top: 20px;
+    font-size: 0.9em;
+}
+
+.form label .texto:focus + span,
+.form label .texto:valid + span {
+    color: black;
+    top: -5px;
+    font-size: 0.8em;
+    font-weight: 600;
+    background: white;
+    padding: 0 5px;
+}
+
+.submit {
+    border: none;
+    outline: none;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    background-color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.submit:hover {
+    background-color: #333;
+}
+
+.inicio {
+    font-size: 14px;
+    color: black;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.inicio a {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.inicio a:hover {
+    text-decoration: underline;
+}
+
+.footer {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -429,42 +184,40 @@ body, html {
     background-color: #f8f8f8;
     border-top: 1px solid #ddd;
     position: relative;
-  }
-  
-  .footer .content {
+}
+
+.footer .content {
     text-align: left;
     margin-left: 20px;
-  }
-  
-  .footer h1,
-  .footer h2,
-  .footer h3,
-  .footer h4 {
+}
+
+.footer h1,
+.footer h2,
+.footer h3,
+.footer h4 {
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     font-size: 18px;
     color: #333;
     margin: 0 0 10px 0;
-  }
-  
-  .footer p {
+}
+
+.footer p {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: #666;
     margin: 0 0 5px 0;
-  }
-  
-  .icons {
+}
+
+.icons {
     position: absolute;
     bottom: 20px;
     left: 20px;
     display: flex;
     gap: 10px;
-  }
-  
-  .icons img {
+}
+
+.icons img {
     width: 25px;
     height: auto;
-  }
-
-  
+}

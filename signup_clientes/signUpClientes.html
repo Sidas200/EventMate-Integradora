@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="signup_clientes.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
         <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
         <script type="text/javascript" src="signup_clientes.js" defer></script>
     </head>
@@ -13,8 +13,8 @@
     <body>
         <nav>
             <div class="logo">
-                <a href="../index.html" > <img src="../assets/images/EventMateLogo.png" class="nav-icon" ></a>
-              </div>
+                <a href="../index.html"><img src="../assets/images/EventMateLogo.png" class="nav-icon"></a>
+            </div>
             <ul class="nav-links">
                 <li><a href="../catering/catering.html">Catering</a></li>
                 <li><a href="../venues/venues.html">Venues</a></li>
@@ -24,44 +24,46 @@
                 <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
             </ul>
         </nav>
-            <br>
-        <div class="forms2">
-        <form id="signup_cliente" class="form">
-            <p class="titulo">Registro</p>
-            <p class="mensaje">Registrate como cliente</p>
-            <div class="flex">
-            <label for="nombre">
-                <input class="texto" type="text" id="nombre" placeholder=""  required="" name="nombre_cliente">
-                <span>Nombre(s)</span>
-            </label> 
-            <label for="apellido" >
-                <input class="texto" id="apellido" type="text" placeholder=""  required="" name="apellido_cliente">
-                <span>Apellido(s)</span>
-            </label>  
+
+        <div class="container">
+            <div class="form-container">
+                <form id="signup_cliente" class="form">
+                    <p class="titulo">Registro</p>
+                    <p class="mensaje">Registrate como cliente</p>
+                    <div class="flex">
+                        <label for="nombre">
+                            <input class="texto" type="text" id="nombre" placeholder="" required="" name="nombre_cliente">
+                            <span>Nombre(s)</span>
+                        </label> 
+                        <label for="apellido">
+                            <input class="texto" id="apellido" type="text" placeholder="" required="" name="apellido_cliente">
+                            <span>Apellido(s)</span>
+                        </label>  
+                    </div>
+                    <label for="email">
+                        <input class="texto" id="email" type="email" placeholder="" required="" name="correo_cliente">
+                        <span>Email</span>
+                    </label>
+                    <label for="telefono">
+                        <input class="texto" id="telefono" type="tel" placeholder="" required="" name="telefono_cliente">
+                        <span>Telefono</span>
+                    </label>
+                    <label for="fecha">
+                        <input class="texto" id="fecha" type="date" placeholder="" required="" name="fecha_nac">
+                        <span>Fecha nacimiento</span>
+                    </label>
+                    <label for="contraseña">
+                        <input class="texto" id="contraseña" type="password" placeholder="" required="" name="contraseña">
+                        <span>Contraseña</span>
+                    </label>
+                    <label for="confirmacion">
+                        <input class="texto" id="confirmacion" type="password" placeholder="" required="" name="confirmacion">
+                        <span>Confirmar contraseña</span>
+                    </label>
+                    <button type="submit" class="submit">Confirmar</button>
+                    <p class="inicio">Ya tienes una cuenta? <a href="../login_usuarios/login_usuario.html">Iniciar sesión</a></p>
+                </form>
             </div>
-            <label for="email">
-                <input class="texto" id="email" type="Email" placeholder="" required="" name="correo_cliente" >
-                <span>Email</span>
-            </label>
-            <label for="telefono">
-                <input class="texto" id="telefono" type="telefono" placeholder="" required="" name="telefono_cliente">
-                <span>telefono</span>
-            </label>
-            <label for="fecha">
-                <input class="texto" id="fecha" type="date" placeholder="" required="" name="fecha_nac">
-                <span>Fecha nacimiento</span>
-            </label>
-            <label for="contraseña">
-                <input class="texto" id="contraseña" type="password" placeholder="" required="" name="contraseña">
-                <span>Contraseña</span>
-            </label>
-            <label for="confirmacion">
-                <input class="texto" id="confirmacion" type="password" placeholder="" required="" name="confirmacion">
-                <span>Confirmar contraseña</span>
-            </label>
-            <button type="submit" class="submit" >Confirmar</button>
-            <p class="inicio">Ya tienes una cuenta? <a href="../login_usuarios/login_usuario.html">Iniciar sesión</a></p>
-        </form>
         </div>
     </body>
 </html>
