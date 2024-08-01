@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>EventMate - Detalles del Venue</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="stylesheet" href="venues_individual.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="/index/index.html">EventMate</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/catering/catering.html">Catering</a></li>
+            <li><a href="/venues_home/venues_home.html">Venues</a></li>
+            <li><a href="/inmobiliario/inmobiliario.html">Mobiliario</a></li>
+            <li><a href="/planeador/planeador.html">Planeador</a></li>
+            <li><a href="/login_usuarios/login_usuario.html">Login</a></li>
+            <li><a href="/signup/singup_index.html">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <div class="venue-details-container" id="venueDetailsContainer">
+        <div class="left-section">
+            <h2>Fotos</h2>
+            <div class="image-gallery">
+                <button id="prevImage">&lt;</button>
+                <img id="venueImage" src="" alt="Venue Image">
+                <button id="nextImage">&gt;</button>
+            </div>
+        </div>
+        <div class="right-section">
+            <h2>Información</h2>
+            <p id="venueInfo" data-description="Un hermoso lugar para eventos, con jardines amplios y vistas impresionantes. Perfecto para bodas, conferencias y eventos sociales."></p>
+            <h2>Contacto</h2>
+            <p id="venueContact" data-contact="Teléfono: 123-456-7890, Email: contacto@venuea.com"></p>
+            <h2>Precios</h2>
+            <p id="venuePrice" data-price="500"></p>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h2>Comentarios</h2>
+        <div id="commentsContainer">
+        </div>
+        <div class="add-comment">
+            <h3>Agregar Comentario</h3>
+            <form id="commentForm">
+                <textarea id="commentText" placeholder="Escribe tu comentario aquí..." required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="venueData" style="display: none;"
+        data-name="Venue A"
+        data-images="/assets/images/quinta_victoria2.jpg,/assets/images/venue_b.jpg,/assets/images/venue_c.jpg"
+        data-description="Un hermoso lugar para eventos, con jardines amplios y vistas impresionantes. Perfecto para bodas, conferencias y eventos sociales."
+        data-contact="Teléfono: 123-456-7890, Email: contacto@venuea.com"
+        data-price="500"
+        data-comments="Excelente lugar, muy recomendable!|El personal fue muy amable y todo salió perfecto.|Hermoso venue, aunque un poco caro."
+    ></div>
+
+    <script src="venues_indidual.js"></script>
+</body>
+</html>
