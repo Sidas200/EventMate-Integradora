@@ -77,25 +77,28 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px 20px 0; /* Move the logo closer to the sections */
+    flex-direction: column;
+    margin-top: 20px;
     background-color: #FAF9F6;
 }
 
 .centered-logo {
-    width: 100px; /* Adjust size as needed */
+    width: 100px;
     height: auto;
+    margin-bottom: 20px;
 }
 
 .main-container {
     display: flex;
-    height: calc(100vh - 160px); /* Adjust based on your header height */
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Bring sections closer together */
+    gap: 20px; /* Adjust gap as needed */
+    padding: 20px;
+    flex-direction: row;
 }
 
-.left-section {
-    flex: 1;
+.left-section, .right-section {
+    flex: 0 1 45%; /* Flex properties to control the width of the sections */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,19 +108,10 @@ nav {
 .side-image {
     height: auto;
     width: auto;
-    max-width: 100%; /* Adjust as needed */
-    max-height: calc(100% - 40px); /* Adjust as needed to control the height */
-    border-radius: 10px; /* Add subtle border radius */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add light shadow */
-}
-
-.right-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    max-width: 100%;
+    max-height: calc(100% - 40px);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-container {
@@ -129,8 +123,8 @@ nav {
     max-width: 400px;
     background-color: #f7f7f7;
     padding: 20px;
-    border-radius: 10px; /* Add subtle border radius */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add light shadow */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-container h1 {
