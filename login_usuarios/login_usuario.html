@@ -6,11 +6,13 @@
     <title>EventMate - Login</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <script src="//code.tidio.co/i3dvbjco7v5affcnmhrrwbo61wenaflf.js" async></script>
 <body>
     <nav>
         <div class="logo">
+  <li><a class="material-symbols-outlined" href="index_ingles.html" id="ingbutton"> translate</a></li>
             <a href="../index.html"> <img src="../assets/images/EventMateLogo.png" class="nav-icon"></a>
         </div>
         <ul class="nav-links">
@@ -40,22 +42,31 @@
             </li>
         </ul>
     </nav>
-    <div class="login-container">
-        <h1>Iniciar Sesión</h1>
-        <form id="login_usuario">
-            <label for="correo_electronico">Correo electronico</label>
-            <input type="text" id="correo" name="correo_electronico" required>
-            
-            <label for="contraseña">Contraseña</label>
-            <input type="password" id="contraseña" name="contraseña" required>
-            
-            <button type="submit">Ingresar</button>
-            <p class="inicio">Aun no tienes una cuenta? <a href="../signup_clientes/signUpClientes.html">Registrate</a></p>
-        </form>
-        <div id="info-message" class="info-message">Iniciando sesión...</div>
-        <div id="error-message" class="error-message"></div>
+    <div class="logo-center">
+        <img src="../assets/images/EventMateLogo.png" class="centered-logo">
     </div>
-
+    <div class="main-container">
+        <div class="left-section">
+            <img src="../assets/images/white-chairs-decorated-with-peonies-greenerty-stand-outside.jpg.webp" alt="Event Image" class="side-image">
+        </div>
+        <div class="right-section">
+            <div class="login-container">
+                <h1>Iniciar Sesión</h1>
+                <form id="login_usuario">
+                    <label for="correo_electronico">Correo electronico</label>
+                    <input type="text" id="correo" name="correo_electronico" required>
+                    
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" name="contraseña" required>
+                    
+                    <button type="submit">Ingresar</button>
+                    <p class="inicio">Aun no tienes una cuenta? <a href="../signup_clientes/signUpClientes.html">Registrate</a></p>
+                </form>
+                <div id="info-message" class="info-message">Iniciando sesión...</div>
+                <div id="error-message" class="error-message"></div>
+            </div>
+        </div>
+    </div>
     <script src="login.js"></script>
 </body>
 </html>
