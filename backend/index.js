@@ -51,6 +51,24 @@ const verifyToken = (req, res, next) => {
     }
 };
 
+server.get('/caterings', (req, res) => {
+    const sql = `
+        SELECT c.descripcion, c.precio_catering, c.plan_catering, c.personas, 
+               p.nombre_proveedor, p.apellido_proveedor, p.telefono_proveedor, p.email_proveedor
+        FROM caterings c
+        JOIN proveedores p ON c.fk_proveedor = p.id_proveedor
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los caterings", error);
+            return res.status(500).json({ message: 'Error al obtener los caterings' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
 
 
 server.post("/registrar", async (req, res) => {
