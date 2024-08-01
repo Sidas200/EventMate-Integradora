@@ -53,7 +53,7 @@ const verifyToken = (req, res, next) => {
 
 
 
-sever.post('/registrar', async(req, res) => {
+server.post('/registrar', async(req, res) => {
     console.log("Datos recibidos:", req.body);
 
     const { nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion } = req.body;
