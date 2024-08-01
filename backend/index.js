@@ -53,11 +53,17 @@ const verifyToken = (req, res, next) => {
 
 
 
-server.post("/registrar", async (req, res) => {
-    const { nombre_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion, apellido_cliente } = req.body;
+app.post('/registrar', async(req, res) => {
+    console.log("Datos recibidos:", req.body);
+
+    const { nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion } = req.body;
+
+    if (!nombre_cliente || !apellido_cliente || !correo_cliente || !telefono_cliente || !fecha_nac || !contraseña || !confirmacion) {
+        return res.status(400).send({ error: "Todos los campos son obligatorios" });
+    }
 
     if (contraseña !== confirmacion) {
-        return res.status(400).send('Las contraseñas no coinciden');
+        return res.status(400).send({ error: "Las contraseñas no coinciden" });
     }
 
     const hashedPassword = await bcrypt.hash(contraseña, 10);
