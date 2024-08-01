@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Carrusel de imágenes
     const images = [
-        "../assets/images/image-14cef189-1280-4dd7-a79f-3b5b38b000a5.JPG.webp",
+        "../",
         "../assets/images/photo-67407950-45df-4226-825c-dfe20c7d18f2.JPG.webp",
         "../assets/images/image-b192146d-7a62-463d-b437-8ff813ab8244.jpg.webp"
     ];
