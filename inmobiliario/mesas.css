@@ -260,20 +260,21 @@ nav .logo a {
   background-color: #1dd86b;
 }
 
-/* Other Chairs Section */
-.other-chairs {
+/* Other Tables (Manteles) Section */
+.other-tables {
   margin-top: 40px;
 }
 
-.other-chairs h2 {
+.other-tables h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.chair-list {
+.table-list {
   display: flex;
   gap: 20px;
   justify-content: space-between;
+  flex-wrap: wrap; /* Allow cards to wrap if necessary */
 }
 
 .card {
@@ -285,12 +286,13 @@ nav .logo a {
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   flex: 1;
-  padding-top: 2%;
+  max-width: calc(33.333% - 20px); /* Ensures three cards per row */
+  margin-bottom: 20px;
   font-weight: bold;
 }
 
 .card img {
-  max-width: 100%;
+  width: 100%;
   height: 200px; /* Consistent height */
   object-fit: cover;
   border-radius: 5px; /* Rounded corners */
