@@ -248,46 +248,79 @@ server.get('/user-info', verifyToken, (req, res) => {
     });
 });
 
-server.post("/comentario", verifyToken, (req, res) => {
-    const id = req.user.id; 
-    const { comentario } = req.body;
-
-    const nuevo_com = {
-        id,
-        comentario
-    };
-    const com = "INSERT INTO comentarios(fk_cliente, comentario) VALUES (?, ?)";
-    conn.query(com, [nuevo_com.id, nuevo_com.comentario], (err, result) => {
-        if (err) {
-            console.log("Error al guardar el comentario", err);
-            res.status(400).send("Error al guardar el comentario");
-        } else {
-            console.log("Comentario guardado exitosamente");
-            res.status(201).send("Comentario guardado correctamente");
-        }
-    });
-});
-/*server.get("/check-session", (req, res) => {
-    console.log("req.session/");
-    console.log(req.cookies.access_token);
-    if (req.session) {
-      res.send({ loggedIn: true, username: req.session });
-    } else {
-      res.send({ loggedIn: false });
-    }
-  });
-*/
-server.get('/comentarios', (req, res) => {
+// Endpoint para obtener los comentarios
+server.get('/comentarios_sillas', (req, res) => {
     const sql = `
-        SELECT c.comentario, cl.nombre_cliente 
-        FROM comentarios c 
-        JOIN clientes cl ON c.fk_cliente = cl.id_cliente
+        SELECT cs.comentario, cs.fecha, cl.nombre_cliente 
+        FROM comentarios_sillas cs
+        JOIN clientes cl ON cs.fk_cliente = cl.id_cliente
     `;
 
     conn.query(sql, (error, results) => {
         if (error) {
             console.error("Error al obtener los comentarios", error);
             return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario
+server.post("/comentario_silla", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_sillas (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+server.get('/chairs/:type', (req, res) => {
+    const chairType = req.params.type; // Get the chair type from the request parameters
+
+    const sql = `
+        SELECT id, name, description, material, color, dimensions, price, image
+        FROM chairs
+        WHERE type = ?
+    `;
+
+    conn.query(sql, [chairType], (error, results) => {
+        if (error) {
+            console.error("Error fetching chair data", error);
+            return res.status(500).json({ message: 'Error fetching chair data' });
+        }
+
+        if (results.length > 0) {
+            res.status(200).json(results[0]); // Send back the first matching chair
+        } else {
+            res.status(404).json({ message: 'Chair not found' });
+        }
+    });
+});
+server.get('/sillas', (req, res) => {
+    const sql = `
+        SELECT s.tipo_silla, s.descripcion_silla, s.caracteristicas, s.precio_silla,
+               p.nombre_proveedor, p.telefono_proveedor, p.email_proveedor
+        FROM sillas s
+        JOIN proveedores p ON s.fk_proveedor = p.id_proveedor
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener las sillas", error);
+            return res.status(500).json({ message: 'Error al obtener las sillas' });
         }
 
         res.status(200).json(results);

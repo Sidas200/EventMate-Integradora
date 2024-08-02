@@ -6,21 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventMate - Detalles del Venue</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/venues_home/venues_individual/venues_individual.css">
 </head>
 
 <body>
-    <nav class="nav-container">
+    <nav>
         <div class="logo">
-            <a href="../../index.html"><img src="/assets/images/EventMateLogo.png" class="nav-icon" alt="EventMate Logo"></a>
+            <a href="/index.html"><img src="/assets/images/EventMateLogo.png" class="nav-icon"></a>
         </div>
         <ul class="nav-links">
-            <li><a href="/catering/catering.html">Catering</a></li>
-            <li><a href="/venues_home/venues_home.html">Venues</a></li>
-            <li><a href="/inmobiliario/inmobiliario.html">Mobiliario</a></li>
-            <li><a href="/planeador/planeador.html">Planeador</a></li>
-            <li><a href="/login_usuarios/login_usuario.html">Login</a></li>
-            <li><a href="/signup/singup_index.html">Sign Up</a></li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/catering/catering.html">Catering</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../venues_home.html">Venues</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/inmobiliario/inmobiliario.html">Mobiliario</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/planeador/planeador.html">Planeador</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/perfil/perfil.html">Perfil</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/logout/logout.html">Logout</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="/login_usuarios/login_usuario.html">Login</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="/signup_clientes/signUpClientes.html">Sign Up</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a class="material-symbols-outlined" href="/index_ingles.html" id="ingbutton">
+                    translate
+                </a>
+            </li>
         </ul>
     </nav>
 
@@ -42,10 +66,21 @@
             <div class="details">
                 <h2>Información del Venue</h2>
                 <p id="venueInfo"></p>
+                <ul>
+                    <li>Capacidad Máxima: 500 personas</li>
+                    <li>Horarios: Lunes a Domingo, 9:00 AM - 12:00 AM</li>
+                    <li>Pista de Baile: Sí, 200 m²</li>
+                    <li>Estacionamiento: Disponible, capacidad para 200 vehículos</li>
+                    <li>Áreas Verdes: Jardines amplios y cuidados para eventos al aire libre</li>
+                    <li>Catering: Opciones personalizadas disponibles</li>
+                    <li>Equipamiento Técnico: Proyectores, sonido profesional, micrófonos</li>
+                    <li>Accesibilidad: Rampa para sillas de ruedas y baños accesibles</li>
+                    <li>Servicios Adicionales: Decoración, organización de eventos, seguridad</li>
+                </ul>
                 <h3>Contacto</h3>
-                <p id="venueContact"></p>
+                <p id="venueContact">Teléfono: +34 123-456-7890, Email: contacto@quintavictoria.com</p>
                 <h3>Precios</h3>
-                <p id="venuePrice"></p>
+                <p id="venuePrice">Precio: $20,000</p>
             </div>
         </div>
     </div>
@@ -67,14 +102,14 @@
         <h2>Recomendaciones de otros Venues</h2>
         <div class="venue-list">
             <a href="venue_individual1.html" class="card">
-                <img src="/assets/images/salon_anita.jpg" alt="Salon Las Fuentes">
+                <img src="/assets\images\venue_nyc.jpg" alt="Salon Anita">
                 <div class="overlay"></div>
                 <div class="text-overlay">
-                    <p>Salon Las Fuentes</p>
+                    <p>Salon Anita</p>
                 </div>
             </a>
             <a href="venue_individual2.html" class="card">
-                <img src="/assets/images/image-60e38b8a-e47b-4554-b16f-540ad046e70e.jpg.webp" alt="Ballys Eventos">
+                <img src="/assets/images/Ballys.jpg" alt="Ballys Eventos">
                 <div class="overlay"></div>
                 <div class="text-overlay">
                     <p>Ballys Eventos</p>
@@ -111,13 +146,12 @@
         </div>
     </div>
 
-    <div id="venueData" style="display: none;"
-        data-name="Quinta Victoria"
+    <div id="venueData" style="display: none;" data-name="Quinta Victoria"
         data-images="/assets/images/quinta_victoria.jpg,/assets/images/quinta_victoria2.jpg,/assets/images/quinta_victoria3.jpg,/assets/images/quinta_victoria5.jpg"
         data-description="Quinta Victoria ofrece un entorno idílico con jardines exuberantes, instalaciones de lujo, y una atmósfera tranquila. Perfecto para bodas, conferencias, y eventos corporativos. Equipado con tecnología de punta y servicios personalizados para cada evento."
-        data-contact="Teléfono: +34 123-456-7890, Email: contacto@quintavictoria.com"
-        data-price="2500"
-        data-comments="Un lugar maravilloso, el mejor día de mi vida se hizo realidad aquí!|El personal fue muy atento y profesional, lo recomiendo!|El ambiente es espectacular, aunque un poco costoso, vale la pena.">
+        data-contact="Diego Fernando Vargas Silva, Teléfono: +34 123-456-7890, Email: contacto@quintavictoria.com"
+        data-price="20000"
+        data-comments="momar: Muy bueno; 1/8/2024, 10:14:05 p.m.|momar: La silla de madera me parece muy buena; 1/8/2024, 10:14:21 p.m.|momar: La silla de velo no es muy cómoda; 1/8/2024, 10:14:42 p.m.">
     </div>
 
     <script src="/venues_home/venues_individual/venues_indidual.js"></script>

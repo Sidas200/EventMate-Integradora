@@ -1,68 +1,161 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventMate - Detalles del Venue</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-    <link rel="stylesheet" href="venues_individual.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/venues_home/venues_individual/venues_individual.css">
 </head>
+
 <body>
     <nav>
         <div class="logo">
-            <a href="/index/index.html">EventMate</a>
+          <a href="/index.html" > <img src="/assets/images/EventMateLogo.png" class="nav-icon" ></a>
         </div>
         <ul class="nav-links">
-            <li><a href="/catering/catering.html">Catering</a></li>
-            <li><a href="/venues_home/venues_home.html">Venues</a></li>
-            <li><a href="/inmobiliario/inmobiliario.html">Mobiliario</a></li>
-            <li><a href="/planeador/planeador.html">Planeador</a></li>
-            <li><a href="/login_usuarios/login_usuario.html">Login</a></li>
-            <li><a href="/signup/singup_index.html">Sign Up</a></li>
-        </ul>
-    </nav>
+          <li class="nav-item nav-logged-in" style="display: none;">
+              <a href="/catering/catering.html">Catering</a>
+          </li>
+          <li class="nav-item nav-logged-in" style="display: none;">
+              <a href="../venues_home.html">Venues</a>
+          </li>
+          <li class="nav-item nav-logged-in" style="display: none;">
+              <a href="/inmobiliario/inmobiliario.html">Mobiliario</a>
+          </li>
+          <li class="nav-item nav-logged-in" style="display: none;">
+              <a href="/planeador/planeador.html">Planeador</a>
+          </li>
+          <li class="nav-item nav-logged-in" style="display: none;">
+              <a href="/perfil/perfil.html">Perfil</a>
+          </li>
+          <li class="nav-item nav-logged-in" style="display: none;">
+              <a href="/logout/logout.html">Logout</a>
+          </li>
+          <li class="nav-item nav-logged-out">
+              <a href="/login_usuarios/login_usuario.html">Login</a>
+          </li>
+          <li class="nav-item nav-logged-out">
+              <a href="/signup_clientes/signUpClientes.html">Sign Up</a>
+          </li>
+          <li class="nav-item nav-logged-out">
+            <a class="material-symbols-outlined" href="/index_ingles.html" id="ingbutton">
+              translate
+            </a>
+          </li>
+      </ul>
+      </nav>
 
-    <div class="venue-details-container" id="venueDetailsContainer">
-        <div class="left-section">
-            <h2>Fotos</h2>
-            <div class="image-gallery">
-                <button id="prevImage">&lt;</button>
-                <img id="venueImage" src="" alt="Venue Image">
-                <button id="nextImage">&gt;</button>
-            </div>
+    <header class="header-section">
+        <div class="header-content">
+            <h1>Palacio de Cristal</h1>
+            <p>Donde tus sueños se hacen realidad</p>
         </div>
-        <div class="right-section">
-            <h2>Información</h2>
-            <p id="venueInfo" data-description="Un hermoso lugar para eventos, con jardines amplios y vistas impresionantes. Perfecto para bodas, conferencias y eventos sociales."></p>
-            <h2>Contacto</h2>
-            <p id="venueContact" data-contact="Teléfono: 123-456-7890, Email: contacto@venuea.com"></p>
-            <h2>Precios</h2>
-            <p id="venuePrice" data-price="500"></p>
+    </header>
+
+    <div class="venue-details-container mobiliario-container">
+        <div class="product-overview">
+            <div class="image-viewer">
+                <img class="fade-in" id="venueImage" src="/assets/images/salon_las_fuentes.jpg" alt="Venue Image">
+                <!-- Botones para cambiar de imagen -->
+                <button id="prevImage" class="image-nav-btn">&lt;</button>
+                <button id="nextImage" class="image-nav-btn">&gt;</button>
+            </div>
+            <div class="details">
+                <h2>Información del Venue</h2>
+                <p id="venueInfo"></p>
+                <ul>
+                    <li>Capacidad Máxima: 600 personas</li>
+                    <li>Horarios: Lunes a Domingo, 9:00 AM - 1:00 AM</li>
+                    <li>Pista de Baile: Sí, 250 m²</li>
+                    <li>Estacionamiento: Espacio para 300 vehículos</li>
+                    <li>Áreas Verdes: Jardines exóticos con fuentes</li>
+                    <li>Catering: Menús internacionales disponibles</li>
+                    <li>Equipamiento Técnico: Iluminación avanzada y acústica profesional</li>
+                    <li>Accesibilidad: Completamente accesible para todos</li>
+                    <li>Servicios Adicionales: Asesoramiento en decoración y entretenimiento</li>
+                </ul>
+                <h3>Contacto</h3>
+                <p id="venueContact">Teléfono: +34 456-789-0123, Email: contacto@palaciodecristal.com</p>
+                <h3>Precios</h3>
+                <p id="venuePrice">Precio: $25,000</p>
+            </div>
         </div>
     </div>
 
-    <div class="comments-section">
+    <div class="comments">
         <h2>Comentarios</h2>
         <div id="commentsContainer">
+            <!-- Los comentarios se agregarán aquí dinámicamente -->
         </div>
-        <div class="add-comment">
-            <h3>Agregar Comentario</h3>
-            <form id="commentForm">
-                <textarea id="commentText" placeholder="Escribe tu comentario aquí..." required></textarea>
-                <button type="submit">Enviar</button>
-            </form>
+        <form id="commentForm" class="add-comment">
+            <textarea id="commentText" placeholder="Escribe tu comentario aquí..." required></textarea>
+            <button type="submit">Agregar Comentario</button>
+        </form>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="recommended-venues">
+        <h2>Recomendaciones de otros Venues</h2>
+        <div class="venue-list">
+            <a href="venue_quinta_victoria.html" class="card">
+                <img src="/assets/images/quinta_victoria.jpg" alt="Quinta Victoria">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Quinta Victoria</p>
+                </div>
+            </a>
+            <a href="venue_individual1.html" class="card">
+                <img src="/assets\images\venue_nyc.jpg" alt="Salon Anita">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Salon Anita</p>
+                </div>
+            </a>
+            <a href="venue_individual4.html" class="card">
+                <img src="/assets/images/jardin_de_ensueno.jpg" alt="Jardin de Ensueño">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Jardin de Ensueño</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="content">
+            <h4>Venues</h4>
+            <p>Interiores</p>
+            <p>Exteriores</p>
+            <p>Jardines</p>
+        </div>
+        <div class="content">
+            <h4>Catering</h4>
+            <p>Bebidas</p>
+            <p>Comidas</p>
+            <p>Planes</p>
+        </div>
+        <div class="content">
+            <h4>Mobiliario</h4>
+            <p>Mesas</p>
+            <p>Sillas</p>
+            <p>Manteles</p>
         </div>
     </div>
 
     <div id="venueData" style="display: none;"
-        data-name="Venue A"
-        data-images="/assets/images/quinta_victoria2.jpg,/assets/images/venue_b.jpg,/assets/images/venue_c.jpg"
-        data-description="Un hermoso lugar para eventos, con jardines amplios y vistas impresionantes. Perfecto para bodas, conferencias y eventos sociales."
-        data-contact="Teléfono: 123-456-7890, Email: contacto@venuea.com"
-        data-price="500"
-        data-comments="Excelente lugar, muy recomendable!|El personal fue muy amable y todo salió perfecto.|Hermoso venue, aunque un poco caro."
-    ></div>
+        data-name="Palacio de Cristal"
+        data-images="/assets/images/salon_las_fuentes.jpg, /assets/images/palacio.jpg,/assets/images/palacio2.jpg, /assets/images/palacio3.jpg "
+        data-description="El Palacio de Cristal es un lugar de ensueño para cualquier tipo de evento. Con una capacidad impresionante y servicios de primera calidad, es el lugar perfecto para bodas de ensueño, grandes conferencias y eventos de lujo."
+        data-contact="Lucía Fernanda González Herrera, Teléfono: +34 456-789-0123, Email: contacto@palaciodecristal.com"
+        data-price="23000"
+        data-comments="Increíble lugar con una atmósfera mágica.|El servicio fue excepcional y la decoración impresionante.|Todo fue perfecto, muy recomendable para grandes eventos.">
+    </div>
 
-    <script src="venues_indidual.js"></script>
+    <script src="/venues_home/venues_individual/venues_indidual.js"></script>
 </body>
+
 </html>
