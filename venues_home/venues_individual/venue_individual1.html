@@ -13,7 +13,7 @@
 <body>
     <nav>
         <div class="logo">
-          <a href="/index.html" > <img src="/assets/images/EventMateLogo.png" class="nav-icon" ></a>
+          <a href="/index.html"> <img src="/assets/images/EventMateLogo.png" class="nav-icon"></a>
         </div>
         <ul class="nav-links">
           <li class="nav-item nav-logged-in" style="display: none;">
@@ -49,15 +49,15 @@
       </nav>
     <header class="header-section">
         <div class="header-content">
-            <h1>Salon Anita</h1>
-            <p>El espacio ideal para tus eventos más íntimos</p>
+            <h1 id="venueName"></h1>
+            <p id="venueTagline"></p>
         </div>
     </header>
 
     <div class="venue-details-container mobiliario-container">
         <div class="product-overview">
             <div class="image-viewer">
-                <img class="fade-in" id="venueImage" src="/assets/images/salon_anita.jpg" alt="Venue Image">
+                <img class="fade-in" id="venueImage" src="" alt="Venue Image">
                 <!-- Botones para cambiar de imagen -->
                 <button id="prevImage" class="image-nav-btn">&lt;</button>
                 <button id="nextImage" class="image-nav-btn">&gt;</button>
@@ -65,21 +65,13 @@
             <div class="details">
                 <h2>Información del Venue</h2>
                 <p id="venueInfo"></p>
-                <ul>
-                    <li>Capacidad Máxima: 150 personas</li>
-                    <li>Horarios: Lunes a Domingo, 10:00 AM - 10:00 PM</li>
-                    <li>Pista de Baile: Sí, 100 m²</li>
-                    <li>Estacionamiento: Capacidad para 50 vehículos</li>
-                    <li>Áreas Verdes: Pequeño jardín para fotos</li>
-                    <li>Catering: Menús fijos y a la carta</li>
-                    <li>Equipamiento Técnico: Luces LED, sistema de sonido premium</li>
-                    <li>Accesibilidad: Acceso total para personas con discapacidad</li>
-                    <li>Servicios Adicionales: Asistencia en decoración, planificación de eventos</li>
+                <ul id="venueFeatures">
+                    <!-- Características del Venue -->
                 </ul>
                 <h3>Contacto</h3>
-                <p id="venueContact">Teléfono: +34 234-567-8901, Email: contacto@salonanita.com</p>
+                <p id="venueContact"></p>
                 <h3>Precios</h3>
-                <p id="venuePrice">Precio: $8,000</p>
+                <p id="venuePrice"></p>
             </div>
         </div>
     </div>
@@ -146,16 +138,21 @@
         </div>
     </div>
 
-    <div id="venueData" style="display: none;"
-        data-name="Salon Anita"
-        data-images="/assets\images\venue_nyc.jpg,/assets/images/quinta_victoria2.jpg,/assets/images/quinta_victoria3.jpg,/assets/images/quinta_victoria5.jpg"
-        data-description="Salon Anita ofrece un entorno acogedor y moderno para eventos más íntimos y privados. Con un enfoque en la atención personalizada, es ideal para bodas pequeñas, celebraciones familiares y reuniones corporativas."
-        data-contact="Sofía Martínez López,Teléfono: +34 234-567-8901, Email: contacto@salonanita.com"
-        data-price="19000"
-        data-comments="Hermoso lugar para eventos pequeños, muy acogedor.|El personal fue extremadamente amable y atento.|Un lugar muy bonito y bien cuidado, lo recomiendo mucho.">
+    <!-- Data for venue1 -->
+    <div id="venueData" style="display: none;">
+        <div id="venue1"
+            data-name="Salon Anita"
+            data-tagline="El espacio ideal para tus eventos más íntimos"
+            data-images="/assets/images/salon_anita.jpg,/assets/images/salon_anita2.jpg,/assets/images/salon_anita3.jpg"
+            data-description="Salon Anita ofrece un entorno acogedor y moderno para eventos más íntimos y privados. Con un enfoque en la atención personalizada, es ideal para bodas pequeñas, celebraciones familiares y reuniones corporativas."
+            data-contact="Teléfono: +34 234-567-8901, Email: contacto@salonanita.com"
+            data-price="8000"
+            data-features="Capacidad Máxima: 150 personas, Horarios: Lunes a Domingo, 10:00 AM - 10:00 PM, Pista de Baile: Sí, 100 m², Estacionamiento: Capacidad para 50 vehículos, Áreas Verdes: Pequeño jardín para fotos, Catering: Menús fijos y a la carta, Equipamiento Técnico: Luces LED, sistema de sonido premium, Accesibilidad: Acceso total para personas con discapacidad, Servicios Adicionales: Asistencia en decoración, planificación de eventos"
+            data-comments="Hermoso lugar para eventos pequeños, muy acogedor.|El personal fue extremadamente amable y atento.|Un lugar muy bonito y bien cuidado, lo recomiendo mucho.">
+        </div>
     </div>
 
-    <script src="venues_indidual.js"></script>
+    <script src="/venues_home/venues_individual/venues_venue1.js"></script>
 </body>
 
 </html>
