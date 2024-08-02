@@ -16,7 +16,8 @@
 <body>
     <nav>
         <div class="logo">
-            <a href="../index.html"> <img src="../assets/images/EventMateLogo.png" class="nav-icon" alt="EventMate Logo"></a>
+            <a href="../index.html"> <img src="../assets/images/EventMateLogo.png" class="nav-icon"
+                    alt="EventMate Logo"></a>
         </div>
         <ul class="nav-links">
             <li class="nav-item nav-logged-in" style="display: none;">
@@ -37,16 +38,11 @@
             <li class="nav-item nav-logged-in" style="display: none;">
                 <a href="../logout/logout.html">Logout</a>
             </li>
-            <li class="nav-item nav-logged-in" style="display: none">
-                <a class="material-symbols-outlined" href="../index_ingles.html" id="ingbutton">
-                    translate
-                </a>
-            </li>
             <li class="nav-item nav-logged-out">
                 <a href="../catering/catering.html">Catering</a>
             </li>
             <li class="nav-item nav-logged-out">
-                <a href="../venues_home/venues_home.html">Venues</a>
+                <a href="/venues_home/venues_home.html">Venues</a>
             </li>
             <li class="nav-item nav-logged-out">
                 <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
@@ -82,6 +78,18 @@
     <div class="content catering">
         <div class="plans" id="plans-container">
             <!-- Catering plans will be dynamically injected here -->
+        </div>
+
+        <!-- Formulario de Comentarios -->
+        <div class="comments-section">
+            <h2>Comentarios</h2>
+            <form id="commentForm">
+                <textarea id="commentText" placeholder="Agrega tu comentario..." required></textarea>
+                <button type="submit">Agregar Comentario</button>
+            </form>
+            <div id="commentList">
+                <!-- Los comentarios se agregarán aquí dinámicamente -->
+            </div>
         </div>
 
         <div class="faq">
@@ -151,14 +159,37 @@
                     }
                 } else {
                     console.error("Error al verificar el estado de autenticación");
+                    // window.location.href = "../login_usuarios/login_usuario.html";
                 }
             } catch (error) {
                 console.error("Se produjo un error al verificar el estado de autenticación:", error);
+                // window.location.href = "../login_usuarios/login_usuario.html";
             }
+
+            const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
+            logoutLinks.forEach(link => {
+                link.addEventListener("click", async (event) => {
+                    event.preventDefault();
+                    try {
+                        const response = await fetch("http://localhost:3000/logout", {
+                            method: "GET",
+                            credentials: 'include',
+                        });
+                        if (response.ok) {
+                            // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
+                            window.location.href = "../login_usuarios/login_usuario.html";
+                        } else {
+                            console.error("Error al cerrar la sesión");
+                        }
+                    } catch (error) {
+                        console.error("Se produjo un error al cerrar la sesión:", error);
+                    }
+                });
+            });
 
             // Fetch and display catering plans
             try {
-                const response = await fetch('http://localhost:3000/caterings'); // Endpoint para obtener los datos de los planes
+                const response = await fetch('http://localhost:3000/caterings');
                 if (response.ok) {
                     const caterings = await response.json();
                     const plansContainer = document.getElementById('plans-container');
@@ -167,16 +198,18 @@
                         const planElement = document.createElement('div');
                         planElement.className = 'plan';
                         planElement.innerHTML = `
-                            <div class="plan">
-                                <h1>${catering.plan_catering}</h1>
-                                <h2>$${catering.precio_catering.toLocaleString()} MXN</h2>
-                                <ul>
-                                    <li>${catering.personas} Personas</li>
-                                    <li>${catering.descripcion.replace(/\n/g, '</li><li>')}</li>
-                                </ul>
-                                <button class="select-btn">Select</button>
-                                <div class="contact-info" style="display: none;">
-                                    <h3>Contacto del Proveedor</h3>
+                            <div class="plan-inner">
+                                <div class="plan-front">
+                                    <h1>${catering.plan_catering}</h1>
+                                    <h2>$${catering.precio_catering.toLocaleString()} MXN</h2>
+                                    <ul>
+                                        <li>${catering.personas} Personas</li>
+                                        <li>${catering.descripcion.replace(/\n/g, '</li><li>')}</li>
+                                    </ul>
+                                    <button class="select-btn">Select</button>
+                                </div>
+                                <div class="plan-back">
+                                    <h4>Contacto del Proveedor</h4>
                                     <p>Nombre: ${catering.nombre_proveedor} ${catering.apellido_proveedor}</p>
                                     <p>Teléfono: ${catering.telefono_proveedor}</p>
                                     <p>Email: ${catering.email_proveedor}</p>
@@ -188,15 +221,9 @@
 
                     // Re-add event listeners for the new buttons
                     document.querySelectorAll('.select-btn').forEach(button => {
-                        button.addEventListener('click', function() {
+                        button.addEventListener('click', function () {
                             const planCard = this.closest('.plan');
                             planCard.classList.toggle('flipped');
-                            const contactInfo = planCard.querySelector('.contact-info');
-                            if (contactInfo.style.display === 'none') {
-                                contactInfo.style.display = 'block';
-                            } else {
-                                contactInfo.style.display = 'none';
-                            }
                         });
                     });
                 } else {
@@ -205,8 +232,65 @@
             } catch (error) {
                 console.error("Se produjo un error al obtener los planes de catering:", error);
             }
+
+            // Load existing comments
+            async function loadComments() {
+                try {
+                    const response = await fetch("/comentarios-catering", {
+                        method: "GET",
+                        credentials: 'include',
+                    });
+
+                    if (response.ok) {
+                        const comments = await response.json();
+                        const commentList = document.getElementById('commentList');
+                        commentList.innerHTML = ''; // Limpiar la lista de comentarios
+
+                        comments.forEach(comment => {
+                            const commentItem = document.createElement('div');
+                            commentItem.classList.add('comment');
+                            commentItem.innerHTML = `<strong>${comment.nombre_cliente}</strong> - <span>${new Date(comment.fecha).toLocaleString()}</span>: <p>${comment.comentario}</p>`;
+                            commentList.appendChild(commentItem);
+                        });
+                    } else {
+                        console.error("Error al obtener los comentarios");
+                    }
+                } catch (error) {
+                    console.error("Se produjo un error al obtener los comentarios:", error);
+                }
+            }
+
+            // Handle new comment submission
+            const commentForm = document.getElementById('commentForm');
+            commentForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const commentText = document.getElementById('commentText').value;
+                if (commentText.trim() === '') return; // No agregar comentarios vacíos
+
+                try {
+                    const response = await fetch("/comentario-catering", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({ comentario: commentText })
+                    });
+
+                    if (response.ok) {
+                        loadComments(); // Reload comments after adding a new one
+                        document.getElementById('commentText').value = ''; // Clear the comment box
+                    } else {
+                        console.error("Error al guardar el comentario en el servidor");
+                    }
+                } catch (error) {
+                    console.error("Se produjo un error al guardar el comentario:", error);
+                }
+            });
+
+            // Initial comments load
+            loadComments();
         });
     </script>
 </body>
-
 </html>
