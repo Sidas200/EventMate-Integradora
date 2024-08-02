@@ -76,19 +76,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const response = await fetch("http://localhost:3000/autorizacion", {
                 method: "GET",
-                credentials: 'include',
+                credentials: 'include', // Asegúrate de que las credenciales se incluyan en las peticiones
             });
 
             if (response.ok) {
                 const result = await response.json();
-                toggleNavItems(result.authenticated);
+                toggleNavItems(result.authenticated); // Llama a la función para actualizar el DOM
             } else {
                 console.error("Error al verificar el estado de autenticación");
-                window.location.href = "../login_usuarios/login_usuario.html";
             }
         } catch (error) {
             console.error("Se produjo un error al verificar el estado de autenticación:", error);
-            window.location.href = "../login_usuarios/login_usuario.html";
         }
     }
 
