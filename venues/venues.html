@@ -5,27 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventMate</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-    <link rel="stylesheet" href="../styles/arturo.css">
+    <link rel="stylesheet" href="venues.css">
+    <link rel="icon" href="../assets/images/Screenshot 2024-07-08 215436.png" type="image/png">
 </head>
+<script src="//code.tidio.co/i3dvbjco7v5affcnmhrrwbo61wenaflf.js" async></script>
 <body>
-    <nav>
-        <div class="logo">
-            <a href="../src/index.html">EventMate</a>
+  <nav>
+    <div class="logo">
+      <img src="../assets/images/EventMateLogo.png" class="nav-icon">
+    </div>
+    <ul class="nav-links">
+      <li class="nav-item nav-logged-in" style="display: none;">
+          <a href="../catering/catering.html">Catering</a>
+      </li>
+      <li class="nav-item nav-logged-in" style="display: none;">
+          <a href="../venues_home/venues_home.html">Venues</a>
+      </li>
+      <li class="nav-item nav-logged-in" style="display: none;">
+          <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+      </li>
+      <li class="nav-item nav-logged-in" style="display: none;">
+          <a href="../planeador/planeador.html">Planeador</a>
+      </li>
+      <li class="nav-item nav-logged-in" style="display: none;">
+          <a href="../perfil/perfil.html">Perfil</a>
+      </li>
+      <li class="nav-item nav-logged-in" style="display: none;">
+          <a href="../logout/logout.html">Logout</a>
+      </li>
+      <li class="nav-item nav-logged-out">
+          <a href="../login_usuarios/login_usuario.html">Login</a>
+      </li>
+      <li class="nav-item nav-logged-out">
+          <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
+      </li>
+  </ul>
+</nav>
+    
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Venues</h1>
+            <p>Los mejores lugares para tu evento</p>
+            <br>
+            <a href="#" class="btn-contact">Contacto</a>
         </div>
-        <ul class="nav-links">
-            <li><a href="../catering/catering.html">Catering</a></li>
-            <li><a href="../venues/venues.html">Venues</a></li>
-            <li><a href="../inmobiliario/inmobiliario.html">Mobiliario</a></li>
-            <li><a href="../planeador/planeador.html">Planeador</a></li>
-            <li><a href="../login_usuarios/login_usuario.html">Login</a></li>
-            <li><a href="../signup_clientes/signUpClientes.html">Sign Up</a></li>
-        </ul>
-    </nav>
-
+        <img src="..\assets\images\image-14cef189-1280-4dd7-a79f-3b5b38b000a5.JPG.webp" data-index="0" class="active">
+        <img src="..\assets\images\photo-67407950-45df-4226-825c-dfe20c7d18f2.JPG.webp" data-index="1" class="active">
+        <img src="..\assets\images\image-b192146d-7a62-463d-b437-8ff813ab8244.jpg.webp" data-index="2" class="active">
+    </div>
+    <div class="content">
+        <div class="section left">
+            <div class="text">
+                <h2>Catering</h2>
+                <p>Encuentra una selección de proveedores ajustados a tus preferencias.</p>
+                
+                <br>
+                <br>
+                <a href="../catering/catering.html" class="btn-contact">Descubre más</a>
+            </div>
+            <div class="image">
+                <img src="..\assets\images\024023-1080w.webp" alt="Image 1"> 
+            </div>
+        </div>
+        <div class="section right">
+            <div class="image">
+                <img src="../assets/images/salon_eventos.jpeg" alt="Image 2"> 
+            </div>
+            <div class="text">
+                <h2>Venues</h2>
+                <h3>Descubre el lugar perfecto para tu evento inolvidable.</h3>
+               
+                <br>
+                <br>
+                <a href="../venues/venues.html" class="btn-contact">Descubre más</a>
+            </div>
+        </div>
+    </div>
     
-
+    <div class="b">
+        <div class="b-c">
+          <h1>Venues</h1>
+          <p>Conoce nuestros venues más populares</p>
+          <br>
+          <a href="../venues/venues.html" class="b-b">Descubrir más</a>
+        </div>
+      </div>
+      <br>
+      
+      <div class="cards">
+        <div class="card red">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="../assets/images/b1.webp" alt="Red Photo">
+            </div>
+            <div class="card-back">
+              <h1 class="second-text">Interiores</h1>
+              <p class="second-text">150 personas</p>
+              <p class="second-text">$50,000 min</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card blue">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="../assets/images/b2.webp" alt="Blue Photo">
+            </div>
+            <div class="card-back">
+                <h3 class="second-text">Interiores</h3>
+                <p class="second-text">150 personas</p>
+                <p class="second-text">$50,000 min</p>
+              </div>
+          </div>
+        </div>
+        
+        <div class="card green">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="../assets/images/b3.webp" alt="Green Photo">
+            </div>
+            <div class="card-back">
+                <h3 class="second-text">Interiores</h3>
+                <p class="second-text">150 personas</p>
+                <p class="second-text">$50,000 min</p>
+              </div>
+          </div>
+        </div>
+        
+        <div class="card red">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="../assets/images/b4.webp" alt="Red Photo">
+            </div>
+            <div class="card-back">
+                <h3 class="second-text">Interiores</h3>
+                <p class="second-text">150 personas</p>
+                <p class="second-text">$50,000 min</p>
+              </div>
+          </div>
+        </div>
+        
+        <div class="card blue">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="../assets/images/b5.webp" alt="Blue Photo">
+            </div>
+            <div class="card-back">
+              <p class="second-text">Salones</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card green">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="../assets/images/b6.webp" alt="Green Photo">
+            </div>
+            <div class="card-back">
+              <p class="second-text">Outdoors</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     
-<hr/>
+<br />
 <div class="footer">
     
     <div class="icons">
@@ -52,6 +196,6 @@
     </div>
 </div>
 
-<script src="../scripts/script.js"></script> 
+<script src="venues.js"></script> 
 </body>
 </html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMate - Detalles del Venue</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/venues_home/venues_individual/venues_individual.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="/index.html"><img src="/assets/images/EventMateLogo.png" class="nav-icon"></a>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/catering/catering.html">Catering</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../venues_home.html">Venues</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/inmobiliario/inmobiliario.html">Mobiliario</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/planeador/planeador.html">Planeador</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/perfil/perfil.html">Perfil</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="/logout/logout.html">Logout</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="/login_usuarios/login_usuario.html">Login</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="/signup_clientes/signUpClientes.html">Sign Up</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a class="material-symbols-outlined" href="/index_ingles.html" id="ingbutton">
+                    translate
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="header-section">
+        <div class="header-content">
+            <h1>Ballys Eventos</h1>
+            <p>Un lugar para celebrar momentos especiales</p>
+        </div>
+    </header>
+
+    <div class="venue-details-container mobiliario-container">
+        <div class="product-overview">
+            <div class="image-viewer">
+                <img class="fade-in" id="venueImage" src="/assets/images/Ballys.jpg" alt="Venue Image">
+                <!-- Botones para cambiar de imagen -->
+                <button id="prevImage" class="image-nav-btn">&lt;</button>
+                <button id="nextImage" class="image-nav-btn">&gt;</button>
+            </div>
+            <div class="details">
+                <h2>Información del Venue</h2>
+                <p id="venueInfo"></p>
+                <ul>
+                    <li>Capacidad Máxima: 300 personas</li>
+                    <li>Horarios: Lunes a Domingo, 10:00 AM - 11:00 PM</li>
+                    <li>Pista de Baile: Sí, 150 m²</li>
+                    <li>Estacionamiento: Espacio para 100 vehículos</li>
+                    <li>Áreas Verdes: Pequeño jardín con iluminación nocturna</li>
+                    <li>Catering: Ofrecemos servicios de catering gourmet</li>
+                    <li>Equipamiento Técnico: Sistema de sonido de alta fidelidad</li>
+                    <li>Accesibilidad: Instalaciones accesibles para discapacitados</li>
+                    <li>Servicios Adicionales: Servicio de planificación de eventos y decoración</li>
+                </ul>
+                <h3>Contacto</h3>
+                <p id="venueContact">Teléfono: +34 345-678-9012, Email: contacto@ballyseventos.com</p>
+                <h3>Precios</h3>
+                <p id="venuePrice">Precio: $15,000</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="comments">
+        <h2>Comentarios</h2>
+        <div id="commentsContainer">
+            <!-- Los comentarios se agregarán aquí dinámicamente -->
+        </div>
+        <form id="commentForm" class="add-comment">
+            <textarea id="commentText" placeholder="Escribe tu comentario aquí..." required></textarea>
+            <button type="submit">Agregar Comentario</button>
+        </form>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="recommended-venues">
+        <h2>Recomendaciones de otros Venues</h2>
+        <div class="venue-list">
+            <a href="venue_quinta_victoria.html" class="card">
+                <img src="/assets/images/quinta_victoria.jpg" alt="Quinta Victoria">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Quinta Victoria</p>
+                </div>
+            </a>
+            <a href="venue_individual1.html" class="card">
+                <img src="/assets\images\venue_nyc.jpg" alt="Salon Anita">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Salon Anita</p>
+                </div>
+            </a>
+            <a href="venue_individual4.html" class="card">
+                <img src="/assets/images/paraiso.jpg" alt="Jardin de Ensueño">
+                <div class="overlay"></div>
+                <div class="text-overlay">
+                    <p>Jardin de Ensueño</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="content">
+            <h4>Venues</h4>
+            <p>Interiores</p>
+            <p>Exteriores</p>
+            <p>Jardines</p>
+        </div>
+        <div class="content">
+            <h4>Catering</h4>
+            <p>Bebidas</p>
+            <p>Comidas</p>
+            <p>Planes</p>
+        </div>
+        <div class="content">
+            <h4>Mobiliario</h4>
+            <p>Mesas</p>
+            <p>Sillas</p>
+            <p>Manteles</p>
+        </div>
+    </div>
+
+    <div id="venueData" style="display: none;" data-name="Ballys Eventos"
+        data-images="/assets/images/Ballys.jpg,/assets/images/Ballys2.jpg, /assets/images/Ballys3.jpg, /assets/images/Ballys4.jpg"
+        data-description="Ballys Eventos es un lugar elegante y moderno, ideal para bodas, conferencias y eventos corporativos. Ofrecemos un servicio de catering gourmet y atención personalizada para asegurar que cada evento sea único."
+        data-contact="Carlos Andrés Ramírez Torres, Teléfono: +34 345-678-9012, Email: contacto@ballyse"
+        data-price="25000"
+        data-comments="Excelente servicio y ambiente, ideal para eventos corporativos.|El catering fue excepcional, realmente superó nuestras expectativas.|Todo fue perfecto, desde la decoración hasta el servicio.">
+    </div>
+
+    <script src="/venues_home/venues_individual/venues_venue2.js"></script>
+
+</html>

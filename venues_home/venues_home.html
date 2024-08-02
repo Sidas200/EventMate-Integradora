@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMate - Venues</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="venues_home.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="../index.html"> <img src="../assets/images/EventMateLogo.png" class="nav-icon" alt="EventMate Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../catering/catering.html">Catering</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../venues_home/venues_home.html">Venues</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../planeador/planeador.html">Planeador</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../perfil/perfil.html">Perfil</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none;">
+                <a href="../logout/logout.html">Logout</a>
+            </li>
+            <li class="nav-item nav-logged-in" style="display: none">
+                <a class="material-symbols-outlined" href="../index_ingles.html" id="ingbutton">
+                    translate
+                </a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../catering/catering.html">Catering</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../venues_home/venues_home.html">Venues</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../planeador/planeador.html">Planeador</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../login_usuarios/login_usuario.html">Login</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
+            </li>
+            <li class="nav-item nav-logged-out">
+                <a class="material-symbols-outlined" href="../index_ingles.html" id="ingbutton">
+                    translate
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <header class="header-section">
+        <div class="header-content">
+            <h1>Venues para Eventos</h1>
+            <p>Encuentra el lugar perfecto para tu evento</p>
+        </div>
+    </header>
+
+    <div class="filter-container">
+        <label for="priceSort">Ordenar por:</label>
+        <select id="priceSort" class="price-sort">
+            <option value="asc">Menor precio</option>
+            <option value="desc">Mayor precio</option>
+        </select>
+    </div>
+    
+
+    <div class="venues-container" id="venuesContainer"></div>
+
+    <footer class="footer">
+        <div class="content">
+            <h4>Venues</h4>
+            <p>Interiores</p>
+            <p>Exteriores</p>
+            <p>Jardines</p>
+        </div>
+        <div class="content">
+            <h4>Catering</h4>
+            <p>Bebidas</p>
+            <p>Comidas</p>
+            <p>Planes</p>
+        </div>
+        <div class="content">
+            <h4>Mobiliario</h4>
+            <p>Mesas</p>
+            <p>Sillas</p>
+            <p>Manteles</p>
+        </div>
+    </footer>
+
+    <script src="venues_home.js"></script>
+</body>
+</html>

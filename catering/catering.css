@@ -3,6 +3,8 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    background-color: #FAF9F6;
+    color: #333;
 }
 
 nav {
@@ -10,13 +12,14 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    background-color: #FAF9F6;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav .logo a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: #333;
     font-size: 24px;
     font-weight: bold;
 }
@@ -34,7 +37,7 @@ nav .nav-links li {
 
 nav .nav-links li a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: #333;
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
@@ -42,49 +45,52 @@ nav .nav-links li a {
 }
 
 nav .nav-links li a:hover {
-    background-color: lightgrey;
-    color: rgb(0, 0, 0);
+    background-color: #e0e0e0;
 }
 
-.content {
-    padding: 20px;
-}
-
-.catering .header {
+.header-section {
+    position: relative;
+    background: url('../assets/images/gensa-hub-BuqhQZ63oFI-unsplash.jpg') no-repeat center center;
+    background-size: cover;
+    height: 450px; /* Ajusta la altura según sea necesario */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    margin-bottom: 40px;
+
 }
 
-.catering .header h1 {
+
+.header-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #FAF9F6 100%);
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-content h1 {
     font-size: 48px;
     margin: 0;
 }
 
-.catering .header p {
+.header-content p {
     font-size: 24px;
-    color: #666;
+    margin: 10px 0 0;
 }
 
-.plan-types {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
-}
-
-.plan-btn {
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.plan-btn:hover {
-    background-color: #0056b3;
+.content {
+    padding: 60px 20px 20px;
+    margin-top: -100px; /* Ajusta este valor para jalar las tarjetas hacia abajo */
 }
 
 .plans {
@@ -96,55 +102,70 @@ nav .nav-links li a:hover {
     padding: 0;
     gap: 32px;
     width: 100%;
-    margin-top: 20px;
+    justify-content: center;
 }
 
 .plan {
     padding: 20px;
     border-radius: 10px;
-    flex: 1 1 calc(33.333% - 32px);
+    flex: 0 1 calc(33.333% - 32px);
     box-sizing: border-box;
     text-align: center;
-    border-radius: 30px;
-    background: #efeeee;
-    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 500px; /* Ensures all plan cards have the same minimum height */
+    justify-content: center;
+    height: 450px; /* Ensures all plan cards have the same height */
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .plan:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .plan h3 {
     margin-top: 0;
     font-size: 24px;
+    font-weight: 700;
+    color: #333;
 }
 
 .plan p {
-    font-size: 24px;
-    color: #000;
+    font-size: 20px;
+    color: #555;
 }
 
 .plan ul {
     list-style: none;
     padding: 0;
     text-align: left;
-    margin-bottom: 20px;
-    flex-grow: 1; /* Ensures the ul takes up available space */
+    margin: 0 auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .plan ul li {
     margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.plan ul li::before {
+    content: '-'; /* Cambia el estilo de la lista aquí */
+    margin-right: 10px;
+    color: #28a745; /* Color del icono */
 }
 
 .select-btn {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 16px;
     border: none;
-    background-color: #28a745;
+    background-color: #333;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
@@ -152,17 +173,19 @@ nav .nav-links li a:hover {
 }
 
 .select-btn:hover {
-    background-color: #218838;
+    background-color: #555;
 }
 
 .faq {
-    margin-top: 40px;
+    margin-top: 80px; /* Separación adicional de la sección de preguntas frecuentes */
 }
 
 .faq h2 {
-    text-align: center;
-    font-size: 32px;
+    text-align: left;
+    font-size: 28px; /* Tamaño de texto apropiado para el encabezado de FAQ */
     margin-bottom: 20px;
+    font-weight: 700;
+    color: #333;
 }
 
 .faq-item {
@@ -170,14 +193,17 @@ nav .nav-links li a:hover {
 }
 
 .faq-item summary {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 400;
     cursor: pointer;
+    color: #555;
 }
 
 .faq-item p {
     margin: 10px 0;
     padding-left: 20px;
+    font-size: 16px;
+    color: #666;
 }
 
 .footer {
@@ -213,15 +239,190 @@ nav .nav-links li a:hover {
     margin: 0 0 5px 0;
   }
   
-  .icons {
+.icons {
     position: absolute;
     bottom: 20px;
     left: 20px;
     display: flex;
     gap: 10px;
-  }
-  
-  .icons img {
+}
+
+.icons img {
     width: 25px;
     height: auto;
+}
+
+/* Section Headers */
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.section-header::after {
+    content: '';
+    width: 80px;
+    height: 4px;
+    background-color: #333;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.nav-icon {
+    width: 50px;
+    height: auto;
   }
+
+  #ingbutton {
+    background-color: #000000; 
+    color: #ffffff; 
+    padding: 5px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+  }
+  
+  #ingbutton:hover {
+    background-color: #d0d0d0; 
+  }
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+  }
+  
+  .footer .icons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .footer .icons img {
+    width: 40px; 
+    height: auto;
+  }
+  
+  .footer .content {
+    text-align: left;
+    margin: 0 20px;
+  }
+  
+  .footer .content h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    margin: 0 0 10px 0;
+  }
+  
+  .footer .content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 5px 0;
+  }
+
+  /* Comments Section */
+.comments-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    text-align: left;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comment strong {
+    font-weight: 700;
+    color: #555;
+}
+
+.comment span {
+    font-size: 12px;
+    color: #888;
+    margin-left: 10px;
+}
+
+.comment p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #333;
+}
+
+#commentsContainer {
+    margin-bottom: 20px;
+}
+
+.add-comment {
+    margin-top: 20px;
+}
+
+.add-comment textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 100px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.add-comment textarea:focus {
+    border-color: #28a745; /* Green border on focus */
+}
+
+#commentForm button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: background-color 0.3s;
+}
+
+#commentForm button:hover {
+    background-color: #1bce68;
+}
+
+#commentForm button:active {
+    background-color: #1e7e34; /* Even darker green on active */
+}
+

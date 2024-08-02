@@ -1,11 +1,9 @@
+/* General Styles */
 body, html {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-}
-
-h1 {
-    font-size: 148px;
+    background-color: #FAF9F6;
 }
 
 nav {
@@ -13,29 +11,55 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #FAF9F6;
     color: rgb(0, 0, 0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.187); 
+    z-index: 1000;
+    position: relative;
 }
 
-nav .logo a {
+.nav-icon {
+    width: 50px;
+    height: auto;
+}
+  
+  nav .logo a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 24px;
     font-weight: bold;
-}
-
-nav .nav-links {
+  }
+  
+  nav .nav-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-}
+  }
+  
+  nav .nav-links li {
+    margin-left: 20px;
+  }
+  
+  nav .nav-links li a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  nav .nav-links li a:hover {
+    background-color: lightgrey;
+    color: rgb(0, 0, 0);
+  }
 
-nav .nav-links li {
+.nav-item {
     margin-left: 20px;
 }
 
-nav .nav-links li a {
+.nav-item a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 16px;
@@ -44,9 +68,50 @@ nav .nav-links li a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-nav .nav-links li a:hover {
+.nav-item a:hover {
     background-color: lightgrey;
     color: rgb(0, 0, 0);
+}
+
+.logo-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    background-color: #FAF9F6;
+}
+
+.centered-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Adjust gap as needed */
+    padding: 20px;
+    flex-direction: row;
+}
+
+.left-section, .right-section {
+    flex: 0 1 45%; /* Flex properties to control the width of the sections */
+    display: flex   ;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.side-image {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100% - 40px);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-container {
@@ -54,9 +119,13 @@ nav .nav-links li a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80vh;
-    padding: 20px;
+    width: 100%;
+    max-width: 400px;
     background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 .login-container h1 {
@@ -67,7 +136,7 @@ nav .nav-links li a:hover {
 .login-container form {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
 }
 
 .login-container label {
@@ -96,4 +165,60 @@ nav .nav-links li a:hover {
 
 .login-container button:hover {
     background-color: #000000ca;
+}
+
+.error-message, .info-message {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.error-message {
+    color: red;
+}
+
+.info-message {
+    color: blue;
+}
+
+#ingbutton {
+    background-color: #000000; 
+    color: #ffffff; 
+    padding: 5px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+}
+
+#ingbutton:hover {
+    background-color: #d0d0d0; 
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+}
+
+#main_cont_login{
+    padding-top: 5%;
+}
+
+#login_logo{
+    padding-top: 5%;
+}
+
+#Ingresar:hover {
+    background-color: #11ce53; 
+}
+
+#email{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#password{
+    font-weight: 500;
+    font-size: 18px;
 }
