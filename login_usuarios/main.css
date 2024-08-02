@@ -99,7 +99,7 @@ nav {
 
 .left-section, .right-section {
     flex: 0 1 45%; /* Flex properties to control the width of the sections */
-    display: flex;
+    display: flex   ;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -124,7 +124,8 @@ nav {
     background-color: #f7f7f7;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 .login-container h1 {
@@ -198,4 +199,26 @@ nav {
     'wght' 400,
     'GRAD' 0,
     'opsz' 20;
+}
+
+#main_cont_login{
+    padding-top: 5%;
+}
+
+#login_logo{
+    padding-top: 5%;
+}
+
+#Ingresar:hover {
+    background-color: #11ce53; 
+}
+
+#email{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+#password{
+    font-weight: 500;
+    font-size: 18px;
 }
