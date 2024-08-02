@@ -5,46 +5,41 @@ document.addEventListener('DOMContentLoaded', async function() {
     const venues = [
         {
             title: "Quinta Victoria Momentos Únicos",
-            imageUrl: "../assets/images/quinta_victoria2.jpg",
+            imageUrl: "/assets/images/quinta_victoria.jpg",
             price: 20000,
             link: "../venues_home/venues_individual/venue_quinta_victoria.html"
         },
         {
-            title: "Salon Las Fuentes",
-            imageUrl: "../assets/images/salon_las_fuentes.jpg",
+            title: "Salon Anita",
+            imageUrl: "/assets/images/venue_nyc.jpg",
             price: 19000,
             link: "../venues_home/venues_individual/venue_individual1.html"
         },
         {
-            title: "Ballys",
+            title: "Ballys Eventos",
             imageUrl: "/assets/images/ballys.jpg",
             price: 25000,
             link: "../venues_home/venues_individual/venue_individual2.html"
         },
         {
-            title: "Ballys",
-            imageUrl: "/assets/images/ballys.jpg",
-            price: 25000,
-            link: "../venues_home/venues_individual/venue_individual2.html"
+            title: "Palacio de Cristal",
+            imageUrl: "/assets/images/salon_las_fuentes.jpg",
+            price: 23000,
+            link: "../venues_home/venues_individual/venue_individual3.html"
         },
         {
-            title: "Ballys",
-            imageUrl: "/assets/images/ballys.jpg",
-            price: 25000,
-            link: "../venues_home/venues_individual/venue_individual2.html"
+            title: "El Paraíso",
+            imageUrl: "/assets/images/el_paraiso.jpg",
+            price: 22000,
+            link: "../venues_home/venues_individual/venue_individual4.html"
         },
         {
-            title: "Ballys",
-            imageUrl: "/assets/images/ballys.jpg",
-            price: 25000,
-            link: "../venues_home/venues_individual/venue_individual2.html"
-        },
-        {
-            title: "Ballys",
-            imageUrl: "/assets/images/ballys.jpg",
-            price: 25000,
-            link: "../venues_home/venues_individual/venue_individual2.html"
-        },
+            title: "Jardín de Ensueño",
+            imageUrl: "/assets/images/jardin_de_ensueno.jpg",
+            price: 21000,
+            link: "../venues_home/venues_individual/venue_individual5.html"
+        }
+        
     ];
 
     function loadVenues(venues) {
