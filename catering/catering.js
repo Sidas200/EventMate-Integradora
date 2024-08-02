@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     });
+    
 
     // Funcionalidad de giro al hacer clic en el botón Select
     const selectButtons = document.querySelectorAll('.select-btn');

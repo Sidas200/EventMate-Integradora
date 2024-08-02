@@ -16,14 +16,15 @@
 <body>
     <nav>
         <div class="logo">
-            <a href="../index.html"> <img src="../assets/images/EventMateLogo.png" class="nav-icon" alt="EventMate Logo"></a>
+            <a href="../index.html"> <img src="../assets/images/EventMateLogo.png" class="nav-icon"
+                    alt="EventMate Logo"></a>
         </div>
         <ul class="nav-links">
             <li class="nav-item nav-logged-in" style="display: none;">
                 <a href="../catering/catering.html">Catering</a>
             </li>
             <li class="nav-item nav-logged-in" style="display: none;">
-                <a href="../venues_home/venues_home.html">Venues</a>
+                <a href="../venues/venues.html">Venues</a>
             </li>
             <li class="nav-item nav-logged-in" style="display: none;">
                 <a href="../inmobiliario/inmobiliario.html">Mobiliario</a>
@@ -124,103 +125,84 @@
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', async () => {
-    // Verificar estado de autenticación
-    try {
-        const response = await fetch("http://localhost:3000/autorizacion", {
-            method: "GET",
-            credentials: 'include',
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            const navLoggedInItems = document.querySelectorAll(".nav-logged-in");
-            const navLoggedOutItems = document.querySelectorAll(".nav-logged-out");
-
-            if (result.authenticated) {
-                navLoggedInItems.forEach(item => item.style.display = "block");
-                navLoggedOutItems.forEach(item => item.style.display = "none");
-            } else {
-                navLoggedInItems.forEach(item => item.style.display = "none");
-                navLoggedOutItems.forEach(item => item.style.display = "block");
-            }
-        } else {
-            console.error("Error al verificar el estado de autenticación");
-            // window.location.href = "../login_usuarios/login_usuario.html";
-        }
-    } catch (error) {
-        console.error("Se produjo un error al verificar el estado de autenticación:", error);
-        // window.location.href = "../login_usuarios/login_usuario.html";
-    }
-
-    const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
-    logoutLinks.forEach(link => {
-        link.addEventListener("click", async (event) => {
-            event.preventDefault();
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Verificar estado de autenticación
             try {
-                const response = await fetch("http://localhost:3000/logout", {
+                const response = await fetch("http://localhost:3000/autorizacion", {
                     method: "GET",
                     credentials: 'include',
                 });
+
                 if (response.ok) {
-                    // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
-                    window.location.href = "../login_usuarios/login_usuario.html";
+                    const result = await response.json();
+                    const navLoggedInItems = document.querySelectorAll(".nav-logged-in");
+                    const navLoggedOutItems = document.querySelectorAll(".nav-logged-out");
+
+                    if (result.authenticated) {
+                        navLoggedInItems.forEach(item => item.style.display = "block");
+                        navLoggedOutItems.forEach(item => item.style.display = "none");
+                    } else {
+                        navLoggedInItems.forEach(item => item.style.display = "none");
+                        navLoggedOutItems.forEach(item => item.style.display = "block");
+                    }
                 } else {
-                    console.error("Error al cerrar la sesión");
+                    console.error("Error al verificar el estado de autenticación");
                 }
             } catch (error) {
-                console.error("Se produjo un error al cerrar la sesión:", error);
+                console.error("Se produjo un error al verificar el estado de autenticación:", error);
+            }
+
+            // Fetch and display catering plans
+            try {
+                const response = await fetch('http://localhost:3000/caterings'); // Endpoint para obtener los datos de los planes
+                if (response.ok) {
+                    const caterings = await response.json();
+                    const plansContainer = document.getElementById('plans-container');
+
+                    caterings.forEach(catering => {
+                        const planElement = document.createElement('div');
+                        planElement.className = 'plan';
+                        planElement.innerHTML = `
+                            <div class="plan">
+                                <h1>${catering.plan_catering}</h1>
+                                <h2>$${catering.precio_catering.toLocaleString()} MXN</h2>
+                                <ul>
+                                    <li>${catering.personas} Personas</li>
+                                    <li>${catering.descripcion.replace(/\n/g, '</li><li>')}</li>
+                                </ul>
+                                <button class="select-btn">Select</button>
+                                <div class="contact-info" style="display: none;">
+                                    <h3>Contacto del Proveedor</h3>
+                                    <p>Nombre: ${catering.nombre_proveedor} ${catering.apellido_proveedor}</p>
+                                    <p>Teléfono: ${catering.telefono_proveedor}</p>
+                                    <p>Email: ${catering.email_proveedor}</p>
+                                </div>
+                            </div>
+                        `;
+                        plansContainer.appendChild(planElement);
+                    });
+
+                    // Re-add event listeners for the new buttons
+                    document.querySelectorAll('.select-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const planCard = this.closest('.plan');
+                            planCard.classList.toggle('flipped');
+                            const contactInfo = planCard.querySelector('.contact-info');
+                            if (contactInfo.style.display === 'none') {
+                                contactInfo.style.display = 'block';
+                            } else {
+                                contactInfo.style.display = 'none';
+                            }
+                        });
+                    });
+                } else {
+                    console.error("Error al obtener los planes de catering");
+                }
+            } catch (error) {
+                console.error("Se produjo un error al obtener los planes de catering:", error);
             }
         });
-    });
-
-    // Fetch and display catering plans
-    try {
-        const response = await fetch('http://localhost:3000/caterings');
-        if (response.ok) {
-            const caterings = await response.json();
-            const plansContainer = document.getElementById('plans-container');
-
-            caterings.forEach(catering => {
-                const planElement = document.createElement('div');
-                planElement.className = 'plan';
-                planElement.innerHTML = `
-                    <div class="plan basic">
-                        <h1>${catering.plan_catering}</h1>
-                        <h2>$${catering.precio_catering.toLocaleString()} MXN</h2>
-                        <ul>
-                            <li>${catering.personas} Personas</li>
-                            <li>${catering.descripcion.replace(/\n/g, '</li><li>')}</li>
-                        </ul>
-                        <button class="select-btn">Select</button>
-                    </div>
-                    <div class="contact-info" style="display: none;">
-                        <h3>Contacto del Proveedor</h3>
-                        <p>Nombre: ${catering.nombre_proveedor} ${catering.apellido_proveedor}</p>
-                        <p>Teléfono: ${catering.telefono_proveedor}</p>
-                        <p>Email: ${catering.email_proveedor}</p>
-                    </div>
-                `;
-                plansContainer.appendChild(planElement);
-            });
-
-            // Re-add event listeners for the new buttons
-            document.querySelectorAll('.select-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const planCard = this.closest('.plan');
-                    planCard.classList.toggle('flipped');
-                    const contactInfo = planCard.querySelector('.contact-info');
-                    contactInfo.style.display = contactInfo.style.display === 'none' ? 'block' : 'none';
-                });
-            });
-        } else {
-            console.error("Error al obtener los planes de catering");
-        }
-    } catch (error) {
-        console.error("Se produjo un error al obtener los planes de catering:", error);
-    }
-});
-
     </script>
 </body>
+
 </html>
