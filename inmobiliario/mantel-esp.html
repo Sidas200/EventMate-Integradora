@@ -158,53 +158,58 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const images = [
-                '../inmobiliario/Manteles/liguster-tablecloth-patterned-white__1196206_pe902826_s5.jpg',
-                '../inmobiliario/Manteles/silverarv-tablecloth-beige__1062943_pe851135_s5.jpg',
-                '../inmobiliario/Manteles/svartsenap-tablecloth-grey__1143997_pe882883_s5.jpg',
-                '../inmobiliario/Manteles/vararv-tablecloth-dark-grey-natural__1144184_pe882899_s5.jpg'
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hardcoded data for tablecloths
+            const tableData = [
+                {
+                    tipo_mesa: "Mantel Blanco con Patrones",
+                    descripcion_mesa: "Mantel de alta calidad con un elegante patrón blanco.",
+                    caracteristicas: "Dimensiones: 140 x 200 cm\nColor: Blanco\nMaterial: Algodón y poliéster\nLavable a máquina: Sí",
+                    precio_mesa: 150,
+                    nombre_proveedor: "Pedro",
+                    telefono_proveedor: "612525365",
+                    email_proveedor: "pedro@hotmail.com",
+                    image: "../inmobiliario/Manteles/liguster-tablecloth-patterned-white__1196206_pe902826_s5.jpg"
+                },
+                {
+                    tipo_mesa: "Mantel Beige",
+                    descripcion_mesa: "Mantel beige suave y duradero para cualquier ocasión.",
+                    caracteristicas: "Dimensiones: 150 x 250 cm\nColor: Beige\nMaterial: Lino\nLavable a máquina: Sí",
+                    precio_mesa: 180,
+                    nombre_proveedor: "Maria",
+                    telefono_proveedor: "612525366",
+                    email_proveedor: "maria@hotmail.com",
+                    image: "../inmobiliario/Manteles/silverarv-tablecloth-beige__1062943_pe851135_s5.jpg"
+                },
+                {
+                    tipo_mesa: "Mantel Gris",
+                    descripcion_mesa: "Mantel gris con un diseño moderno y elegante.",
+                    caracteristicas: "Dimensiones: 160 x 220 cm\nColor: Gris\nMaterial: Algodón\nLavable a máquina: No",
+                    precio_mesa: 200,
+                    nombre_proveedor: "Juan",
+                    telefono_proveedor: "612525367",
+                    email_proveedor: "juan@hotmail.com",
+                    image: "../inmobiliario/Manteles/svartsenap-tablecloth-grey__1143997_pe882883_s5.jpg"
+                },
+                {
+                    tipo_mesa: "Mantel Gris Oscuro",
+                    descripcion_mesa: "Mantel gris oscuro para eventos formales y elegantes.",
+                    caracteristicas: "Dimensiones: 180 x 240 cm\nColor: Gris Oscuro\nMaterial: Poliéster\nLavable a máquina: Sí",
+                    precio_mesa: 220,
+                    nombre_proveedor: "Ana",
+                    telefono_proveedor: "612525368",
+                    email_proveedor: "ana@hotmail.com",
+                    image: "../inmobiliario/Manteles/vararv-tablecloth-dark-grey-natural__1144184_pe882899_s5.jpg"
+                }
             ];
 
             const mainImage = document.getElementById('mainImage');
-            const commentForm = document.getElementById('commentForm');
-            const commentList = document.getElementById('commentList');
             const quantityInput = document.getElementById('quantity');
             const totalPriceElement = document.getElementById('totalPrice');
 
-            let currentImageIndex = 0;
-            let tableData = [];
+            let currentTableIndex = 0; // Track the current table index
 
-            function updateImage() {
-                mainImage.src = images[currentImageIndex];
-            }
-
-            function updatePrice(pricePerTable) {
-                const quantity = parseInt(quantityInput.value) || 0;
-                const totalPrice = pricePerTable * quantity;
-                totalPriceElement.textContent = totalPrice.toFixed(2);
-            }
-
-            async function fetchTables() {
-                try {
-                    const response = await fetch("http://localhost:3000/manteles", {
-                        method: "GET",
-                        credentials: 'include',
-                    });
-
-                    if (response.ok) {
-                        const tables = await response.json();
-                        tableData = tables;
-                        // Load the first table data as default
-                        updateTableDetails(tableData[0].tipo_mesa);
-                    } else {
-                        console.error("Error al obtener los datos de los manteles");
-                    }
-                } catch (error) {
-                    console.error("Error al conectar con el servidor:", error);
-                }
-            }
-
+            // Function to update the table details
             function updateTableDetails(tableType) {
                 const table = tableData.find(t => t.tipo_mesa === tableType);
 
@@ -222,7 +227,7 @@
                     detailsList.appendChild(listItem);
                 });
 
-                document.getElementById('table-price').innerText = `Precio por mantel: $${table.precio_mesa}MXN`;
+                document.getElementById('table-price').innerText = `Precio por mantel: $${table.precio_mesa} MXN`;
 
                 const contactList = document.getElementById('contact-details');
                 contactList.innerHTML = `
@@ -231,17 +236,26 @@
                     <li>Correo Electrónico: ${table.email_proveedor}</li>
                 `;
 
-                updatePrice(table.precio_mesa); // Actualizar el precio total basado en el precio unitario
+                updatePrice(table.precio_mesa); // Update total price based on unit price
 
-                currentImageIndex = tableData.indexOf(table); // Usar índice correcto para imagen
-                updateImage();
+                currentTableIndex = tableData.indexOf(table); // Use correct index for image
+                mainImage.src = table.image; // Update image
             }
 
+            // Function to update the total price
+            function updatePrice(pricePerTable) {
+                const quantity = parseInt(quantityInput.value) || 0;
+                const totalPrice = pricePerTable * quantity;
+                totalPriceElement.textContent = totalPrice.toFixed(2);
+            }
+
+            // Event listener for quantity input
             quantityInput.addEventListener('input', () => {
-                const table = tableData[currentImageIndex];
+                const table = tableData[currentTableIndex];
                 updatePrice(table.precio_mesa);
             });
 
+            // Event listener for card clicks
             document.querySelectorAll('.card').forEach(card => {
                 card.addEventListener('click', () => {
                     const tableType = card.getAttribute('data-table');
@@ -249,112 +263,8 @@
                 });
             });
 
-            async function loadComments() {
-                try {
-                    const response = await fetch("http://localhost:3000/comentarios_manteles", {
-                        method: "GET",
-                        credentials: 'include',
-                    });
-
-                    if (response.ok) {
-                        const comments = await response.json();
-                        commentList.innerHTML = ''; // Limpiar la lista de comentarios
-
-                        comments.forEach(comment => {
-                            const commentItem = document.createElement('div');
-                            commentItem.classList.add('comment');
-                            commentItem.innerHTML = `<strong>${comment.nombre_cliente}</strong>: <p>${comment.comentario}</p> <span>${new Date(comment.fecha).toLocaleString()}</span>`;
-                            commentList.appendChild(commentItem);
-                        });
-                    } else {
-                        console.error("Error al obtener los comentarios");
-                    }
-                } catch (error) {
-                    console.error("Se produjo un error al obtener los comentarios:", error);
-                }
-            }
-
-            async function checkAuthentication() {
-                try {
-                    const response = await fetch("http://localhost:3000/autorizacion", {
-                        method: "GET",
-                        credentials: 'include',
-                    });
-
-                    if (response.ok) {
-                        const result = await response.json();
-                        toggleNavItems(result.authenticated);
-                    } else {
-                        console.error("Error al verificar el estado de autenticación");
-                       // window.location.href = "../login_usuarios/login_usuario.html";
-                    }
-                } catch (error) {
-                    console.error("Se produjo un error al verificar el estado de autenticación:", error);
-                   // window.location.href = "../login_usuarios/login_usuario.html";
-                }
-            }
-
-            function toggleNavItems(authenticated) {
-                const navLoggedInItems = document.querySelectorAll(".nav-logged-in");
-                const navLoggedOutItems = document.querySelectorAll(".nav-logged-out");
-
-                navLoggedInItems.forEach(item => item.style.display = authenticated ? "block" : "none");
-                navLoggedOutItems.forEach(item => item.style.display = authenticated ? "none" : "block");
-            }
-
-            async function handleLogout(event) {
-                event.preventDefault();
-                try {
-                    const response = await fetch("http://localhost:3000/logout", {
-                        method: "GET",
-                        credentials: 'include',
-                    });
-                    if (response.ok) {
-                        // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
-                       /// window.location.href = "../login_usuarios/login_usuario.html";
-                    } else {
-                        console.error("Error al cerrar la sesión");
-                    }
-                } catch (error) {
-                    console.error("Se produjo un error al cerrar la sesión:", error);
-                }
-            }
-
-            const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
-            logoutLinks.forEach(link => link.addEventListener("click", handleLogout));
-
-            // Cargar los comentarios al cargar la página
-            loadComments();
-
-            commentForm.addEventListener('submit', async function(event) {
-                event.preventDefault();
-                const commentText = document.getElementById('commentText').value;
-                if (commentText.trim() === '') return; // No agregar comentarios vacíos
-
-                try {
-                    const response = await fetch("http://localhost:3000/comentario_mantel", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        credentials: 'include',
-                        body: JSON.stringify({ comentario: commentText })
-                    });
-
-                    if (response.ok) {
-                        // Agregar comentario a la lista de comentarios en la interfaz de usuario
-                        loadComments(); // Recargar comentarios
-                        document.getElementById('commentText').value = ''; // Limpiar el campo de texto
-                    } else {
-                        console.error("Error al guardar el comentario en el servidor");
-                    }
-                } catch (error) {
-                    console.error("Se produjo un error al guardar el comentario:", error);
-                }
-            });
-
-            await fetchTables(); // Obtener los datos de los manteles antes de la autenticación
-            checkAuthentication();
+            // Initialize the page with the first table's data
+            updateTableDetails(tableData[0].tipo_mesa);
         });
     </script>
 </body>
