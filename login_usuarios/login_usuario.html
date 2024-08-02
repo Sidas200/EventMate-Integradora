@@ -52,30 +52,31 @@
                 <a href="../signup_clientes/signUpClientes.html">Sign Up</a>
             </li>
             <li class="nav-item nav-logged-out">
-                <a class="material-symbols-outlined" href="../index_ingles.html" id="ingbutton">
+                <a class="material-symbols-outlined" href="../login_usuarios/login_usuarioEnglish.html" id="ingbutton">
                     translate
                 </a>
             </li>
         </ul>
     </nav>
-    <div class="logo-center">
-        <img src="../assets/images/EventMateLogo.png" class="centered-logo">
-    </div>
-    <div class="main-container">
+
+    <div class="main-container" id="main_cont_login">
         <div class="left-section">
             <img src="../assets/images/white-chairs-decorated-with-peonies-greenerty-stand-outside.jpg.webp" alt="Event Image" class="side-image">
         </div>
-        <div class="right-section">
+        <div class="right-section"> 
             <div class="login-container">
+                <br>
+                <img src="../assets/images/EventMateLogo.png" class="centered-logo" id="login_logo">
                 <h1>Iniciar Sesión</h1>
                 <form id="login_usuario">
-                    <label for="correo_electronico">Correo electronico</label>
+                    <br>
+                    <label for="correo_electronico" id="email">Correo electronico</label>
                     <input type="text" id="correo" name="correo_electronico" required>
                     
-                    <label for="contraseña">Contraseña</label>
+                    <label for="contraseña" id="password">Contraseña</label>
                     <input type="password" id="contraseña" name="contraseña" required>
-                    
-                    <button type="submit">Ingresar</button>
+                    <br>
+                    <button type="submit" id="Ingresar">Ingresar</button>
                     <p class="inicio">Aun no tienes una cuenta? <a href="../signup_clientes/signUpClientes.html">Registrate</a></p>
                 </form>
                 <div id="info-message" class="info-message">Iniciando sesión...</div>

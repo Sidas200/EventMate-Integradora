@@ -192,3 +192,73 @@ nav .nav-links li a:hover {
     'GRAD' 0,
     'opsz' 20;
 }
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+
+.signup-container h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.signup-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.signup-container label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.signup-container input {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.signup-container button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-container button:hover {
+    background-color: #000000ca;
+}
+
+#main_cont_login{
+    padding-top: 5%;
+}
+
+#login_logo{
+    padding-top: 5%;
+}
+
+#confirmar:hover {
+    background-color: #11ce53; 
+}
+
+#labelname{
+    font-size: 18px;
+    font-weight: 500;
+}
