@@ -206,26 +206,20 @@
                                         <li>${catering.personas} Personas</li>
                                         <li>${catering.descripcion.replace(/\n/g, '</li><li>')}</li>
                                     </ul>
-                                    <button class="select-btn">Select</button>
                                 </div>
                                 <div class="plan-back">
                                     <h4>Contacto del Proveedor</h4>
-                                    <p>Nombre: ${catering.nombre_proveedor} ${catering.apellido_proveedor}</p>
-                                    <p>Teléfono: ${catering.telefono_proveedor}</p>
-                                    <p>Email: ${catering.email_proveedor}</p>
+                                    <ul class="provider-info">
+                                        <li>Nombre: ${catering.nombre_proveedor} ${catering.apellido_proveedor}</li>
+                                        <li>Teléfono: ${catering.telefono_proveedor}</li>
+                                        <li>Email: ${catering.email_proveedor}</li>
+                                    </ul>
                                 </div>
                             </div>
                         `;
                         plansContainer.appendChild(planElement);
                     });
 
-                    // Re-add event listeners for the new buttons
-                    document.querySelectorAll('.select-btn').forEach(button => {
-                        button.addEventListener('click', function () {
-                            const planCard = this.closest('.plan');
-                            planCard.classList.toggle('flipped');
-                        });
-                    });
                 } else {
                     console.error("Error al obtener los planes de catering");
                 }
@@ -293,4 +287,5 @@
         });
     </script>
 </body>
+
 </html>
