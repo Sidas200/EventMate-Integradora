@@ -46,20 +46,13 @@
                 <img class="fade" src="../assets/images/silla_evento.png" alt="Silla para Eventos">
             </div>
             <div class="details">
-                <h2>Silla Basica de Madera</h2>
-                <h3>Silla de madera con colchon </h3>
-                <ul>
-                    <li>Altura: 90 cm</li>
-                    <li>Ancho: 45 cm</li>
-                    <li>Profundidad: 50 cm</li>
-                    <li>Material: Metal y plástico</li>
+                <h2 id="chair-title"></h2>
+                <h3 id="chair-description"></h3>
+                <ul id="chair-details">
                 </ul>
-                <h2>Precio por silla: $50MXN</h2>
+                <h2 id="chair-price"></h2>
                 <h1>Contacto</h1>
-                <ul>
-                    <li>Nombre: Pedro</li>
-                    <li>Numero: 612525365</li>
-                    <li>Correo Electronico: pedro@hotmail.com</li>
+                <ul id="contact-details">
                 </ul>
             </div>
         </div>
@@ -68,16 +61,16 @@
             <h2>Otros tipos de sillas</h2>
             <br>
             <div class="chair-list">
-                <div class="card">
-                    <img src="../assets/images/white-chairs-decorated-with-peonies-greenerty-stand-outside.jpg.webp" alt="Silla 4">
+                <div class="card" data-chair="Silla para Bodas">
+                    <img src="../assets/images/white-chairs-decorated-with-peonies-greenerty-stand-outside.jpg.webp" alt="Silla para Bodas">
                     <p>Silla para Bodas</p>
                 </div>
-                <div class="card">
-                    <img src="../assets/images/nick-fewings-yzqR-1tZVKI-unsplash-2.jpg" alt="Silla 5">
+                <div class="card" data-chair="Silla formal con velo">
+                    <img src="../assets/images/nick-fewings-yzqR-1tZVKI-unsplash-2.jpg" alt="Silla formal con velo">
                     <p>Silla Formal con Velo</p>
                 </div>
-                <div class="card">
-                    <img src="../assets/images/dcc-gold-rim-chairs-1.jpg" alt="Silla 6">
+                <div class="card" data-chair="Silla formal con respaldo">
+                    <img src="../assets/images/dcc-gold-rim-chairs-1.jpg" alt="Silla formal con respaldo">
                     <p>Silla Formal con Respaldo Acolchonado</p>
                 </div>
             </div>
@@ -114,5 +107,6 @@
             <p>Manteles</p>
         </div>
     </div>
+<script src="sillas.js"></script>
 </body>
 </html>
