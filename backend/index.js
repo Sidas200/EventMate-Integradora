@@ -499,6 +499,124 @@ server.get('/comentarios_venue3', (req, res) => {
     });
 });
 
+// Endpoint para obtener los comentarios de manteles
+server.get('/comentarios_manteles', (req, res) => {
+    const sql = `
+        SELECT cm.comentario, cm.fecha, cl.nombre_cliente 
+        FROM comentarios_manteles cm
+        JOIN clientes cl ON cm.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario
+server.post("/comentario_mantel", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_manteles (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener los comentarios de mesas
+server.get('/comentarios_mesas', (req, res) => {
+    const sql = `
+        SELECT cm.comentario, cm.fecha, cl.nombre_cliente 
+        FROM comentarios_mesas cm
+        JOIN clientes cl ON cm.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario
+server.post("/comentario_mesa", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_mesas (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+server.get('/comentarios_catering', (req, res) => {
+    const sql = `
+        SELECT cc.comentario, cc.fecha, cl.nombre_cliente 
+        FROM comentarios_caterings cc
+        JOIN clientes cl ON cc.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios de catering", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios de catering' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de catering
+server.post("/comentario_catering", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_caterings (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario de catering", err);
+            return res.status(400).send("Error al guardar el comentario de catering");
+        } else {
+            console.log("Comentario de catering guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
 server.listen(3000, () => {
     console.log("Server is running on http://localhost:3000");
 });

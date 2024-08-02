@@ -89,15 +89,6 @@
             <div id="commentsContainer" class="comments">
                 <div id="commentList">
                     <!-- Los comentarios se agregarán aquí dinámicamente -->
-                    <div class="comment">
-                        <strong>Juan Pérez</strong> - <span>12/08/2024 14:30</span>
-                        <p>Excelente servicio, muy recomendado.</p>
-                    </div>
-                    <div class="comment">
-                        <strong>María García</strong> - <span>13/08/2024 09:15</span>
-                        <p>Los platos fueron exquisitos y el servicio excepcional.</p>
-                    </div>
-                    <!-- Más comentarios -->
                 </div>
             </div>
         </div>
@@ -241,7 +232,7 @@
             // Load existing comments
             async function loadComments() {
                 try {
-                    const response = await fetch("/comentarios-catering", {
+                    const response = await fetch("http://localhost:3000/comentarios_catering", {
                         method: "GET",
                         credentials: 'include',
                     });
@@ -273,7 +264,7 @@
                 if (commentText.trim() === '') return; // No agregar comentarios vacíos
 
                 try {
-                    const response = await fetch("/comentario-catering", {
+                    const response = await fetch("http://localhost:3000/comentario_catering", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
