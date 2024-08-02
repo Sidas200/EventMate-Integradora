@@ -14,9 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const totalPriceElement = document.getElementById('totalPrice');
     const pricePerChair = 50.00; // Precio unitario de la silla
 
-    function updateImage() {
-        mainImage.src = images[currentImageIndex];
-    }
 
     function updatePrice() {
         const quantity = parseInt(quantityInput.value) || 0;
@@ -32,20 +29,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         navLoggedOutItems.forEach(item => item.style.display = authenticated ? "none" : "block");
     }
 
-    prevBtn.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-        updateImage();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        updateImage();
-    });
-
-    quantityInput.addEventListener('input', updatePrice);
-
-    updateImage();
-    updatePrice();
 
     async function loadComments() {
         try {
@@ -76,19 +59,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const response = await fetch("http://localhost:3000/autorizacion", {
                 method: "GET",
-                credentials: 'include', // Asegúrate de que las credenciales se incluyan en las peticiones
+                credentials: 'include',
             });
 
             if (response.ok) {
                 const result = await response.json();
-                toggleNavItems(result.authenticated); // Llama a la función para actualizar el DOM
+                toggleNavItems(result.authenticated);
             } else {
                 console.error("Error al verificar el estado de autenticación");
+                window.location.href = "../login_usuarios/login_usuario.html";
             }
         } catch (error) {
             console.error("Se produjo un error al verificar el estado de autenticación:", error);
+            window.location.href = "../login_usuarios/login_usuario.html";
         }
     }
+
 
     async function handleLogout(event) {
         event.preventDefault();
