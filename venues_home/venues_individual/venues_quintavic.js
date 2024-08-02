@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async() => {
+document.addEventListener('DOMContentLoaded', async () => {
     const venueDataElement = document.getElementById('venueData');
 
     const venue = {
@@ -29,35 +29,70 @@ document.addEventListener('DOMContentLoaded', async() => {
         venuePrice.textContent = `Precio: $${venue.price}`;
     }
 
+    // Function to fetch and display comments from the server
+    async function fetchComments() {
+        try {
+            const response = await fetch('http://localhost:3000/comentarios_quintavictoria');
+            if (response.ok) {
+                const comments = await response.json();
+                displayComments(comments);
+            } else {
+                console.error('Error fetching comments:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    }
+
+    // Function to display comments in the commentsContainer
     function displayComments(comments) {
-        commentsContainer.innerHTML = '';
+        commentsContainer.innerHTML = ''; // Clear previous comments
         comments.forEach(comment => {
             const commentElement = document.createElement('div');
             commentElement.classList.add('comment');
-            commentElement.innerHTML = `<p>${comment}</p>`;
+            commentElement.innerHTML = `
+                <p><strong>${comment.nombre_cliente}</strong> - ${formatDate(comment.fecha)}</p>
+                <p>${comment.comentario}</p>
+            `;
             commentsContainer.appendChild(commentElement);
         });
     }
 
-    function showNextImage() {
-        currentImageIndex = (currentImageIndex + 1) % venue.images.length;
-        venueImage.src = venue.images[currentImageIndex].trim();
+    // Function to format the date for displaying comments
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return new Date(dateString).toLocaleDateString('es-ES', options);
     }
 
-    function showPreviousImage() {
-        currentImageIndex = (currentImageIndex - 1 + venue.images.length) % venue.images.length;
-        venueImage.src = venue.images[currentImageIndex].trim();
-    }
-
-    function addComment(event) {
+    // Function to handle adding a comment
+    async function addComment(event) {
         event.preventDefault();
         const newComment = commentText.value.trim();
         if (newComment) {
-            venue.comments.push(newComment);
-            displayComments(venue.comments);
-            commentText.value = '';
+            try {
+                const response = await fetch('http://localhost:3000/comentario_quintavictoria', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ comentario: newComment }),
+                    credentials: 'include' // Include credentials to handle authentication
+                });
+
+                if (response.ok) {
+                    console.log('Comment added successfully');
+                    fetchComments(); // Refresh comments after adding
+                    commentText.value = ''; // Clear the input field
+                } else {
+                    console.error('Error adding comment:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error adding comment:', error);
+            }
         }
     }
+
+    // Check authentication status and update navigation display
     try {
         const response = await fetch("http://localhost:3000/autorizacion", {
             method: "GET",
@@ -83,10 +118,24 @@ document.addEventListener('DOMContentLoaded', async() => {
         console.error("Se produjo un error al verificar el estado de autenticación:", error);
     }
 
+    // Event listeners for image navigation and comment form submission
     document.getElementById('nextImage').addEventListener('click', showNextImage);
     document.getElementById('prevImage').addEventListener('click', showPreviousImage);
     commentForm.addEventListener('submit', addComment);
 
+    // Show the next image in the gallery
+    function showNextImage() {
+        currentImageIndex = (currentImageIndex + 1) % venue.images.length;
+        venueImage.src = venue.images[currentImageIndex].trim();
+    }
+
+    // Show the previous image in the gallery
+    function showPreviousImage() {
+        currentImageIndex = (currentImageIndex - 1 + venue.images.length) % venue.images.length;
+        venueImage.src = venue.images[currentImageIndex].trim();
+    }
+
+    // Initialize the venue details and comments display
     displayVenueDetails(venue);
-    displayComments(venue.comments);
+    fetchComments(); // Fetch and display existing comments
 });
