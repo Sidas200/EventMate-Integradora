@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         } else {
             console.error("Error al verificar el estado de autenticación");
-            window.location.href = "../login_usuarios/login_usuario.html";
+            //window.location.href = "../login_usuarios/login_usuario.html";
         }
     } catch (error) {
         console.error("Se produjo un error al verificar el estado de autenticación:", error);
-        window.location.href = "../login_usuarios/login_usuario.html";
+        //window.location.href = "../login_usuarios/login_usuario.html";
     }
     const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
     logoutLinks.forEach(link => {
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
                 if (response.ok) {
                     // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
-                    window.location.href = "../login_usuarios/login_usuario.html";
+                    //window.location.href = "../login_usuarios/login_usuario.html";
                 } else {
                     console.error("Error al cerrar la sesión");
                 }
