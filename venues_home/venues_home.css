@@ -5,51 +5,82 @@ body, html {
     background-color: #FAF9F6;
 }
 
-.nav-container {
-    background-color: #ffffff;
-    color: #000000;
-    padding: 10px 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-nav .logo a {
-    text-decoration: none;
+    padding: 20px;
+    background-color: #FAF9F6;
     color: rgb(0, 0, 0);
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.nav-links {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .nav-icon {
+    width: 50px;
+    height: auto;
+  }
+  
+  nav .nav-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-}
-
-.nav-links li {
+  }
+  
+  nav .nav-links li {
     margin-left: 20px;
-}
-
-.nav-links li a {
+  }
+  
+  nav .nav-links li a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
-}
-
-.nav-links li a:hover {
+  }
+  
+  nav .nav-links li a:hover {
     background-color: lightgrey;
     color: rgb(0, 0, 0);
-}
-
+  }
+  
+  .nav-item {
+    margin-left: 20px;
+  }
+  
+  .nav-item a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .nav-item a:hover {
+    background-color: lightgrey;
+    color: rgb(0, 0, 0);
+  }
+  #ingbutton {
+    background-color: #000000; 
+    color: #ffffff; 
+    padding: 5px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+  }
+  
+  #ingbutton:hover {
+    background-color: #d0d0d0; 
+  }
+  
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20
+  }
 /* Header Section */
 .header-section {
     position: relative;
