@@ -4,6 +4,78 @@ document.addEventListener('DOMContentLoaded', async () => {
         '../assets/images/silla_evento.png',
         '../assets/images/SILLA-PLEGABLES-ACOJINADA.jpg'
     ];
+    
+    const chairData = {
+        "Silla Básica de Madera": {
+            title: "Silla Básica de Madera",
+            description: "Silla de madera con colchón",
+            details: [
+                "Altura: 90 cm",
+                "Ancho: 45 cm",
+                "Profundidad: 50 cm",
+                "Material: Metal y plástico"
+            ],
+            price: "Precio por silla: $50MXN",
+            contact: {
+                name: "Pedro",
+                number: "612525365",
+                email: "pedro@hotmail.com"
+            },
+            imageIndex: 0
+        },
+        "Silla para Bodas": {
+            title: "Silla para Bodas",
+            description: "Silla blanca, con colchón y velo por detrás con arreglo floral",
+            details: [
+                "Altura: 90 cm",
+                "Ancho: 45 cm",
+                "Profundidad: 50 cm",
+                "Material: Metal y plástico y tela"
+            ],
+            price: "Precio por silla: $70MXN",
+            contact: {
+                name: "Juan",
+                number: "612525366",
+                email: "juan@hotmail.com"
+            },
+            imageIndex: 1
+        },
+        "Silla formal con velo": {
+            title: "Silla formal con velo",
+            description: "Silla de metal color dorada, con colchón y velo sencillo blanco",
+            details: [
+                "Altura: 90 cm",
+                "Ancho: 45 cm",
+                "Profundidad: 50 cm",
+                "Material: Metal y plástico"
+            ],
+            price: "Precio por silla: $40MXN",
+            contact: {
+                name: "Maria",
+                number: "612525367",
+                email: "maria@hotmail.com"
+            },
+            imageIndex: 2
+        },
+        "Silla formal con respaldo": {
+            title: "Silla formal con respaldo",
+            description: "Silla de plástico color dorado, con respaldo redondo y colchón",
+            details: [
+                "Altura: 90 cm",
+                "Ancho: 45 cm",
+                "Profundidad: 50 cm",
+                "Material: Metal y plástico"
+            ],
+            price: "Precio por silla: $50MXN",
+            contact: {
+                name: "Ana",
+                number: "612525368",
+                email: "ana@hotmail.com"
+            },
+            imageIndex: 3
+        }
+    };
+
     let currentImageIndex = 0;
     const mainImage = document.getElementById('mainImage');
     const prevBtn = document.getElementById('prevBtn');
@@ -32,6 +104,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         navLoggedOutItems.forEach(item => item.style.display = authenticated ? "none" : "block");
     }
 
+    function updateChairDetails(chairType) {
+        const chair = chairData[chairType];
+
+        if (!chair) return;
+
+        document.getElementById('chair-title').innerText = chair.title;
+        document.getElementById('chair-description').innerText = chair.description;
+        
+        const detailsList = document.getElementById('chair-details');
+        detailsList.innerHTML = '';
+        chair.details.forEach(detail => {
+            const listItem = document.createElement('li');
+            listItem.textContent = detail;
+            detailsList.appendChild(listItem);
+        });
+
+        document.getElementById('chair-price').innerText = chair.price;
+
+        const contactList = document.getElementById('contact-details');
+        contactList.innerHTML = '';
+        contactList.innerHTML = `
+            <li>Nombre: ${chair.contact.name}</li>
+            <li>Número: ${chair.contact.number}</li>
+            <li>Correo Electrónico: ${chair.contact.email}</li>
+        `;
+
+        currentImageIndex = chair.imageIndex;
+        updateImage();
+    }
+
     prevBtn.addEventListener('click', () => {
         currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
         updateImage();
@@ -46,6 +148,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     updateImage();
     updatePrice();
+
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            const chairType = card.getAttribute('data-chair');
+            updateChairDetails(chairType);
+        });
+    });
 
     async function loadComments() {
         try {
@@ -150,3 +259,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     checkAuthentication();
 });
+
