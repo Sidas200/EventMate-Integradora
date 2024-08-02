@@ -23,12 +23,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (userResponse.ok) {
                     const userResult = await userResponse.json();
-                    
+
                     // Actualizar el contenido HTML con la información del usuario
                     const userNameElement = document.querySelector('.user-details h2');
                     const userEmailElement = document.querySelector('.user-details p.email');
                     const userPhoneElement = document.querySelector('.user-details p.phone');
-                    const userAddressElement = document.querySelector('.user-details p.address');
                     const userBirthdayElement = document.querySelector('.user-details p.birthday');
 
                     if (userNameElement) {
