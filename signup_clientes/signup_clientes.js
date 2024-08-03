@@ -7,7 +7,7 @@ form.addEventListener("submit", async(event) => {
     const data = Object.fromEntries(dataForm);
 
     try {
-        const response = await fetch("http://localhost:3000/registrar", {  // URL de Render
+        const response = await fetch("https://eventmate-integradora.onrender.com/registrar", {  // URL de Render
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
