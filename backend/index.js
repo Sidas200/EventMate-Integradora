@@ -1,12 +1,13 @@
 const express = require('express');
-const mysql = require('mysql2'); // Asegúrate de requerir el módulo correcto
+const db = require('mysql2');
 const server = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const secret_jwt = "esta-es-la-clave-secreta";
+const secret_jwt = "esta-es-la-clave-secreta"
 
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: false }));
@@ -197,7 +198,7 @@ server.get('/info-token', (req, res) => {
 server.get('/logout', (req, res) => {
     res.clearCookie('access_token', {
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: 'lax',
         path: '/'
     });
