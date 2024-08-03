@@ -127,7 +127,7 @@ server.post("/login_cliente", (req, res) => {
                             res.cookie('access_token', token, {
                                 httpOnly: true,
                                 secure: true,
-                                sameSite: 'strict',
+                                sameSite: 'None',
                                 maxAge: 1000 * 60 * 60 * 24,
                                 path: '/'
                             });
@@ -195,7 +195,7 @@ server.get('/logout', (req, res) => {
     res.clearCookie('access_token', {
         httpOnly: true,
         secure: true,
-        sameSite: 'strict',
+        sameSite: 'None',
         path: '/'
     });
     return res.status(200).json({ message: 'Sesión cerrada correctamente' });
