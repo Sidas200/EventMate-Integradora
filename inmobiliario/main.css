@@ -270,9 +270,9 @@ nav .logo a {
 
 .card {
   background-color: #ffffff;
-  border: 1px solid #ccc;
+  
   border-radius: 8px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.34);
   padding: 10px;
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -304,6 +304,7 @@ nav .logo a {
 .comments {
   margin-top: 40px;
   text-align: left;
+  padding-right: 20px;
 }
 
 .comments h2 {
@@ -314,6 +315,7 @@ nav .logo a {
 .comment {
   background-color: #f2f2f2;
   padding: 10px;
+
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -399,4 +401,49 @@ nav .logo a {
   border: none;
   border-top: 2px solid #ccc; /* Adjust the color and thickness as needed */
   margin: 40px 0; /* Adjust the spacing around the line as needed */
+}
+#ingbutton {
+  background-color: #000000; 
+  color: #ffffff; 
+  padding: 5px; 
+  border-radius: 5px; 
+  text-decoration: none; 
+}
+
+#ingbutton:hover {
+  background-color: #d0d0d0; 
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 20
+}
+.mobiliario-container,
+.chair-list {
+  display: flex; /* Usar flexbox para alinear elementos horizontalmente */
+  gap: 20px; /* Espacio entre elementos */
+  justify-content: space-between; /* Distribuir el espacio equitativamente */
+}
+
+.chair-list {
+  display: flex; /* Usar flexbox para alinear elementos horizontalmente */
+  flex-wrap: wrap; /* Asegura que los elementos se ajusten a múltiples filas si es necesario */
+  justify-content: space-between; /* Distribuir el espacio equitativamente */
+}
+
+.card {
+  flex: 1; /* Permite que las tarjetas tomen el mismo espacio disponible */
+  margin: 10px; /* Añadir márgenes para espacio adicional */
+  max-width: calc(33.33% - 20px); /* Controla el ancho máximo para tres columnas */
+  min-width: 200px; /* Establece un ancho mínimo para garantizar la legibilidad */
+}
+
+.product-overview {
+  display: flex; /* Asegura que los productos se alineen en una fila */
+  flex-direction: row; /* Mantiene la dirección en fila */
+  gap: 20px; /* Añadir espacio entre el visor de imagen y los detalles */
+  justify-content: space-between; /* Espacio uniforme entre el visor de imagen y los detalles */
 }

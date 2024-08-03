@@ -26,6 +26,7 @@ form.addEventListener("submit", async (event) => {
         infoMessageElement.style.display = "none";
 
         if (!response.ok) {
+            alert("Correo o contraseña incorrectos, intentelo de nuevo");
             throw new Error("Correo o contraseña incorrectos, intentelo de nuevo");
         }
 
@@ -33,6 +34,7 @@ form.addEventListener("submit", async (event) => {
         setTimeout(() => {
             window.location.href = "../index.html";
         }, 1000);
+
 
     } catch (error) {
         console.error("Se produjo un error al iniciar sesión:", error);

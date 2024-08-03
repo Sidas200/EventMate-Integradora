@@ -1,32 +1,40 @@
 const express = require('express');
-const mysql = require('mysql2'); // Asegúrate de requerir el módulo correcto
+const db = require('mysql2');
 const server = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const secret_jwt = "esta-es-la-clave-secreta";
+const crypto = require('crypto');
+const secret_jwt = "esta-es-la-clave-secreta"
+
 
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(cors({
-    origin: 'https://eventmate.site', // Permitir solicitudes desde tu dominio
-    credentials: true // Permitir el envío de cookies
+    origin: 'http://localhost:5501', 
+    credentials: true 
 }));
 
-// Configuración de la base de datos
-const config = {
-    host: process.env.DB_HOST || 'localhost', // Cambia a localhost si es necesario
-    user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "Sidas-200",
+// Conexión a la base de datos
+const conn = db.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Sidas-200",
     port: 3306,
-    database: process.env.DB_NAME || "eventmate_integradora"
-};
+    database: "eventmate_integradora"
+});
 
-// Creación del pool de conexiones
-const pool = mysql.createPool(config);
+conn.connect((error) => {
+    if (error) {
+        console.log("Error connecting to database", error);
+    } else {
+        console.log("Connected to database");
+    }
+});
 
 // Middleware para verificar el token
 const verifyToken = (req, res, next) => {
@@ -43,17 +51,31 @@ const verifyToken = (req, res, next) => {
     }
 };
 
-server.post('/registrar', async (req, res) => {
-    console.log("Datos recibidos:", req.body);
+server.get('/caterings', (req, res) => {
+    const sql = `
+        SELECT c.descripcion, c.precio_catering, c.plan_catering, c.personas, 
+               p.nombre_proveedor, p.apellido_proveedor, p.telefono_proveedor, p.email_proveedor
+        FROM caterings c
+        JOIN proveedores p ON c.fk_proveedor = p.id_proveedor
+    `;
 
-    const { nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion } = req.body;
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los caterings", error);
+            return res.status(500).json({ message: 'Error al obtener los caterings' });
+        }
 
-    if (!nombre_cliente || !apellido_cliente || !correo_cliente || !telefono_cliente || !fecha_nac || !contraseña || !confirmacion) {
-        return res.status(400).send({ error: "Todos los campos son obligatorios" });
-    }
+        res.status(200).json(results);
+    });
+});
+
+
+
+server.post("/registrar", async (req, res) => {
+    const { nombre_cliente, correo_cliente, telefono_cliente, fecha_nac, contraseña, confirmacion, apellido_cliente } = req.body;
 
     if (contraseña !== confirmacion) {
-        return res.status(400).send({ error: "Las contraseñas no coinciden" });
+        return res.status(400).send('Las contraseñas no coinciden');
     }
 
     const hashedPassword = await bcrypt.hash(contraseña, 10);
@@ -68,7 +90,7 @@ server.post('/registrar', async (req, res) => {
     };
 
     const buscar = "SELECT * FROM clientes WHERE correo_cliente = ?";
-    pool.query(buscar, [nuevoCliente.correo_cliente], function (err, row) {
+    conn.query(buscar, [nuevoCliente.correo_cliente], function (err, row) {
         if (err) {
             console.log("Error searching for user", err);
             res.status(500).send('Error al buscar el cliente');
@@ -78,7 +100,7 @@ server.post('/registrar', async (req, res) => {
                 res.status(409).send('El usuario ya existe');
             } else {
                 const sql = "INSERT INTO clientes (nombre_cliente, correo_cliente, telefono_cliente, fecha_nac, codigo_unico, contraseña, apellido_cliente) VALUES (?, ?, ?, ?, NULL, ?, ?)";
-                pool.query(sql, [nuevoCliente.nombre_cliente, nuevoCliente.correo_cliente, nuevoCliente.telefono_cliente, nuevoCliente.fecha_nac, nuevoCliente.contraseña, nuevoCliente.apellido_cliente], (error, results) => {
+                conn.query(sql, [nuevoCliente.nombre_cliente, nuevoCliente.correo_cliente, nuevoCliente.telefono_cliente, nuevoCliente.fecha_nac, nuevoCliente.contraseña, nuevoCliente.apellido_cliente], (error, results) => {
                     if (error) {
                         console.log("Error inserting data", error);
                         res.status(400).send('Error al guardar el cliente');
@@ -92,6 +114,7 @@ server.post('/registrar', async (req, res) => {
     });
 });
 
+
 server.post("/login_cliente", (req, res) => {
     const { correo_electronico, contraseña } = req.body;
 
@@ -100,14 +123,15 @@ server.post("/login_cliente", (req, res) => {
         return res.status(400).send("Correo electrónico y contraseña son requeridos");
     }
 
-    pool.query(
+    conn.query(
         "SELECT * FROM clientes WHERE correo_cliente = ?",
-        [correo_electronico],
-        async (error, results) => { // Solo pasamos correo_electronico aquí
+        [correo_electronico, contraseña],
+        async (error, results) => {
             if (error) {
                 console.log("Error al consultar la base de datos", error);
                 return res.status(500).send("Error al consultar la base de datos");
             } else {
+
                 if (results.length > 0) {
                     const storedHash = results[0]['contraseña'];
                     if (!storedHash) {
@@ -123,17 +147,18 @@ server.post("/login_cliente", (req, res) => {
                             const sesion = {
                                 correo_electronico,
                                 contraseña: encriptada
+
                             }
                             res.cookie('access_token', token, {
                                 httpOnly: true,
                                 secure: false,
                                 sameSite: 'lax',
-                                maxAge: 1000 * 60 * 60 * 24,
-                                path: '/'
+                                maxAge: 1000*60*60*24,
+                                path:'/'
                             });
-                            console.log('Cookie set', res.get('Set-Cookie'));
+                            console.log('Cookie set',res.get('Set-Cookie'));
                             const guardar = "INSERT INTO login_cliente(correo_electronico, contraseña) VALUES (?,?) ";
-                            pool.query(guardar, [sesion.correo_electronico, sesion.contraseña], (err, res) => {
+                            conn.query(guardar,[sesion.correo_electronico, sesion.contraseña], (err,res)=>{
                                 if (err) {
                                     console.log("Error inserting data", error);
                                 } else {
@@ -164,6 +189,7 @@ server.get('/autorizacion', (req, res) => {
             if (err) {
                 return res.status(401).json({ authenticated: false });
             }
+            // Aquí puedes realizar comprobaciones adicionales si es necesario
             return res.status(200).json({ authenticated: true });
         });
     } else {
@@ -179,9 +205,11 @@ server.get('/info-token', (req, res) => {
     }
 
     try {
+        // Decodificar el token sin verificar su validez
         const decoded = jwt.decode(token, { complete: true });
 
         if (decoded) {
+            // Información del token
             return res.status(200).json({ message: 'Token decoded successfully', data: decoded });
         } else {
             return res.status(401).json({ message: 'Invalid token' });
@@ -202,10 +230,10 @@ server.get('/logout', (req, res) => {
 });
 
 server.get('/user-info', verifyToken, (req, res) => {
-    const userId = req.user.id; 
+    const userId = req.user.id; // Obtener el ID del usuario desde el token decodificado
 
     const sql = "SELECT nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, fecha_nac  FROM clientes WHERE id_cliente = ?";
-    pool.query(sql, [userId], (error, results) => {
+    conn.query(sql, [userId], (error, results) => {
         if (error) {
             console.error("Error al obtener la información del usuario", error);
             return res.status(500).json({ message: 'Error interno del servidor' });
@@ -220,38 +248,15 @@ server.get('/user-info', verifyToken, (req, res) => {
     });
 });
 
-server.post('/comentario', verifyToken, (req, res) => {
-    const id = req.user.id; 
-    const { comentario } = req.body;
-
-    const nuevo_com = {
-        id,
-        comentario
-    };
-    const com = "INSERT INTO comentarios(fk_cliente, comentario) VALUES (?, ?)";
-    pool.query(com, [nuevo_com.id, nuevo_com.comentario], (err, result) => {
-        if (err) {
-            console.log("Error al guardar el comentario");
-            res.status(400).send("Error al guardar el comentario");
-        } else {
-            console.log("Comentario guardado exitosamente");
-            res.status(201).send("Comentario guardado correctamente");
-        }
-    });
-});
-
-server.listen(3000, () => {
-    console.log("Server is running on http://localhost:3000");
-});
-
-server.get('/comentarios', (req, res) => {
+// Endpoint para obtener los comentarios
+server.get('/comentarios_sillas', (req, res) => {
     const sql = `
-        SELECT c.comentario, cl.nombre_cliente 
-        FROM comentarios c 
-        JOIN clientes cl ON c.fk_cliente = cl.id_cliente
+        SELECT cs.comentario, cs.fecha, cl.nombre_cliente 
+        FROM comentarios_sillas cs
+        JOIN clientes cl ON cs.fk_cliente = cl.id_cliente
     `;
 
-    pool.query(sql, (error, results) => {
+    conn.query(sql, (error, results) => {
         if (error) {
             console.error("Error al obtener los comentarios", error);
             return res.status(500).json({ message: 'Error al obtener los comentarios' });
@@ -259,4 +264,359 @@ server.get('/comentarios', (req, res) => {
 
         res.status(200).json(results);
     });
+});
+
+// Endpoint para insertar un nuevo comentario
+server.post("/comentario_silla", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_sillas (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+server.get('/chairs/:type', (req, res) => {
+    const chairType = req.params.type; // Get the chair type from the request parameters
+
+    const sql = `
+        SELECT id, name, description, material, color, dimensions, price, image
+        FROM chairs
+        WHERE type = ?
+    `;
+
+    conn.query(sql, [chairType], (error, results) => {
+        if (error) {
+            console.error("Error fetching chair data", error);
+            return res.status(500).json({ message: 'Error fetching chair data' });
+        }
+
+        if (results.length > 0) {
+            res.status(200).json(results[0]); // Send back the first matching chair
+        } else {
+            res.status(404).json({ message: 'Chair not found' });
+        }
+    });
+});
+server.get('/sillas', (req, res) => {
+    const sql = `
+        SELECT s.tipo_silla, s.descripcion_silla, s.caracteristicas, s.precio_silla,
+               p.nombre_proveedor, p.telefono_proveedor, p.email_proveedor
+        FROM sillas s
+        JOIN proveedores p ON s.fk_proveedor = p.id_proveedor
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener las sillas", error);
+            return res.status(500).json({ message: 'Error al obtener las sillas' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+server.get('/comentarios_quintavictoria', (req, res) => {
+    const sql = `
+        SELECT cq.comentario, cq.fecha, cl.nombre_cliente 
+        FROM comentarios_quintavictoria cq
+        JOIN clientes cl ON cq.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint to insert a new comment
+server.post("/comentario_quintavictoria", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_quintavictoria (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+server.get('/comentarios_venue1', (req, res) => {
+    const sql = `
+        SELECT cv1.comentario, cv1.fecha, cl.nombre_cliente 
+        FROM comentarios_venue1 cv1
+        JOIN clientes cl ON cv1.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios para venue1", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint to insert a new comment for venue1
+server.post("/comentario_venue1", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_venue1 (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario para venue1", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario para venue1 guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+server.get('/comentarios_venue2', (req, res) => {
+    const sql = `
+        SELECT cv1.comentario, cv1.fecha, cl.nombre_cliente 
+        FROM comentarios_venue2 cv1
+        JOIN clientes cl ON cv1.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios para venue2", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Route to fetch comments for venue2
+server.get('/comentarios_venue2', (req, res) => {
+    const sql = `
+        SELECT cv2.comentario, cv2.fecha, cl.nombre_cliente 
+        FROM comentarios_venue2 cv2
+        JOIN clientes cl ON cv2.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios para venue2", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint to insert a new comment for venue2
+server.post("/comentario_venue2", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_venue2 (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario para venue2", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario para venue2 guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint to insert a new comment for venue2
+server.post("/comentario_venue3", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_venue3 (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario para venue2", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario para venue2 guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+server.get('/comentarios_venue3', (req, res) => {
+    const sql = `
+        SELECT cv3.comentario, cv3.fecha, cl.nombre_cliente 
+        FROM comentarios_venue3 cv3
+        JOIN clientes cl ON cv3.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios para venue3", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para obtener los comentarios de manteles
+server.get('/comentarios_manteles', (req, res) => {
+    const sql = `
+        SELECT cm.comentario, cm.fecha, cl.nombre_cliente 
+        FROM comentarios_manteles cm
+        JOIN clientes cl ON cm.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario
+server.post("/comentario_mantel", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_manteles (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener los comentarios de mesas
+server.get('/comentarios_mesas', (req, res) => {
+    const sql = `
+        SELECT cm.comentario, cm.fecha, cl.nombre_cliente 
+        FROM comentarios_mesas cm
+        JOIN clientes cl ON cm.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario
+server.post("/comentario_mesa", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_mesas (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+server.get('/comentarios_catering', (req, res) => {
+    const sql = `
+        SELECT cc.comentario, cc.fecha, cl.nombre_cliente 
+        FROM comentarios_caterings cc
+        JOIN clientes cl ON cc.fk_cliente = cl.id_cliente
+    `;
+
+    conn.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios de catering", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios de catering' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de catering
+server.post("/comentario_catering", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_caterings (fk_cliente, comentario) VALUES (?, ?)";
+    conn.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario de catering", err);
+            return res.status(400).send("Error al guardar el comentario de catering");
+        } else {
+            console.log("Comentario de catering guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+server.listen(3000, () => {
+    console.log("Server is running on http://localhost:3000");
 });

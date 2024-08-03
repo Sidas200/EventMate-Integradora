@@ -14,9 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const totalPriceElement = document.getElementById('totalPrice');
     const pricePerChair = 50.00; // Precio unitario de la silla
 
-    function updateImage() {
-        mainImage.src = images[currentImageIndex];
-    }
 
     function updatePrice() {
         const quantity = parseInt(quantityInput.value) || 0;
@@ -24,20 +21,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         totalPriceElement.textContent = totalPrice.toFixed(2);
     }
 
-    prevBtn.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-        updateImage();
-    });
+    function toggleNavItems(authenticated) {
+        const navLoggedInItems = document.querySelectorAll(".nav-logged-in");
+        const navLoggedOutItems = document.querySelectorAll(".nav-logged-out");
+        
+        navLoggedInItems.forEach(item => item.style.display = authenticated ? "block" : "none");
+        navLoggedOutItems.forEach(item => item.style.display = authenticated ? "none" : "block");
+    }
 
-    nextBtn.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        updateImage();
-    });
-
-    quantityInput.addEventListener('input', updatePrice);
-
-    updateImage();
-    updatePrice();
 
     async function loadComments() {
         try {
@@ -63,6 +54,48 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error("Se produjo un error al obtener los comentarios:", error);
         }
     }
+
+    async function checkAuthentication() {
+        try {
+            const response = await fetch("http://localhost:3000/autorizacion", {
+                method: "GET",
+                credentials: 'include',
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                toggleNavItems(result.authenticated);
+            } else {
+                console.error("Error al verificar el estado de autenticación");
+                window.location.href = "../login_usuarios/login_usuario.html";
+            }
+        } catch (error) {
+            console.error("Se produjo un error al verificar el estado de autenticación:", error);
+            window.location.href = "../login_usuarios/login_usuario.html";
+        }
+    }
+
+
+    async function handleLogout(event) {
+        event.preventDefault();
+        try {
+            const response = await fetch("http://localhost:3000/logout", {
+                method: "GET",
+                credentials: 'include',
+            });
+            if (response.ok) {
+                // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
+                window.location.href = "../login_usuarios/login_usuario.html";
+            } else {
+                console.error("Error al cerrar la sesión");
+            }
+        } catch (error) {
+            console.error("Se produjo un error al cerrar la sesión:", error);
+        }
+    }
+
+    const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
+    logoutLinks.forEach(link => link.addEventListener("click", handleLogout));
 
     // Cargar los comentarios al cargar la página
     loadComments();
@@ -99,51 +132,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    try {
-        const response = await fetch("/autorizacion", {
-            method: "GET",
-            credentials: 'include',
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            const navLoggedInItems = document.querySelectorAll(".nav-logged-in");
-            const navLoggedOutItems = document.querySelectorAll(".nav-logged-out");
-
-            if (result.authenticated) {
-                navLoggedInItems.forEach(item => item.style.display = "block");
-                navLoggedOutItems.forEach(item => item.style.display = "none");
-            } else {
-                navLoggedInItems.forEach(item => item.style.display = "none");
-                navLoggedOutItems.forEach(item => item.style.display = "block");
-            }
-        } else {
-            console.error("Error al verificar el estado de autenticación");
-            window.location.href = "../login_usuarios/login_usuario.html";
-        }
-    } catch (error) {
-        console.error("Se produjo un error al verificar el estado de autenticación:", error);
-        window.location.href = "../login_usuarios/login_usuario.html";
-    }
-
-    const logoutLinks = document.querySelectorAll(".nav-logged-in a[href='../logout/logout.html']");
-    logoutLinks.forEach(link => {
-        link.addEventListener("click", async (event) => {
-            event.preventDefault();
-            try {
-                const response = await fetch("/logout", {
-                    method: "GET",
-                    credentials: 'include',
-                });
-                if (response.ok) {
-                    // Redirigir al usuario a la página de inicio de sesión después de cerrar sesión
-                    window.location.href = "../login_usuarios/login_usuario.html";
-                } else {
-                    console.error("Error al cerrar la sesión");
-                }
-            } catch (error) {
-                console.error("Se produjo un error al cerrar la sesión:", error);
-            }
-        });
-    });
+    checkAuthentication();
 });
