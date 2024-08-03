@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Fetch and display comments specifically for venue1
     async function fetchCommentsForVenue1() {
         try {
-            const response = await fetch(`http://localhost:3000/comentarios_venue1`);
+            const response = await fetch('https://eventmate-integradora.onrender.com/comentarios_venue1');
             if (response.ok) {
                 const comments = await response.json();
                 displayComments(comments);
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const newComment = commentText.value.trim();
         if (newComment) {
             try {
-                const response = await fetch('http://localhost:3000/comentario_venue1', {
+                const response = await fetch('https://eventmate-integradora.onrender.com/comentario_venue1', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Check authentication status and update navigation display
     try {
-        const response = await fetch("http://localhost:3000/autorizacion", {
+        const response = await fetch("https://eventmate-integradora.onrender.com/autorizacion", {
             method: "GET",
             credentials: 'include',
         });
