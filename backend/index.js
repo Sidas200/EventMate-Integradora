@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql2'); // Asegúrate de requerir el módulo correcto
 const server = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -16,21 +16,17 @@ server.use(cors({
     credentials: true // Permitir el envío de cookies
 }));
 
-const conn = mysql.createConnection({
+// Configuración de la base de datos
+const config = {
     host: process.env.DB_HOST || 'localhost', // Cambia a localhost si es necesario
     user: process.env.DB_USER || "root",
     password: process.env.DB_PASSWORD || "Sidas-200",
     port: 3306,
     database: process.env.DB_NAME || "eventmate_integradora"
-});
+};
 
-conn.connect((error) => {
-    if (error) {
-        console.log("Error connecting to database", error);
-    } else {
-        console.log("Connected to database");
-    }
-});
+// Creación del pool de conexiones
+const pool = mysql.createPool(config);
 
 // Middleware para verificar el token
 const verifyToken = (req, res, next) => {
@@ -72,7 +68,7 @@ server.post('/registrar', async (req, res) => {
     };
 
     const buscar = "SELECT * FROM clientes WHERE correo_cliente = ?";
-    conn.query(buscar, [nuevoCliente.correo_cliente], function (err, row) {
+    pool.query(buscar, [nuevoCliente.correo_cliente], function (err, row) {
         if (err) {
             console.log("Error searching for user", err);
             res.status(500).send('Error al buscar el cliente');
@@ -82,7 +78,7 @@ server.post('/registrar', async (req, res) => {
                 res.status(409).send('El usuario ya existe');
             } else {
                 const sql = "INSERT INTO clientes (nombre_cliente, correo_cliente, telefono_cliente, fecha_nac, codigo_unico, contraseña, apellido_cliente) VALUES (?, ?, ?, ?, NULL, ?, ?)";
-                conn.query(sql, [nuevoCliente.nombre_cliente, nuevoCliente.correo_cliente, nuevoCliente.telefono_cliente, nuevoCliente.fecha_nac, nuevoCliente.contraseña, nuevoCliente.apellido_cliente], (error, results) => {
+                pool.query(sql, [nuevoCliente.nombre_cliente, nuevoCliente.correo_cliente, nuevoCliente.telefono_cliente, nuevoCliente.fecha_nac, nuevoCliente.contraseña, nuevoCliente.apellido_cliente], (error, results) => {
                     if (error) {
                         console.log("Error inserting data", error);
                         res.status(400).send('Error al guardar el cliente');
@@ -104,10 +100,10 @@ server.post("/login_cliente", (req, res) => {
         return res.status(400).send("Correo electrónico y contraseña son requeridos");
     }
 
-    conn.query(
+    pool.query(
         "SELECT * FROM clientes WHERE correo_cliente = ?",
         [correo_electronico],
-        async (error, results) => {
+        async (error, results) => { // Solo pasamos correo_electronico aquí
             if (error) {
                 console.log("Error al consultar la base de datos", error);
                 return res.status(500).send("Error al consultar la base de datos");
@@ -127,7 +123,7 @@ server.post("/login_cliente", (req, res) => {
                             const sesion = {
                                 correo_electronico,
                                 contraseña: encriptada
-                            };
+                            }
                             res.cookie('access_token', token, {
                                 httpOnly: true,
                                 secure: true,
@@ -137,7 +133,7 @@ server.post("/login_cliente", (req, res) => {
                             });
                             console.log('Cookie set', res.get('Set-Cookie'));
                             const guardar = "INSERT INTO login_cliente(correo_electronico, contraseña) VALUES (?,?) ";
-                            conn.query(guardar, [sesion.correo_electronico, sesion.contraseña], (err, res) => {
+                            pool.query(guardar, [sesion.correo_electronico, sesion.contraseña], (err, res) => {
                                 if (err) {
                                     console.log("Error inserting data", error);
                                 } else {
@@ -199,7 +195,7 @@ server.get('/logout', (req, res) => {
     res.clearCookie('access_token', {
         httpOnly: true,
         secure: true,
-        sameSite: 'lax',
+        sameSite: 'strict',
         path: '/'
     });
     return res.status(200).json({ message: 'Sesión cerrada correctamente' });
@@ -209,7 +205,7 @@ server.get('/user-info', verifyToken, (req, res) => {
     const userId = req.user.id; 
 
     const sql = "SELECT nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, fecha_nac  FROM clientes WHERE id_cliente = ?";
-    conn.query(sql, [userId], (error, results) => {
+    pool.query(sql, [userId], (error, results) => {
         if (error) {
             console.error("Error al obtener la información del usuario", error);
             return res.status(500).json({ message: 'Error interno del servidor' });
@@ -233,7 +229,7 @@ server.post('/comentario', verifyToken, (req, res) => {
         comentario
     };
     const com = "INSERT INTO comentarios(fk_cliente, comentario) VALUES (?, ?)";
-    conn.query(com, [nuevo_com.id, nuevo_com.comentario], (err, result) => {
+    pool.query(com, [nuevo_com.id, nuevo_com.comentario], (err, result) => {
         if (err) {
             console.log("Error al guardar el comentario");
             res.status(400).send("Error al guardar el comentario");
@@ -255,7 +251,7 @@ server.get('/comentarios', (req, res) => {
         JOIN clientes cl ON c.fk_cliente = cl.id_cliente
     `;
 
-    conn.query(sql, (error, results) => {
+    pool.query(sql, (error, results) => {
         if (error) {
             console.error("Error al obtener los comentarios", error);
             return res.status(500).json({ message: 'Error al obtener los comentarios' });
