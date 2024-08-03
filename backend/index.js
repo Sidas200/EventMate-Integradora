@@ -16,18 +16,21 @@ server.use(cors({
     credentials: true // Permitir el envío de cookies
 }));
 
-// Configuración de la base de datos
-const config = {
+const conn = db.createConnection({
     host: process.env.DB_HOST || 'localhost', // Cambia a localhost si es necesario
     user: process.env.DB_USER || "root",
     password: process.env.DB_PASSWORD || "Sidas-200",
     port: 3306,
     database: process.env.DB_NAME || "eventmate_integradora"
-};
+});
 
-// Creación del pool de conexiones
-const pool = mysql.createPool(config);
-
+conn.connect((error) => {
+    if (error) {
+        console.log("Error connecting to database", error);
+    } else {
+        console.log("Connected to database");
+    }
+});
 // Middleware para verificar el token
 const verifyToken = (req, res, next) => {
     const token = req.cookies.access_token;
