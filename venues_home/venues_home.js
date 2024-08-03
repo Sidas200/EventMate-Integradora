@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 
     try {
-        const response = await fetch("http://localhost:3000/autorizacion", {
+        const response = await fetch("https://eventmate-integradora.onrender.com/autorizacion", {
             method: "GET",
             credentials: 'include',
         });
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         link.addEventListener("click", async (event) => {
             event.preventDefault();
             try {
-                const response = await fetch("http://localhost:3000/logout", {
+                const response = await fetch("https://eventmate-integradora.onrender.com/logout", {
                     method: "GET",
                     credentials: 'include',
                 });

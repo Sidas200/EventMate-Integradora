@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Verificar estado de autenticación
     try {
-        const response = await fetch("http://localhost:3000/autorizacion", {
+        const response = await fetch("https://eventmate-integradora.onrender.com/autorizacion", {
             method: "GET",
             credentials: 'include',
         });
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Obtener y mostrar información del token
     try {
-        const response = await fetch('http://localhost:3000/info-token', {
+        const response = await fetch('https://eventmate-integradora.onrender.com/info-token', {
             method: 'GET',
             credentials: 'include' // Asegúrate de incluir las cookies en la solicitud
         });
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         link.addEventListener("click", async (event) => {
             event.preventDefault();
             try {
-                const response = await fetch("http://localhost:3000/logout", {
+                const response = await fetch("https://eventmate-integradora.onrender.com/logout", {
                     method: "GET",
                     credentials: 'include',
                 });

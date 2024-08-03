@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Verificar estado de autenticación
-        const authResponse = await fetch("http://localhost:3000/autorizacion", {
+        const authResponse = await fetch("https://eventmate-integradora.onrender.com/autorizacion", {
             method: "GET",
             credentials: 'include',
         });
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 navLoggedOutItems.forEach(item => item.style.display = "none");
 
                 // Obtener información del usuario
-                const userResponse = await fetch("http://localhost:3000/user-info", {
+                const userResponse = await fetch("https://eventmate-integradora.onrender.com/user-info", {
                     method: "GET",
                     credentials: 'include',
                 });
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         link.addEventListener("click", async (event) => {
             event.preventDefault();
             try {
-                const response = await fetch("http://localhost:3000/logout", {
+                const response = await fetch("https://eventmate-integradora.onrender.com/logout", {
                     method: "GET",
                     credentials: 'include',
                 });

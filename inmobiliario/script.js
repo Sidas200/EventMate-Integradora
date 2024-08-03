@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function loadComments() {
         try {
-            const response = await fetch("/comentarios", {
+            const response = await fetch("https://eventmate-integradora.onrender.com/comentarios", {
                 method: "GET",
                 credentials: 'include',
             });
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function checkAuthentication() {
         try {
-            const response = await fetch("http://localhost:3000/autorizacion", {
+            const response = await fetch("https://eventmate-integradora.onrender.com/autorizacion", {
                 method: "GET",
                 credentials: 'include',
             });
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function handleLogout(event) {
         event.preventDefault();
         try {
-            const response = await fetch("http://localhost:3000/logout", {
+            const response = await fetch("https://eventmate-integradora.onrender.com/logout", {
                 method: "GET",
                 credentials: 'include',
             });

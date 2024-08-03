@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
     try {
-        const response = await fetch("/autorizacion", {
+        const response = await fetch("https://eventmate-integradora.onrender.com/autorizacion", {
             method: "GET",
             credentials: 'include',
         });
