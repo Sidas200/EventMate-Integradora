@@ -129,8 +129,8 @@ server.post("/login_cliente", (req, res) => {
                             }
                             res.cookie('access_token', token, {
                                 httpOnly: true,
-                                secure: false,
-                                sameSite: 'lax',
+                                secure: true,
+                                sameSite: 'strict',
                                 maxAge: 1000 * 60 * 60 * 24,
                                 path: '/'
                             });
