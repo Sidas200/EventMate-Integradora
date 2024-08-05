@@ -235,7 +235,7 @@
                 mainImage.src = table.image; // Update image
             }
             try {
-        const response = await fetch("http://localhost:3000/autorizacion", {
+        const response = await fetch("https://eventmate-integradora.onrender.com/autorizacion", {
             method: "GET",
             credentials: 'include',
         });
@@ -285,7 +285,7 @@
             // Fetch and display comments
             async function loadComments() {
                 try {
-                    const response = await fetch("http://localhost:3000/comentarios_mesas", {
+                    const response = await fetch("https://eventmate-integradora.onrender.com/comentarios_mesas", {
                         method: "GET",
                         credentials: 'include',
                     });
@@ -317,7 +317,7 @@
                 if (commentText.trim() === '') return; // Don't add empty comments
 
                 try {
-                    const response = await fetch("http://localhost:3000/comentario_mesa", {
+                    const response = await fetch("https://eventmate-integradora.onrender.com/comentario_mesa", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
