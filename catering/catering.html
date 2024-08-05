@@ -142,7 +142,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             // Verificar estado de autenticación
             try {
-                const response = await fetch("http://localhost:3000/autorizacion", {
+                const response = await fetch("https://eventmate-integradora.onrender.com/autorizacion", {
                     method: "GET",
                     credentials: 'include',
                 });
@@ -173,7 +173,7 @@
                 link.addEventListener("click", async (event) => {
                     event.preventDefault();
                     try {
-                        const response = await fetch("http://localhost:3000/logout", {
+                        const response = await fetch("https://eventmate-integradora.onrender.com/logout", {
                             method: "GET",
                             credentials: 'include',
                         });
@@ -191,7 +191,7 @@
 
             // Fetch and display catering plans
             try {
-                const response = await fetch('http://localhost:3000/caterings');
+                const response = await fetch('https://eventmate-integradora.onrender.com/caterings');
                 if (response.ok) {
                     const caterings = await response.json();
                     const plansContainer = document.getElementById('plans-container');
@@ -232,7 +232,7 @@
             // Load existing comments
             async function loadComments() {
                 try {
-                    const response = await fetch("http://localhost:3000/comentarios_catering", {
+                    const response = await fetch("https://eventmate-integradora.onrender.com/comentarios_catering", {
                         method: "GET",
                         credentials: 'include',
                     });
@@ -264,7 +264,7 @@
                 if (commentText.trim() === '') return; // No agregar comentarios vacíos
 
                 try {
-                    const response = await fetch("http://localhost:3000/comentario_catering", {
+                    const response = await fetch("https://eventmate-integradora.onrender.com/comentario_catering", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
