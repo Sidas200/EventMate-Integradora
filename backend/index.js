@@ -103,7 +103,7 @@ server.post("/login_cliente", (req, res) => {
     pool.query(
         "SELECT * FROM clientes WHERE correo_cliente = ?",
         [correo_electronico],
-        async (error, results) => { // Solo pasamos correo_electronico aquí
+        async (error, results) => {
             if (error) {
                 console.log("Error al consultar la base de datos", error);
                 return res.status(500).send("Error al consultar la base de datos");
@@ -258,5 +258,386 @@ server.get('/comentarios', (req, res) => {
         }
 
         res.status(200).json(results);
+    });
+});
+
+// Endpoint para obtener los caterings
+server.get('/caterings', (req, res) => {
+    const sql = `
+        SELECT c.descripcion, c.precio_catering, c.plan_catering, c.personas, 
+               p.nombre_proveedor, p.apellido_proveedor, p.telefono_proveedor, p.email_proveedor
+        FROM caterings c
+        JOIN proveedores p ON c.fk_proveedor = p.id_proveedor
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los caterings", error);
+            return res.status(500).json({ message: 'Error al obtener los caterings' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para obtener comentarios de sillas
+server.get('/comentarios_sillas', (req, res) => {
+    const sql = `
+        SELECT cs.comentario, cs.fecha, cl.nombre_cliente 
+        FROM comentarios_sillas cs
+        JOIN clientes cl ON cs.fk_cliente = cl.id_cliente
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de sillas
+server.post("/comentario_silla", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_sillas (fk_cliente, comentario) VALUES (?, ?)";
+    pool.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener detalles de sillas
+server.get('/sillas', (req, res) => {
+    const sql = `
+        SELECT s.tipo_silla, s.descripcion_silla, s.caracteristicas, s.precio_silla,
+               p.nombre_proveedor, p.telefono_proveedor, p.email_proveedor
+        FROM sillas s
+        JOIN proveedores p ON s.fk_proveedor = p.id_proveedor
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener las sillas", error);
+            return res.status(500).json({ message: 'Error al obtener las sillas' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para obtener comentarios de Quinta Victoria
+server.get('/comentarios_quintavictoria', (req, res) => {
+    const sql = `
+        SELECT cq.comentario, cq.fecha, cl.nombre_cliente 
+        FROM comentarios_quintavictoria cq
+        JOIN clientes cl ON cq.fk_cliente = cl.id_cliente
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de Quinta Victoria
+server.post("/comentario_quintavictoria", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_quintavictoria (fk_cliente, comentario) VALUES (?, ?)";
+    pool.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener comentarios de Venue 1
+server.get('/comentarios_venue1', (req, res) => {
+    const sql = `
+        SELECT cv1.comentario, cv1.fecha, cl.nombre_cliente 
+        FROM comentarios_venue1 cv1
+        JOIN clientes cl ON cv1.fk_cliente = cl.id_cliente
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios para venue1", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de Venue 1
+server.post("/comentario_venue1", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_venue1 (fk_cliente, comentario) VALUES (?, ?)";
+    pool.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario para venue1", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario para venue1 guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener comentarios de Venue 2
+server.get('/comentarios_venue2', (req, res) => {
+    const sql = `
+        SELECT cv2.comentario, cv2.fecha, cl.nombre_cliente 
+        FROM comentarios_venue2 cv2
+        JOIN clientes cl ON cv2.fk_cliente = cl.id_cliente
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios para venue2", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de Venue 2
+server.post("/comentario_venue2", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_venue2 (fk_cliente, comentario) VALUES (?, ?)";
+    pool.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario para venue2", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario para venue2 guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener comentarios de Venue 3
+server.get('/comentarios_venue3', (req, res) => {
+    const sql = `
+        SELECT cv3.comentario, cv3.fecha, cl.nombre_cliente 
+        FROM comentarios_venue3 cv3
+        JOIN clientes cl ON cv3.fk_cliente = cl.id_cliente
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios para venue3", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+// Endpoint para insertar un nuevo comentario de Venue 3
+server.post("/comentario_venue3", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_venue3 (fk_cliente, comentario) VALUES (?, ?)";
+    pool.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario para venue3", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario para venue3 guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener comentarios de manteles
+server.get('/comentarios_manteles', (req, res) => {
+    const sql = `
+        SELECT cm.comentario, cm.fecha, cl.nombre_cliente 
+        FROM comentarios_manteles cm
+        JOIN clientes cl ON cm.fk_cliente = cl.id_cliente
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios de manteles", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de manteles
+server.post("/comentario_mantel", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_manteles (fk_cliente, comentario) VALUES (?, ?)";
+    pool.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario de manteles", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario de manteles guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener comentarios de mesas
+server.get('/comentarios_mesas', (req, res) => {
+    const sql = `
+        SELECT cm.comentario, cm.fecha, cl.nombre_cliente 
+        FROM comentarios_mesas cm
+        JOIN clientes cl ON cm.fk_cliente = cl.id_cliente
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios de mesas", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de mesas
+server.post("/comentario_mesa", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_mesas (fk_cliente, comentario) VALUES (?, ?)";
+    pool.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario de mesas", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario de mesas guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener comentarios de catering
+server.get('/comentarios_catering', (req, res) => {
+    const sql = `
+        SELECT cc.comentario, cc.fecha, cl.nombre_cliente 
+        FROM comentarios_caterings cc
+        JOIN clientes cl ON cc.fk_cliente = cl.id_cliente
+    `;
+
+    pool.query(sql, (error, results) => {
+        if (error) {
+            console.error("Error al obtener los comentarios de catering", error);
+            return res.status(500).json({ message: 'Error al obtener los comentarios' });
+        }
+
+        res.status(200).json(results);
+    });
+});
+
+// Endpoint para insertar un nuevo comentario de catering
+server.post("/comentario_catering", verifyToken, (req, res) => {
+    const { comentario } = req.body;
+    const userId = req.user.id;
+
+    const nuevoComentario = {
+        fk_cliente: userId,
+        comentario
+    };
+
+    const sql = "INSERT INTO comentarios_caterings (fk_cliente, comentario) VALUES (?, ?)";
+    pool.query(sql, [nuevoComentario.fk_cliente, nuevoComentario.comentario], (err, result) => {
+        if (err) {
+            console.log("Error al guardar el comentario de catering", err);
+            return res.status(400).send("Error al guardar el comentario");
+        } else {
+            console.log("Comentario de catering guardado exitosamente");
+            res.status(201).send("Comentario guardado correctamente");
+        }
+    });
+});
+
+// Endpoint para obtener información sobre las sillas de un tipo específico
+server.get('/chairs/:type', (req, res) => {
+    const chairType = req.params.type;
+
+    const sql = `
+        SELECT id, name, description, material, color, dimensions, price, image
+        FROM chairs
+        WHERE type = ?
+    `;
+
+    pool.query(sql, [chairType], (error, results) => {
+        if (error) {
+            console.error("Error al obtener los datos de las sillas", error);
+            return res.status(500).json({ message: 'Error al obtener los datos de las sillas' });
+        }
+
+        if (results.length > 0) {
+            res.status(200).json(results[0]); // Devuelve la primera silla que coincide
+        } else {
+            res.status(404).json({ message: 'Silla no encontrada' });
+        }
     });
 });
