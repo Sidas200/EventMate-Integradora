@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const secret_jwt = "esta-es-la-clave-secreta";
+const path = require('path');
 
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: false }));
@@ -239,6 +240,14 @@ server.post('/comentario', verifyToken, (req, res) => {
         }
     });
 });
+// Servir archivos estáticos desde la raíz del proyecto
+server.use(express.static(path.join(__dirname, '..')));
+
+// Servir index.html cuando accedan a "/"
+server.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
+
 
 server.listen(3000, () => {
     console.log("Server is running on http://localhost:3000");
